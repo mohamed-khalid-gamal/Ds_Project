@@ -15,6 +15,7 @@ public:
 	User();
 	std::string getUsername(void);
 	std::string getPassword(void);
+	void setPassword(std::string pass);
 	void sendMoney(void);
 	void requestMoney(void);
 	void changePassword(void);
