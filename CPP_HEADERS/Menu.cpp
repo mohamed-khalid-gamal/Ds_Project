@@ -18,7 +18,7 @@ void Menu::mainMenu(std::unordered_map<std::string, User>& allUsers, std::vector
 		switch (choice) {
 		case 1: account.logIn(allUsers, allTransactions); break;
 		case 2: account.registerAccount(allUsers); break;
-		case 3: account.forgetPassword(); break;
+		case 3: account.forgetPassword(allUsers); break;
 		case 4: exit(0);
 		default: std::cout << "Please enter number from the list."; break;
 		}
