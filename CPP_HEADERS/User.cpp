@@ -30,6 +30,10 @@ std::string User::getPassword(void)
 {
 	return password;
 }
+void User::setPassword(std::string pass)
+{
+	password = pass;
+}
 void User::sendMoney(void)
 {
 }
