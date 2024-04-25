@@ -3,8 +3,8 @@
 #include "Account.h"
 #include <unordered_map>
 #include <string>
-
-User::User(std::string name, std::string pass)
+using namespace std;
+User::User( string name,  string pass)
 {
 	username = name;
 	password = pass;
@@ -22,15 +22,15 @@ User::User()
 	is_active = false;
 } 
 
-std::string User::getUsername(void)
+ string User::getUsername(void)
 {
 	return username;
 }
-std::string User::getPassword(void)
+string User::getPassword(void)
 {
 	return password;
 }
-void User::setPassword(std::string pass)
+void User::setPassword(string pass)
 {
 	password = pass;
 }

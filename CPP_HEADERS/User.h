@@ -1,21 +1,22 @@
 #pragma once
 #include <string>
 #include <vector>
+using namespace std;
 class Transcation;
 class User
 {
-	std::string username;
-	std::string password;
+	string username;
+	string password;
 	int balance;
-	std::vector<Transcation>* userTransactions;
-	std::string pin;
+	vector<Transcation>* userTransactions;
+	string pin;
 	bool is_active;
 public:
-	User(std::string name, std::string pass);
+	User(string name, string pass);
 	User();
-	std::string getUsername(void);
-	std::string getPassword(void);
-	void setPassword(std::string pass);
+	string getUsername(void);
+	string getPassword(void);
+	void setPassword(string pass);
 	void sendMoney(void);
 	void requestMoney(void);
 	void changePassword(void);

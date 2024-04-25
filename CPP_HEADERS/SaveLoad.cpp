@@ -1,19 +1,19 @@
 #include "SaveLoad.h"
 #include <unordered_map>
+using namespace std;
 
-
-std::unordered_map<std::string, User> SaveLoad::loadUsers()
+unordered_map<string, User> SaveLoad::loadUsers()
 {
-	return std::unordered_map<std::string, User>();
+	return unordered_map<string, User>();
 }
 
 void SaveLoad::saveUsers()
 {
 }
 
-std::vector<Transaction> SaveLoad::loadTransactions()
+vector<Transaction> SaveLoad::loadTransactions()
 {
-	return std::vector<Transaction>();
+	return vector<Transaction>();
 }
 
 
