@@ -9,7 +9,7 @@ class Account
 public:
 	void logIn(std::unordered_map<std::string, User>& allUsers, std::vector<Transaction>& allTransactions);
 	void registerAccount(std::unordered_map<std::string, User>& allUsers);
-	void forgetPassword();
+	void forgetPassword(std::unordered_map<std::string, User>& allUsers);
 	void hashPassword();
 };
 
