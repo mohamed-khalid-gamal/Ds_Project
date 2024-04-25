@@ -83,8 +83,34 @@ void Account::registerAccount(std::unordered_map<std::string, User>& allUsers)
 	allUsers[name] = newUser;
 }
 
-void Account::forgetPassword()
+void Account::forgetPassword(std::unordered_map<std::string, User>& allUsers)
 {
+	std::string name;
+	std::string pass;
+	std::cout << "~Forget Password (-1 at any point to go back to main menu)~\n";
+	while (true)
+	{
+		std::cout << "Enter Username(must between 5 and 16 letters length):\n";
+		std::cin >> name;
+
+		if (name == "-1") return;
+		else if (name == allUsers[name].getUsername()) {
+			break;
+		}
+		std::cout << "Username not found, try again!\n";
+	}
+	while (true)
+	{
+		std::cout << "Enter Password(must between 8 and 16 letters length):\n";
+		std::cin >> pass;
+		if (pass == "-1") return;
+		else if (pass.length() < 8 || pass.length() > 16) {
+			std::cout << "Wrong length please try again.";
+			continue;
+		}
+		break;
+	}
+	allUsers[name].setPassword(pass);
 }
 
 void Account::hashPassword()
