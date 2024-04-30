@@ -15,5 +15,4 @@ int main()
 	std::vector<Transaction> allTransactions;
 	menu.mainMenu(allUsers, allTransactions);
 	file.saveUsers();
-	file.saveTransactions();
 }
