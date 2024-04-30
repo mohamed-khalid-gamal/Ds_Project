@@ -84,3 +84,19 @@ User User::searchUser(string uname, unordered_map <string, User> users)
 		return User();
 	}
 }
+
+void User::removeUser(string uname, set <User> users)
+{
+	set <User> ::iterator it;
+	while (it != users.end())
+	{
+		if (uname == it->username)
+		{
+			users.erase(it);
+			return;
+		}
+		it++;
+	}
+	cout << "User not found\n";
+	return;
+}

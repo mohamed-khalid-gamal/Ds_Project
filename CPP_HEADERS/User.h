@@ -26,5 +26,6 @@ public:
 	void transactionHistory(void);
 	static User searchUser(string uname, set <User> users);
 	static User searchUser(string uname, unordered_map <string, User> users);
+	static void removeUser(string uname, set <User> users);
 };
 
