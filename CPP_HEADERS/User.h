@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <set>
+#include <unordered_map>
 using namespace std;
 class Transcation;
 class User
@@ -22,5 +24,7 @@ public:
 	void changePassword(void);
 	void pendingRequests(void);
 	void transactionHistory(void);
+	static User searchUser(string uname, set <User> users);
+	sataic User searchUser(string uname, unordered_map <User> users);
 };
 

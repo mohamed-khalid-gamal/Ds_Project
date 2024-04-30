@@ -53,3 +53,31 @@ void User::pendingRequests(void)
 void User::transactionHistory(void)
 {
 }
+User User::searchUser(string uname, set<User> users)
+{
+	return User();
+}
+static User searchUser(string uname, set <User> users)
+{
+	set <User> ::iterator it;
+	it = users.begin();
+	while (it != users.end())
+	{
+		if (strcmp(uname, it->username) == 0)
+			return *it;
+	}
+	cout << "User not found\n";
+	return null;
+}
+
+sataic User searchUser(string uname, unordered_map <User> users)
+{
+	User* ptr = users.find(unmae);
+	if (ptr != users.end())
+		return *ptr;
+	else
+	{
+		cout << "User not found\n";
+		return null;
+	}
+}
