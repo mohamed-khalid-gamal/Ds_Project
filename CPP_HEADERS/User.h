@@ -25,6 +25,6 @@ public:
 	void pendingRequests(void);
 	void transactionHistory(void);
 	static User searchUser(string uname, set <User> users);
-	sataic User searchUser(string uname, unordered_map <User> users);
+	static User searchUser(string uname, unordered_map <string, User> users);
 };
 
