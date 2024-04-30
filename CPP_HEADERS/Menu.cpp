@@ -5,8 +5,7 @@
 using namespace std;
 Account account;
 
-void Menu::mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions)
-{
+void Menu::mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions) {
 	int choice;
 	while (true) {
 		cout << "~Main Menu~\n"

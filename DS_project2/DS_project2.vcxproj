@@ -133,6 +133,7 @@
     <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\SaveLoad.cpp" />
     <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\Transaction.cpp" />
     <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\User.cpp" />
+    <ClCompile Include="Admin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\Account.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\SaveLoad.h" />
     <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\Transaction.h" />
     <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\User.h" />
+    <ClInclude Include="Admin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

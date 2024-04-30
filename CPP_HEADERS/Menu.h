@@ -8,7 +8,7 @@ class Transaction;
 class Menu
 {
 public:
-	void mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions);
-	void userMenu(User activeUser, unordered_map<string, User>& allUsers);
-	void adminMenu();
+	static void mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions);
+	static void userMenu(User activeUser, unordered_map<string, User>& allUsers);
+	static void adminMenu();
 };

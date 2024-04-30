@@ -4,21 +4,21 @@
 #include <unordered_map>
 #include "User.h"
 #include "Menu.h"
-
-void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::vector<Transaction>& allTransactions)
+using namespace std;
+void Account::logIn(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions)
 {
 	Menu menu;
-	std::string name;
-	std::string pass;
-	std::cout << "~Log In (-1 at any point to go back to main menu)~\n";
+	string name;
+	string pass;
+	cout << "~Log In (-1 at any point to go back to main menu)~\n";
 	while (true)
 	{
-		std::cout << "Enter Username:\n";
-		std::cin >> name;
+		cout << "Enter Username:\n";
+		cin >> name;
 
 		if (name == "-1") return;
 		else if (name.length() < 5 || name.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			cout << "Wrong length please try again.";
 			continue;
 		}
 		break;
@@ -26,18 +26,18 @@ void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::vector
 	int passwordFailTries = 0;
 	while (true)
 	{
-		std::cout << "Enter Password:\n";
-		std::cin >> pass;
-		std::cin.ignore();
+		cout << "Enter Password:\n";
+		cin >> pass;
+		cin.ignore();
 		if (pass == "-1") return;
 		else if (name == "admin" && pass == "admin") {
 				menu.adminMenu();
 				return;
 			}
 		else if (pass != allUsers[name].getPassword()) {
-			std::cout << "Wrong password! Please try again.\n" + allUsers[name].getPassword();
+			cout << "Wrong password! Please try again.\n" + allUsers[name].getPassword();
 			if (++passwordFailTries > 3) {
-				std::cout << "Inputed wrong password too many times";
+				cout << "Inputed wrong password too many times";
 				return;
 			}
 			continue;
@@ -47,33 +47,33 @@ void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::vector
 	menu.userMenu(allUsers.at(name), allUsers);
 }
 
-void Account::registerAccount(std::unordered_map<std::string, User>& allUsers)
+void Account::registerAccount(unordered_map<string, User>& allUsers)
 {
-	std::string name;
-	std::string pass;
-	std::cout << "~Register Account (-1 at any point to go back to main menu)~\n";
+	string name;
+	string pass;
+	cout << "~Register Account (-1 at any point to go back to main menu)~\n";
 	while (true)
 	{
-		std::cout << "Enter Username(must between 5 and 16 letters length):\n";
-		std::cin >> name;
+		cout << "Enter Username(must between 5 and 16 letters length):\n";
+		cin >> name;
 		
 		if (name == "-1") return;
 		else if (name.length() < 5 || name.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			cout << "Wrong length please try again.";
 			continue;
 		}
 		else if (name == allUsers[name].getUsername()) {
-			std::cout << "Username is already taken please try again.";
+			cout << "Username is already taken please try again.";
 			continue;
 		}
 		break;
 	}
 	while (true)
 	{
-		std::cout << "Enter Password(must between 8 and 16 letters length):\n";
-		std::cin >> pass;
+		cout << "Enter Password(must between 8 and 16 letters length):\n";
+		cin >> pass;
 		if (pass.length() < 8 || pass.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			cout << "Wrong length please try again.";
 			continue;
 		}
 		else if (pass == "-1") return;
@@ -83,29 +83,29 @@ void Account::registerAccount(std::unordered_map<std::string, User>& allUsers)
 	allUsers[name] = newUser;
 }
 
-void Account::forgetPassword(std::unordered_map<std::string, User>& allUsers)
+void Account::forgetPassword(unordered_map<string, User>& allUsers)
 {
-	std::string name;
-	std::string pass;
-	std::cout << "~Forget Password (-1 at any point to go back to main menu)~\n";
+	string name;
+	string pass;
+	cout << "~Forget Password (-1 at any point to go back to main menu)~\n";
 	while (true)
 	{
-		std::cout << "Enter Username(must between 5 and 16 letters length):\n";
-		std::cin >> name;
+		cout << "Enter Username(must between 5 and 16 letters length):\n";
+		cin >> name;
 
 		if (name == "-1") return;
 		else if (name == allUsers[name].getUsername()) {
 			break;
 		}
-		std::cout << "Username not found, try again!\n";
+		cout << "Username not found, try again!\n";
 	}
 	while (true)
 	{
-		std::cout << "Enter Password(must between 8 and 16 letters length):\n";
-		std::cin >> pass;
+		cout << "Enter Password(must between 8 and 16 letters length):\n";
+		cin >> pass;
 		if (pass == "-1") return;
 		else if (pass.length() < 8 || pass.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			cout << "Wrong length please try again.";
 			continue;
 		}
 		break;
