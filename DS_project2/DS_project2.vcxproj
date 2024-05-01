@@ -18,6 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="Admin.h" />
+    <ClInclude Include="LogIn.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="SaveLoad.h" />
+    <ClInclude Include="Transaction.h" />
+    <ClInclude Include="User.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="LogIn.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="SaveLoad.cpp" />
+    <ClCompile Include="Transaction.cpp" />
+    <ClCompile Include="User.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,23 +145,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\Account.cpp" />
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\main.cpp" />
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\Menu.cpp" />
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\SaveLoad.cpp" />
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\Transaction.cpp" />
-    <ClCompile Include="..\..\Ds_Project\CPP_HEADERS\User.cpp" />
-    <ClCompile Include="Admin.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\Account.h" />
-    <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\Menu.h" />
-    <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\SaveLoad.h" />
-    <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\Transaction.h" />
-    <ClInclude Include="..\..\Ds_Project\CPP_HEADERS\User.h" />
-    <ClInclude Include="Admin.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -13,7 +13,7 @@ void Admin::EditUser(unordered_map<string, User>& allUsers) {
 	int x; cin >> x;
 	cin.ignore();
 	if (x == 1) {
-		
+		choosen.changeUsername(allUsers, true);
 	}
 	else if (x == 2) {
 		choosen.changePassword(allUsers, true);

@@ -26,6 +26,8 @@ User::User()
 	is_active = false;
 }
 
+
+
 string User::getUsername(void)
 {
 	return username;
@@ -179,6 +181,64 @@ bool User::validPassword(string password) {
         return false;
     }
     return true;
+}
+void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = false) {
+    if (admin == false) {
+        system("pause"); system("cls");
+        cout << "Enter new Username : ";
+        string username; getline(cin, username);
+        auto it = allUsers.find(username);
+        if (it != allUsers.end()) {
+            this->username = username;
+        }
+        else {
+            cout << "This username is taken !" << endl << "Try another one" << endl;
+            system("pause"); system("cls");
+            cout << endl << "             (1) reEnter new username                   ";
+            cout << endl << "             other to return to user menu                     ";
+            int x; cin >> x;
+            cin.ignore();
+            if (x == 1) {
+                system("pause"); system("cls");
+                changePassword(allUsers);
+            }
+            else {
+                system("pause"); system("cls");
+                Menu::userMenu(*this, allUsers);
+                //Menu::userMenu(allUsers[this->username], allUsers);
+                //both are correct
+            }
+        }
+        system("pause");
+    }
+    else if (admin == true) {
+        system("pause"); system("cls");
+        cout << "Enter new Username : ";
+        string username; getline(cin, username);
+        auto it = allUsers.find(username);
+        if (it != allUsers.end()) {
+            this->username = username;
+        }
+        else {
+            cout << "This username is taken !" << endl << "Try another one" << endl;
+            system("pause"); system("cls");
+            cout << endl << "             (1) reEnter new username                   ";
+            cout << endl << "             other to return to admin menu                     ";
+            int x; cin >> x;
+            cin.ignore();
+            if (x == 1) {
+                system("pause"); system("cls");
+                changeUsername(allUsers,true);
+            }
+            else {
+                system("pause"); system("cls");
+                Menu::adminMenu();
+                //Menu::userMenu(allUsers[this->username], allUsers);
+                //both are correct
+            }
+        }
+        system("pause");
+    }
 }
 
 void User::pendingRequests(void)

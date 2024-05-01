@@ -7,24 +7,12 @@
       "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:DS_project2\\Admin.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:CPP_HEADERS\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:DS_project2\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:CPP_HEADERS\\Menu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:CPP_HEADERS\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:CPP_HEADERS\\User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\Admin.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:DS_project2\\Admin.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{699E5AB1-A590-48A3-AA53-9DFC47691582}|DS_project2\\DS_project2.vcxproj|solutionrelative:DS_project2\\User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,23 +26,33 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Admin.h",
-              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\Admin.h",
-              "RelativeDocumentMoniker": "DS_project2\\Admin.h",
-              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\Admin.h",
-              "RelativeToolTip": "DS_project2\\Admin.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAATAAAA",
+              "DocumentIndex": 1,
+              "Title": "User.h",
+              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.h",
+              "RelativeDocumentMoniker": "DS_project2\\User.h",
+              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.h",
+              "RelativeToolTip": "DS_project2\\User.h",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABkAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-30T22:03:40.738Z"
+              "WhenOpened": "2024-05-01T12:14:27.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cpp",
+              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.cpp",
+              "RelativeDocumentMoniker": "DS_project2\\User.cpp",
+              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\User.cpp",
+              "RelativeToolTip": "DS_project2\\User.cpp",
+              "ViewState": "AQIAACcAAAAAAAAAAAAswPQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-01T12:12:12.026Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,58 +62,14 @@
               "RelativeDocumentMoniker": "DS_project2\\Admin.cpp",
               "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\DS_project2\\Admin.cpp",
               "RelativeToolTip": "DS_project2\\Admin.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAHAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-30T22:03:47.596Z",
+              "WhenOpened": "2024-05-01T12:09:16.287Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Menu.h",
-              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.h",
-              "RelativeDocumentMoniker": "CPP_HEADERS\\Menu.h",
-              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.h",
-              "RelativeToolTip": "CPP_HEADERS\\Menu.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-30T21:22:22.26Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Menu.cpp",
-              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.cpp",
-              "RelativeDocumentMoniker": "CPP_HEADERS\\Menu.cpp",
-              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\Menu.cpp",
-              "RelativeToolTip": "CPP_HEADERS\\Menu.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAABhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-30T21:16:48.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "User.h",
-              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.h",
-              "RelativeDocumentMoniker": "CPP_HEADERS\\User.h",
-              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.h",
-              "RelativeToolTip": "CPP_HEADERS\\User.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABcAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-30T19:56:28.637Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cpp",
-              "DocumentMoniker": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.cpp",
-              "RelativeDocumentMoniker": "CPP_HEADERS\\User.cpp",
-              "ToolTip": "C:\\Users\\moham\\Desktop\\My-Github\\Ds_Project\\CPP_HEADERS\\User.cpp",
-              "RelativeToolTip": "CPP_HEADERS\\User.cpp",
-              "ViewState": "AQIAABMAAAAAAAAAAAAAADAAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-30T19:56:28.731Z"
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }

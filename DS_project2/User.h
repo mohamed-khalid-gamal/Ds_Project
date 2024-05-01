@@ -23,6 +23,7 @@ public:
 	void requestMoney(void);
 	void changePassword(unordered_map<string, User>&, bool);
 	bool validPassword(string); 
+	void changeUsername(unordered_map<string, User>& allUsers, bool admin);
 	void pendingRequests(void);
 	void transactionHistory(void);
 	static User searchUser(string uname, set <User> users);
