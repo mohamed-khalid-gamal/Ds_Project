@@ -7,6 +7,10 @@ using namespace std;
 
 class Transaction
 {
+	std::string id;
+	User* sender;
+	User* recipient;
+	std::string datePlaceHolder; //Placeholder for the person who works on transactions class
 	string id;
 	string sender;
 	string recipient;
@@ -15,6 +19,7 @@ class Transaction
 public:
 	Transaction();
 	Transaction(User sendUser, User recieveUser);
+	void listTransactions(std::vector<Transaction> transactionArr); //Displays a list of all transactions
 	void setid(string nid);
 	void setsender(string nsender);
 	void setrecipient(string nrecipient);
@@ -28,4 +33,3 @@ public:
 	string getdatePlaceHolder();
 	bool getisAccepted();
 };
-

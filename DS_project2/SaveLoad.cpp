@@ -1,69 +1,54 @@
-#include "User.h"
-#include "Transaction.h"
+#include "SaveLoad.h"
+#include <unordered_map>
 #include <fstream>
+using namespace std;
 
-
-Transaction::Transaction(User sendUser, User recieveUser)
-{
-	sender = sendUser.getUsername();
-	recipient = recieveUser.getUsername();
-	datePlaceHolder = "Today";
-	isAccepted = false;
-}
-
-void Transaction::listTransactions(std::vector<Transaction>)
+unordered_map<string, User> SaveLoad::loadUsers()
+@@ - 11, 12 + 12, 44 @@ void SaveLoad::saveUsers()
 {
 }
 
-Transaction::Transaction()
+vector<Transaction> SaveLoad::loadTransactions()
+stack <Transaction> SaveLoad::loadTransactions()
 {
-	sender = User("test", "test").getUsername();
-	recipient = User("test", "test").getUsername();
-	datePlaceHolder = "Today";
-	isAccepted = false;
+	return vector<Transaction>();
+	string text;
+	stack <Transaction> temp;
+	ifstream ifile("data files/transactions.txt");
+	while (getline(ifile, text))
+	{
+		Transaction tmp;
+		tmp.setid(text);
+		getline(ifile, text);
+		tmp.setsender(text);
+		getline(ifile, text);
+		tmp.setrecipient(text);
+		getline(ifile, text);
+		tmp.setdatePlaceHolder(text);
+		getline(ifile, text);
+		bool bol = (bool)stoi(text);
+		tmp.setisAccepted(bol);
+		temp.push(tmp);
+	}
+	stack <Transaction> transactions;
+	while (!temp.empty())
+	{
+		transactions.push(temp.top());
+		temp.pop();
+	}
+	return transactions;
 }
 
-void Transaction::setid(string nid)
-{
-	id = nid;
-}
-void Transaction::setsender(string nsender)
-{
-	sender = nsender;
-}
-void Transaction::setrecipient(string nrecipient)
-{
-	recipient = nrecipient;
-}
-void Transaction::setdatePlaceHolder(string ndatePlaceHolder)
-{
-	datePlaceHolder = ndatePlaceHolder;
-}
-void Transaction::setisAccepted(bool nisAccepted)
-{
-	isAccepted = nisAccepted;
-}
-string Transaction::getid()
-{
-	return id;
-}
 
-string Transaction::getsender()
+void SaveLoad::saveTransactions()
+void SaveLoad::saveTransactions(stack <Transaction> transactions)
 {
-	return sender;
-}
-
-string Transaction::getrecipient()
-{
-	return recipient;
-}
-
-string Transaction::getdatePlaceHolder()
-{
-	return datePlaceHolder;
-}
-
-bool Transaction::getisAccepted()
-{
-	return isAccepted;
-}
+	ofstream ofile("data files/transactions.txt");
+	stack <Transaction> temp = transactions;
+	while (!temp.empty())
+	{
+		Transaction tmp = transactions.top();
+		ofile << tmp.getid() << endl << tmp.getsender() << endl << tmp.getrecipient() << endl
+			<< tmp.getdatePlaceHolder() << endl << tmp.getisAccepted() << endl;
+	}
+	ofile.close();

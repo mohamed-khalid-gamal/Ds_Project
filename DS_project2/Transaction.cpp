@@ -5,18 +5,19 @@
 
 Transaction::Transaction(User sendUser, User recieveUser)
 {
+	*sender = sendUser;
+	*recipient = recieveUser;
 	sender = sendUser.getUsername();
 	recipient = recieveUser.getUsername();
 	datePlaceHolder = "Today";
 	isAccepted = false;
 }
-
-void Transaction::listTransactions(std::vector<Transaction>)
-{
-}
+@@ - 16, 8 + 17, 53 @@ void Transaction::listTransactions(std::vector<Transaction>)
 
 Transaction::Transaction()
 {
+	*sender = User("test", "test");
+	*recipient = User("test", "test");
 	sender = User("test", "test").getUsername();
 	recipient = User("test", "test").getUsername();
 	datePlaceHolder = "Today";
