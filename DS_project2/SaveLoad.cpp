@@ -1,22 +1,69 @@
-#include "SaveLoad.h"
-#include <unordered_map>
-using namespace std;
+#include "User.h"
+#include "Transaction.h"
+#include <fstream>
 
-unordered_map<string, User> SaveLoad::loadUsers()
+
+Transaction::Transaction(User sendUser, User recieveUser)
 {
-	return unordered_map<string, User>();
+	sender = sendUser.getUsername();
+	recipient = recieveUser.getUsername();
+	datePlaceHolder = "Today";
+	isAccepted = false;
 }
 
-void SaveLoad::saveUsers()
+void Transaction::listTransactions(std::vector<Transaction>)
 {
 }
 
-vector<Transaction> SaveLoad::loadTransactions()
+Transaction::Transaction()
 {
-	return vector<Transaction>();
+	sender = User("test", "test").getUsername();
+	recipient = User("test", "test").getUsername();
+	datePlaceHolder = "Today";
+	isAccepted = false;
 }
 
-
-void SaveLoad::saveTransactions()
+void Transaction::setid(string nid)
 {
+	id = nid;
+}
+void Transaction::setsender(string nsender)
+{
+	sender = nsender;
+}
+void Transaction::setrecipient(string nrecipient)
+{
+	recipient = nrecipient;
+}
+void Transaction::setdatePlaceHolder(string ndatePlaceHolder)
+{
+	datePlaceHolder = ndatePlaceHolder;
+}
+void Transaction::setisAccepted(bool nisAccepted)
+{
+	isAccepted = nisAccepted;
+}
+string Transaction::getid()
+{
+	return id;
+}
+
+string Transaction::getsender()
+{
+	return sender;
+}
+
+string Transaction::getrecipient()
+{
+	return recipient;
+}
+
+string Transaction::getdatePlaceHolder()
+{
+	return datePlaceHolder;
+}
+
+bool Transaction::getisAccepted()
+{
+	return isAccepted;
 }

@@ -19,7 +19,7 @@ void Admin::EditUser(unordered_map<string, User>& allUsers) {
 		choosen.changePassword(allUsers, true);
 	}
 	else {
-		Menu::userMenu();
+		Menu::adminMenu();
 	}
 	 
 }

@@ -21,7 +21,8 @@ public:
 	void setPassword(string pass);
 	void sendMoney(void);
 	void requestMoney(void);
-	void changePassword(void);
+	void changePassword(unordered_map<string, User>&, bool);
+	bool validPassword(string); 
 	void pendingRequests(void);
 	void transactionHistory(void);
 	static User searchUser(string uname, set <User> users);
