@@ -4,14 +4,16 @@
 using namespace std;
 
 unordered_map<string, User> SaveLoad::loadUsers()
-@@ - 11, 12 + 12, 44 @@ void SaveLoad::saveUsers()
+{
+	return unordered_map<string, User>();
+}
+
+void SaveLoad::saveUsers()
 {
 }
 
-vector<Transaction> SaveLoad::loadTransactions()
 stack <Transaction> SaveLoad::loadTransactions()
 {
-	return vector<Transaction>();
 	string text;
 	stack <Transaction> temp;
 	ifstream ifile("data files/transactions.txt");
@@ -39,8 +41,6 @@ stack <Transaction> SaveLoad::loadTransactions()
 	return transactions;
 }
 
-
-void SaveLoad::saveTransactions()
 void SaveLoad::saveTransactions(stack <Transaction> transactions)
 {
 	ofstream ofile("data files/transactions.txt");
@@ -50,5 +50,8 @@ void SaveLoad::saveTransactions(stack <Transaction> transactions)
 		Transaction tmp = transactions.top();
 		ofile << tmp.getid() << endl << tmp.getsender() << endl << tmp.getrecipient() << endl
 			<< tmp.getdatePlaceHolder() << endl << tmp.getisAccepted() << endl;
+		temp.pop();
 	}
 	ofile.close();
+	return;
+}

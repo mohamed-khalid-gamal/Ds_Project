@@ -19,7 +19,7 @@ void Menu::mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& 
 		case 1: account.logIn(allUsers, allTransactions); break;
 		case 2: account.registerAccount(allUsers); break;
 		case 3: account.forgetPassword(allUsers); break;
-		case 4: exit(0);
+		case 4: return;
 		default: cout << "Please enter number from the list."; break;
 		}
 	}
