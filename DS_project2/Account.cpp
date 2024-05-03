@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include "Transaction.h"
 #include "User.h"
 #include "Menu.h"
 using namespace std;
+
 void Account::logIn(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions)
 {
 	Menu menu;

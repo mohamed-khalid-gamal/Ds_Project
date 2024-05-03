@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <stack>
-#include "User.h"
 using namespace std;
 
 class Transaction
@@ -14,13 +13,12 @@ class Transaction
 	bool isAccepted; //If accepted transaction will appear on the user's transactions instead of user's requests (less space than having several arrays for requests and transactions
 public:
 	Transaction();
-	Transaction(User sendUser, User recieveUser);
+	Transaction(string sendUser, string recieveUser);
 	void setid(string nid);
 	void setsender(string nsender);
 	void setrecipient(string nrecipient);
 	void setdatePlaceHolder(string ndatePlaceHolder);
 	void setisAccepted(bool nisAccepted);
-	void saveTransactions(stack<Transaction> transactions);
 	void listTransactions(vector<Transaction> transactionArr); //Displays a list of all transactions
 	string getid();
 	string getsender();

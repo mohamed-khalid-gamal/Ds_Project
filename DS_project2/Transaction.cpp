@@ -3,10 +3,10 @@
 #include <fstream>
 
 
-Transaction::Transaction(User sendUser, User recieveUser)
+Transaction::Transaction(string sendUser, string recieveUser)
 {
-	sender = sendUser.getUsername();
-	recipient = recieveUser.getUsername();
+	sender = sendUser;
+	recipient = recieveUser;
 	datePlaceHolder = "Today";
 	isAccepted = false;
 }
@@ -67,3 +67,4 @@ bool Transaction::getisAccepted()
 {
 	return isAccepted;
 }
+

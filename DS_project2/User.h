@@ -1,26 +1,33 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <stack>
 #include <set>
 #include <unordered_map>
+#include "Transaction.h"
+
 using namespace std;
-class Transcation;
 class User
 {
 	string username;
 	string password;
 	int balance;
-	vector<Transcation>* userTransactions;
+	stack<Transaction> userTransactions;
 	string pin;
 	bool is_active;
 public:
 	User(string name, string pass);
 	User();
 	string getUsername(void);
+	void setUsername(string uname);
 	string getPassword(void);
 	int getBalance(void);
+	void setBalance(int bal);
 	string getPin(void);
+	void setPin(string pinum);
+	stack <Transaction> getTransactions(void);
+	void setTransactions(stack <Transaction>);
 	bool getActive(void);
+	void setActive(bool activity);
 	void setPassword(string pass);
 	void sendMoney(void);
 	void requestMoney(void);

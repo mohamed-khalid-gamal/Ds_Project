@@ -1,4 +1,3 @@
-#include "Transaction.h"
 #include "User.h"
 #include "Account.h"
 #include "Menu.h"
@@ -32,6 +31,10 @@ string User::getUsername(void)
 {
 	return username;
 }
+void User::setUsername(string uname)
+{
+    username = uname;
+}
 string User::getPassword(void)
 {
 	return password;
@@ -40,13 +43,34 @@ int User::getBalance(void)
 {
     return balance;
 }
+void User::setBalance(int bal)
+{
+    balance = bal;
+}
 string User::getPin(void)
 {
     return pin;
 }
+void User::setPin(string pinum)
+{
+    pin = pinum;
+}
 bool User::getActive(void)
 {
     return is_active;
+}
+void User::setActive(bool activity)
+{
+    is_active = activity;
+}
+
+stack<Transaction> User::getTransactions(void)
+{
+    return userTransactions;
+}
+void User::setTransactions(stack <Transaction> UTrans)
+{
+    userTransactions = UTrans;
 }
 void User::setPassword(string pass)
 {

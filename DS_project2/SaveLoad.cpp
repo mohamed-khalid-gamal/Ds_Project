@@ -3,9 +3,60 @@
 #include <fstream>
 using namespace std;
 
+template <typename T>
+stack <T> SaveLoad::reverseStack(stack <T> orig)
+{
+	stack <T> reversed;
+	while (!orig.empty())
+	{
+		reversed.push(orig.top());
+		orig.pop();
+	}
+	return reversed;
+}
+
 unordered_map<string, User> SaveLoad::loadUsers()
 {
-	return unordered_map<string, User>();
+	unordered_map<string, User> users;
+	User temp;
+	stack <Transaction> userTrans;
+	Transaction tmp;
+	int size;
+	ifstream ifile("data files/users.txt");
+	string text;
+	while (getline(ifile, text))
+	{
+		temp.setUsername(text);
+		getline(ifile, text);
+		temp.setPassword(text);
+		getline(ifile, text);
+		temp.setBalance(stoi(text));
+		getline(ifile, text);
+		temp.setPin(text);
+		getline(ifile, text);
+		temp.setActive((bool)stoi(text));
+		getline(ifile, text);
+		size = stoi(text);
+		for (int i = 0; i < size; i++)
+		{
+			getline(ifile, text);
+			tmp.setid(text);
+			getline(ifile, text);
+			tmp.setsender(text);
+			getline(ifile, text);
+			tmp.setrecipient(text);
+			getline(ifile, text);
+			tmp.setdatePlaceHolder(text);
+			getline(ifile, text);
+			tmp.setisAccepted((bool)stoi(text));
+			userTrans.push(tmp);
+		}
+		userTrans = reverseStack(userTrans);
+		temp.setTransactions(userTrans);
+		users.insert(make_pair(temp.getUsername(), temp));
+	}
+	ifile.close();
+	return users;
 }
 
 void SaveLoad::saveUsers(unordered_map<string, User> users)
@@ -13,8 +64,23 @@ void SaveLoad::saveUsers(unordered_map<string, User> users)
 	ofstream ofile("data files/users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
 	{
-		ofile << i->first << endl << i->second.getPassword() << endl << i->second.getBalance()
-			<< endl << i->second.getPin() << endl << i->second.getActive() << endl;
+		stack<Transaction> userTrans = i->second.getTransactions();
+		ofile << i->first << endl << i->second.getPassword() << endl << i->second.getBalance()<< endl 
+			<< i->second.getPin() << endl << i->second.getActive() << endl << userTrans.size() << endl;
+		while (!userTrans.empty())
+		{
+			ofile << userTrans.top().getid() << endl;
+			userTrans.pop();
+			ofile << userTrans.top().getsender() << endl;
+			userTrans.pop();
+			ofile << userTrans.top().getrecipient() << endl;
+			userTrans.pop();
+			ofile << userTrans.top().getdatePlaceHolder() << endl;
+			userTrans.pop();
+			ofile << userTrans.top().getisAccepted() << endl;
+			userTrans.pop();
+		}
+		
 	}
 	ofile.close();
 }
@@ -22,7 +88,7 @@ void SaveLoad::saveUsers(unordered_map<string, User> users)
 stack <Transaction> SaveLoad::loadTransactions()
 {
 	string text;
-	stack <Transaction> temp;
+	stack <Transaction> transactions;
 	ifstream ifile("data files/transactions.txt");
 	while (getline(ifile, text))
 	{
@@ -37,14 +103,9 @@ stack <Transaction> SaveLoad::loadTransactions()
 		getline(ifile, text);
 		bool bol = (bool)stoi(text);
 		tmp.setisAccepted(bol);
-		temp.push(tmp);
+		transactions.push(tmp);
 	}
-	stack <Transaction> transactions;
-	while (!temp.empty())
-	{
-		transactions.push(temp.top());
-		temp.pop();
-	}
+	transactions = reverseStack(transactions);
 	ifile.close();
 	return transactions;
 }
