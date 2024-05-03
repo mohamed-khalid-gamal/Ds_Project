@@ -36,6 +36,18 @@ string User::getPassword(void)
 {
 	return password;
 }
+int User::getBalance(void)
+{
+    return balance;
+}
+string User::getPin(void)
+{
+    return pin;
+}
+bool User::getActive(void)
+{
+    return is_active;
+}
 void User::setPassword(string pass)
 {
 	password = pass;

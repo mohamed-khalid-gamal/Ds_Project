@@ -8,8 +8,15 @@ unordered_map<string, User> SaveLoad::loadUsers()
 	return unordered_map<string, User>();
 }
 
-void SaveLoad::saveUsers()
+void SaveLoad::saveUsers(unordered_map<string, User> users)
 {
+	ofstream ofile("data files/users.txt");
+	for (auto i = users.begin(); i != users.end(); i++)
+	{
+		ofile << i->first << endl << i->second.getPassword() << endl << i->second.getBalance()
+			<< endl << i->second.getPin() << endl << i->second.getActive() << endl;
+	}
+	ofile.close();
 }
 
 stack <Transaction> SaveLoad::loadTransactions()
@@ -38,6 +45,7 @@ stack <Transaction> SaveLoad::loadTransactions()
 		transactions.push(temp.top());
 		temp.pop();
 	}
+	ifile.close();
 	return transactions;
 }
 
@@ -53,5 +61,4 @@ void SaveLoad::saveTransactions(stack <Transaction> transactions)
 		temp.pop();
 	}
 	ofile.close();
-	return;
 }

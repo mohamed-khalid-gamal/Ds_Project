@@ -18,6 +18,9 @@ public:
 	User();
 	string getUsername(void);
 	string getPassword(void);
+	int getBalance(void);
+	string getPin(void);
+	bool getActive(void);
 	void setPassword(string pass);
 	void sendMoney(void);
 	void requestMoney(void);
