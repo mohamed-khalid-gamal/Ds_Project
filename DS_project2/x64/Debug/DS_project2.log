@@ -1,8 +1,87 @@
 ﻿  Account.cpp
+  Admin.cpp
+  LogIn.cpp
   main.cpp
   Menu.cpp
   SaveLoad.cpp
   Transaction.cpp
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(43,8): error C2039: 'setid': is not a member of 'Transaction'
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(55,8): error C2039: 'setTransactions': is not a member of 'User'
+  F:\uploaded\Ds_Project\DS_project2\User.h(9,7):
+  see declaration of 'User'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(72,29): error C2039: 'getid': is not a member of 'Transaction'
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(96,7): error C2039: 'setid': is not a member of 'Transaction'
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(120,16): error C2039: 'getid': is not a member of 'Transaction'
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(43,8): error C2039: 'setid': is not a member of 'Transaction'
+  (compiling source file 'Transaction.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(55,8): error C2039: 'setTransactions': is not a member of 'User'
+  (compiling source file 'Transaction.cpp')
+  F:\uploaded\Ds_Project\DS_project2\User.h(9,7):
+  see declaration of 'User'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(72,29): error C2039: 'getid': is not a member of 'Transaction'
+  (compiling source file 'Transaction.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(96,7): error C2039: 'setid': is not a member of 'Transaction'
+  (compiling source file 'Transaction.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(120,16): error C2039: 'getid': is not a member of 'Transaction'
+  (compiling source file 'Transaction.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Transaction.h(7,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\Transaction.cpp(92,19): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   User.cpp
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(43,8): error C2039: 'setid': is not a member of 'Transaction'
+  (compiling source file 'User.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Menu.h(6,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(55,8): error C2039: 'setTransactions': is not a member of 'User'
+  (compiling source file 'User.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Menu.h(5,7):
+  see declaration of 'User'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(72,29): error C2039: 'getid': is not a member of 'Transaction'
+  (compiling source file 'User.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Menu.h(6,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(96,7): error C2039: 'setid': is not a member of 'Transaction'
+  (compiling source file 'User.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Menu.h(6,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\SaveLoad.cpp(120,16): error C2039: 'getid': is not a member of 'Transaction'
+  (compiling source file 'User.cpp')
+  F:\uploaded\Ds_Project\DS_project2\Menu.h(6,7):
+  see declaration of 'Transaction'
+  
+F:\uploaded\Ds_Project\DS_project2\User.cpp(45,12): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+F:\uploaded\Ds_Project\DS_project2\User.cpp(49,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+F:\uploaded\Ds_Project\DS_project2\User.cpp(118,42): error C2102: '&' requires l-value
+F:\uploaded\Ds_Project\DS_project2\User.cpp(134,42): error C2102: '&' requires l-value
+F:\uploaded\Ds_Project\DS_project2\User.cpp(152,38): error C2102: '&' requires l-value
+F:\uploaded\Ds_Project\DS_project2\User.cpp(187,42): error C2102: '&' requires l-value
+F:\uploaded\Ds_Project\DS_project2\User.cpp(441,38): error C2102: '&' requires l-value
   Generating Code...
-  DS_project2.vcxproj -> F:\uploaded\Ds_Project\x64\Debug\DS_project2.exe

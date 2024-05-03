@@ -69,7 +69,7 @@ void SaveLoad::saveUsers(unordered_map<string, User> users)
 			<< i->second.getPin() << endl << i->second.getActive() << endl << userTrans.size() << endl;
 		while (!userTrans.empty())
 		{
-			ofile << userTrans.top().getid() << endl;
+			ofile << userTrans.top().getId() << endl;
 			userTrans.pop();
 			ofile << userTrans.top().getsender() << endl;
 			userTrans.pop();
@@ -117,7 +117,7 @@ void SaveLoad::saveTransactions(stack <Transaction> transactions)
 	while (!temp.empty())
 	{
 		Transaction tmp = transactions.top();
-		ofile << tmp.getid() << endl << tmp.getsender() << endl << tmp.getrecipient() << endl
+		ofile << tmp.getId() << endl << tmp.getsender() << endl << tmp.getrecipient() << endl
 			<< tmp.getdatePlaceHolder() << endl << tmp.getisAccepted() << endl;
 		temp.pop();
 	}

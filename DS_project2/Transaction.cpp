@@ -1,18 +1,29 @@
 #include "User.h"
 #include "Transaction.h"
 #include <fstream>
-
-
+#include <chrono>
+#include <ctime>
+#include"SaveLoad.cpp"
 Transaction::Transaction(string sendUser, string recieveUser)
 {
+	SaveLoad files = SaveLoad();
+	auto all_tr = files.loadTransactions();
+	if (all_tr.empty())
+	{
+		this->id = 0;
+	}
+	else
+	{
+		this->id = all_tr.top().id++;
+	}
 	sender = sendUser;
 	recipient = recieveUser;
-	datePlaceHolder = "Today";
+	datePlaceHolder = get_time();
 	isAccepted = false;
 }
-
 void Transaction::listTransactions(std::vector<Transaction>)
 {
+
 }
 
 Transaction::Transaction()
@@ -21,11 +32,6 @@ Transaction::Transaction()
 	recipient = User("test", "test").getUsername();
 	datePlaceHolder = "Today";
 	isAccepted = false;
-}
-
-void Transaction::setid(string nid)
-{
-	id = nid;
 }
 void Transaction::setsender(string nsender)
 {
@@ -43,10 +49,11 @@ void Transaction::setisAccepted(bool nisAccepted)
 {
 	isAccepted = nisAccepted;
 }
-string Transaction::getid()
+void Transaction::setAmount(float trans_amount)
 {
-	return id;
+	this->tran_amount = trans_amount;
 }
+
 
 string Transaction::getsender()
 {
@@ -63,8 +70,32 @@ string Transaction::getdatePlaceHolder()
 	return datePlaceHolder;
 }
 
+int Transaction::getId()
+{
+	return id;
+}
+
+float Transaction::getAmount()
+{
+	return tran_amount;
+}
+
 bool Transaction::getisAccepted()
 {
 	return isAccepted;
+}
+
+string Transaction::get_time()
+{
+	auto now = chrono::system_clock::now();
+	time_t current_time = chrono::system_clock::to_time_t(now);
+	tm* local_time = localtime(&current_time);
+	char date_buffer[80];
+	strftime(date_buffer, sizeof(date_buffer), "%Y-%m-%d", local_time);
+	string current_date = date_buffer;
+	char time_buffer[80];
+	strftime(time_buffer, sizeof(time_buffer), "%H:%M:%S", local_time);
+	string current_time_str = time_buffer;
+	return  current_date + " " + current_time_str;
 }
 

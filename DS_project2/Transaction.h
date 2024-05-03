@@ -6,7 +6,8 @@ using namespace std;
 
 class Transaction
 {
-	string id;
+	int id;
+	float tran_amount;
 	string sender;
 	string recipient;
 	string datePlaceHolder; //Placeholder for the person who works on transactions class
@@ -14,15 +15,17 @@ class Transaction
 public:
 	Transaction();
 	Transaction(string sendUser, string recieveUser);
-	void setid(string nid);
 	void setsender(string nsender);
 	void setrecipient(string nrecipient);
 	void setdatePlaceHolder(string ndatePlaceHolder);
 	void setisAccepted(bool nisAccepted);
+	void setAmount(float);
 	void listTransactions(vector<Transaction> transactionArr); //Displays a list of all transactions
-	string getid();
 	string getsender();
 	string getrecipient();
 	string getdatePlaceHolder();
+	int getId();
+	float getAmount();
 	bool getisAccepted();
+	string get_time();
 };

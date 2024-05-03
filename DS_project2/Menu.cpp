@@ -30,8 +30,6 @@ void Menu::userMenu(User activeUser, unordered_map<string, User>& allUsers)
 	cout << "Welcome " + activeUser.getUsername() + "!";
 	getchar();
 }
-
-
 void Menu::adminMenu()
 {
 	cout << "Admin menu";

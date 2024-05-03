@@ -10,8 +10,9 @@ class User
 {
 	string username;
 	string password;
-	int balance;
+	float balance;
 	stack<Transaction> userTransactions;
+	unordered_map<int,Transaction> user_pending_Transactions;
 	string pin;
 	bool is_active;
 public:
@@ -25,16 +26,18 @@ public:
 	string getPin(void);
 	void setPin(string pinum);
 	stack <Transaction> getTransactions(void);
-	void setTransactions(stack <Transaction>);
+	void setTransaction(Transaction);
+	void setPendingTransaction(Transaction);
 	bool getActive(void);
 	void setActive(bool activity);
 	void setPassword(string pass);
-	void sendMoney(void);
+	void sendMoney( );
 	void requestMoney(void);
+	void acceptRequest(Transaction);
 	void changePassword(unordered_map<string, User>&, bool);
 	bool validPassword(string); 
 	void changeUsername(unordered_map<string, User>& allUsers, bool admin);
-	void pendingRequests(void);
+	void pendingRequests();
 	void transactionHistory(void);
 	static User searchUser(string uname, set <User> users);
 	static User searchUser(string uname, unordered_map <string, User> users);

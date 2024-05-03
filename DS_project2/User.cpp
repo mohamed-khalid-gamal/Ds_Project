@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include <unordered_map>
+#include "SaveLoad.cpp"
 using namespace std;
 
 User::User(string name, string pass)
@@ -68,20 +69,142 @@ stack<Transaction> User::getTransactions(void)
 {
     return userTransactions;
 }
-void User::setTransactions(stack <Transaction> UTrans)
+void User::setTransaction(Transaction tra)
 {
-    userTransactions = UTrans;
+    userTransactions.push(tra);
 }
+
+void User::setPendingTransaction(Transaction tr)
+{
+    user_pending_Transactions.insert(make_pair(tr.getId(),tr));
+}
+
 void User::setPassword(string pass)
 {
 	password = pass;
 }
-void User::sendMoney(void)
+void User::sendMoney()
 {
+    string recipient;
+    float amount;
+
+    cout << "Enter the user name you want to receive the money ";
+    cin >> recipient;
+    cout << "Enter the amount you want to send ";
+    cin >> amount;
+    SaveLoad X = SaveLoad();
+    auto user = searchUser(recipient, X.loadUsers());
+    if ( user.getUsername() == recipient)
+    {
+        if (amount <= this->balance)
+        {
+            if (this->getActive()==true && user.getActive())
+            {
+                Transaction trans = Transaction(this->getUsername(), recipient);
+                trans.setisAccepted(true);
+                trans.setAmount(amount);
+                this->setTransaction(trans);
+                user.setTransaction(trans);
+                this->balance -= amount;
+                user.balance += amount;
+               auto transs =  X.loadTransactions();
+               transs.push(trans);
+               X.saveTransactions(transs);
+            }
+            else {
+                cout << "you  or the recepient are panned  call the admin";
+                Menu men = Menu();
+                User actUser = searchUser(this->username, X.loadUsers());
+                auto users = &X.loadUsers();
+                men.userMenu(actUser, *users);
+            }
+        }
+        else {
+            cout << "invalid amount";
+            char x;
+            cout << "\n do you want try again ? (Y / N)";
+            cin >> x;
+            if (x == 'y' || x == 'Y')
+            {
+                sendMoney();
+            }
+            else {
+                Menu men = Menu();
+                User actUser = searchUser(this->username, X.loadUsers());
+                auto users = &X.loadUsers();
+                men.userMenu(actUser, *users);
+            }
+        }
+        
+    }
+    else
+    {
+        char x;
+        cout << "\n do you want try again ? (Y / N)";
+        cin >> x;
+        if (x=='y' ||x=='Y')
+        {
+            sendMoney();
+        }
+        else {
+            Menu men = Menu();
+            User actUser = searchUser(this->username, X.loadUsers());
+            auto users = &X.loadUsers();
+                men.userMenu(actUser,*users );
+        }
+    }
 }
 
-void User::requestMoney(void)
+void User::requestMoney()
 {
+    string sender;
+    float amount;
+    cout << "Enter the user name you want to receive the request ";
+    cin >> sender;
+    cout << "Enter the amount you want to request ";
+    cin >> amount;
+    SaveLoad files = SaveLoad();
+    auto user = searchUser(sender, files.loadUsers());
+    if (user.getUsername() == sender)
+    {     
+            
+                Transaction trans = Transaction( sender, this->getUsername());
+                trans.setAmount(amount);
+                user.setPendingTransaction(trans);
+    }
+    else
+    {
+        char x;
+        cout << "\n do you want try again ? (Y / N)";
+        cin >> x;
+        if (x == 'y' || x == 'Y')
+        {
+            requestMoney();
+        }
+        else {
+            Menu men = Menu();
+            User actUser = searchUser(this->username, files.loadUsers());
+            auto users = &files.loadUsers();
+            men.userMenu(actUser, *users);
+        }
+    }
+
+}
+
+void User::acceptRequest(Transaction tr_pend)
+{
+
+    SaveLoad files = SaveLoad();
+    user_pending_Transactions.erase(tr_pend.getId());
+    tr_pend.setisAccepted(true);
+    this->balance -= tr_pend.getAmount();
+    this->setTransaction(tr_pend);
+    User recepient = searchUser(tr_pend.getrecipient(), files.loadUsers());
+    recepient.balance += tr_pend.getAmount();
+    recepient.setTransaction(tr_pend);
+    stack<Transaction> trs = files.loadTransactions();
+    trs.push(tr_pend);
+    files.saveTransactions(trs);
 }
 
 void User::changePassword(unordered_map<string, User>& allUsers, bool admin = false) {
@@ -277,8 +400,48 @@ void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = fal
     }
 }
 
-void User::pendingRequests(void)
+void User::pendingRequests()
 {
+    for (auto it: user_pending_Transactions)
+    {
+        cout << "id : " << it.first << "amount : " << it.second.getAmount()<<"recepient :"<<it.second.getrecipient();
+    }
+    int id;
+    cout << "Enter the id of request you want to proceed \n";
+    cin >> id;
+    Transaction tr_pend = user_pending_Transactions.at(id);
+    if (tr_pend.getAmount()<=this->balance && this->getActive())
+    {
+        char ch;
+        cout << "Do you want to accept the request (Y / N)\n";
+        cin >> ch;
+        if (ch == 'y'|| ch =='Y')
+        {
+            acceptRequest(tr_pend);
+        }
+        else
+        {
+            user_pending_Transactions.erase(tr_pend.getId());
+        }
+    }
+    else
+    {
+        char ch;
+        cout << "you can`t accept this request do you want to reject it ? (Y / N)\n";
+        cin >> ch;
+        if (ch == 'y' || ch == 'Y')
+        {
+            user_pending_Transactions.erase(tr_pend.getId());
+        }
+        else
+        {
+            SaveLoad X = SaveLoad();
+            Menu men = Menu();
+            User actUser = searchUser(this->username, X.loadUsers());
+            auto users = &X.loadUsers();
+            men.userMenu(actUser, *users);
+        }
+    }
 }
 
 void User::transactionHistory(void)
