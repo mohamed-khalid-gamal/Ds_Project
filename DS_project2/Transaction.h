@@ -21,7 +21,7 @@ public:
 	void setdatePlaceHolder(string ndatePlaceHolder);
 	void setisAccepted(bool nisAccepted);
 	void setAmount(float);
-	void listTransactions(vector<Transaction> transactionArr); //Displays a list of all transactions
+	void listTransactions(stack<Transaction> transactions; //Displays a list of all transactions
 	string getsender();
 	string getrecipient();
 	string getdatePlaceHolder();
