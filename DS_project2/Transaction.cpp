@@ -37,6 +37,7 @@ void Transaction::listTransactions(std::stack<Transaction>)
         cout<<transaction.top().getrecipient()<<endl;
         cout<<"Date : ";
         cout<<transaction.top().getdatePlaceHolder()<<endl;
+	    transaction.pop();
     }
     if(!flag){
         cout<<"No Transactions yet";
