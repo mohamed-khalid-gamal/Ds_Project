@@ -478,7 +478,6 @@ void User::transactionHistory(stack<Transaction> userTransactions)
 }
 
 
-
 User User::searchUser(string uname, set <User> users)
 {
 	set <User> ::iterator it;
