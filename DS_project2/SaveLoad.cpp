@@ -30,7 +30,7 @@ unordered_map<string, User> SaveLoad::loadUsers()
 		getline(ifile, text);
 		temp.setPassword(text);
 		getline(ifile, text);
-		temp.setBalance(stoi(text));
+		temp.setBalance(stof(text));
 		getline(ifile, text);
 		temp.setPin(text);
 		getline(ifile, text);
@@ -40,7 +40,7 @@ unordered_map<string, User> SaveLoad::loadUsers()
 		for (int i = 0; i < size; i++)
 		{
 			getline(ifile, text);
-			tmp.setid(text);
+			tmp.setid(stoi(text));
 			getline(ifile, text);
 			tmp.setsender(text);
 			getline(ifile, text);
@@ -93,7 +93,7 @@ stack <Transaction> SaveLoad::loadTransactions()
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
-		tmp.setid(text);
+		tmp.setid(stoi(text));
 		getline(ifile, text);
 		tmp.setsender(text);
 		getline(ifile, text);

@@ -33,6 +33,10 @@ Transaction::Transaction()
 	datePlaceHolder = "Today";
 	isAccepted = false;
 }
+void Transaction::setid(int i)
+{
+	id = i;
+}
 void Transaction::setsender(string nsender)
 {
 	sender = nsender;

@@ -41,11 +41,11 @@ string User::getPassword(void)
 {
 	return password;
 }
-int User::getBalance(void)
+float User::getBalance(void)
 {
     return balance;
 }
-void User::setBalance(int bal)
+void User::setBalance(float bal)
 {
     balance = bal;
 }
@@ -69,6 +69,10 @@ void User::setActive(bool activity)
 stack<Transaction> User::getTransactions(void)
 {
     return userTransactions;
+}
+void User::setTransactions(stack <Transaction> UTrans)
+{
+    userTransactions = UTrans;
 }
 void User::setTransaction(Transaction tra)
 {

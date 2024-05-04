@@ -21,11 +21,12 @@ public:
 	string getUsername(void);
 	void setUsername(string uname);
 	string getPassword(void);
-	int getBalance(void);
-	void setBalance(int bal);
+	float getBalance(void);
+	void setBalance(float bal);
 	string getPin(void);
 	void setPin(string pinum);
 	stack <Transaction> getTransactions(void);
+	void setTransactions(stack <Transaction> UTrans);
 	void setTransaction(Transaction);
 	void setPendingTransaction(Transaction);
 	bool getActive(void);
