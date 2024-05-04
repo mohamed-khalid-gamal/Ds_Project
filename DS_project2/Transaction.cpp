@@ -21,9 +21,26 @@ Transaction::Transaction(string sendUser, string recieveUser)
 	datePlaceHolder = get_time();
 	isAccepted = false;
 }
-void Transaction::listTransactions(std::vector<Transaction>)
+void Transaction::listTransactions(std::stack<Transaction>)
 {
-
+    bool flag = false;
+    while (!transaction.empty()){
+        
+        flag = true;
+        cout<<"Transaction ID : ";
+        cout<<transaction.top().getId()<<endl;
+        cout<<"Transaction amount : ";
+        cout<<transaction.top().getAmount()<<endl;
+        cout<<"Sender : ";
+        cout<<transaction.top().getsender()<<endl;
+        cout<<"Recipient : ";
+        cout<<transaction.top().getrecipient()<<endl;
+        cout<<"Date : ";
+        cout<<transaction.top().getdatePlaceHolder()<<endl;
+    }
+    if(!flag){
+        cout<<"No Transactions yet";
+    }
 }
 
 Transaction::Transaction()
