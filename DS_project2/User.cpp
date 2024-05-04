@@ -467,7 +467,6 @@ void User::transactionHistory(stack<Transaction> userTransactions)
         cout<<tempStack.top().getrecipient()<<endl;
         cout<<"Date : ";
         cout<<tempStack.top().getdatePlaceHolder()<<endl;
-        tempStack.push(tempStack.top());
         tempStack.pop();
 
     }
