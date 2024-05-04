@@ -10,7 +10,7 @@ class Admin {
     static const string password;
 public:
     void EditUser(unordered_map<string, User>& allUsers);
-    void ListUsers();
+    void ListUsers(unordered_map<string, User>& allUsers);
 };
 
 const string Admin::username = "admin";

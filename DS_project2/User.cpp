@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include <unordered_map>
+#include <stack>
 #include "SaveLoad.cpp"
 using namespace std;
 
@@ -444,8 +445,32 @@ void User::pendingRequests()
     }
 }
 
-void User::transactionHistory(void)
+void User::transactionHistory(stack<Transaction> userTransactions)
 {
+    stack<Transaction> tempStack = userTransactions;
+    bool flag = false;
+
+    while (!tempStack.empty()){
+
+        flag = true;
+        cout<<"Transaction ID : ";
+        cout<<tempStack.top().getId()<<endl;
+        cout<<"Transaction amount : ";
+        cout<<tempStack.top().getAmount()<<endl;
+        cout<<"Sender : ";
+        cout<<tempStack.top().getsender()<<endl;
+        cout<<"Recipient : ";
+        cout<<tempStack.top().getrecipient()<<endl;
+        cout<<"Date : ";
+        cout<<tempStack.top().getdatePlaceHolder()<<endl;
+        tempStack.push(tempStack.top());
+        tempStack.pop();
+
+    }
+    if(!flag){
+        cout<<"No Transactions found";
+    }
+
 }
 
 

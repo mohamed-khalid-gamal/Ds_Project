@@ -2,6 +2,7 @@
 #include <iostream>
 #include "User.h"
 #include "Menu.h"
+#include "SaveLoad.h"
 void Admin::EditUser(unordered_map<string, User>& allUsers) {
 	cout << "Enter the username of Account you want to edit :";
 	string usernamesearched; getline(cin, usernamesearched);
@@ -22,4 +23,13 @@ void Admin::EditUser(unordered_map<string, User>& allUsers) {
 		Menu::adminMenu();
 	}
 	 
+}
+
+void ListUsers(unordered_map<string, User>& allUsers){
+    for (auto& pair : allUsers){
+        cout<< "Username : "<< pair.second.getUsername()<<endl;
+        cout<< "current balance : "<< pair.second.getBalance()<<endl;
+        cout<< "Transaction History : "<< pair.second.transactionHistory()<<endl;
+    }
+
 }

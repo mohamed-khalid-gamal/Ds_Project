@@ -38,7 +38,7 @@ public:
 	bool validPassword(string); 
 	void changeUsername(unordered_map<string, User>& allUsers, bool admin);
 	void pendingRequests();
-	void transactionHistory(void);
+	void transactionHistory(stack<Transaction> userTransactions);
 	static User searchUser(string uname, set <User> users);
 	static User searchUser(string uname, unordered_map <string, User> users);
 	static void removeUser(string uname, set <User> users);
