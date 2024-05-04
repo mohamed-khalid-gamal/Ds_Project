@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include"SaveLoad.cpp"
+#include <iostream>
 Transaction::Transaction(string sendUser, string recieveUser)
 {
 	SaveLoad files = SaveLoad();
@@ -21,7 +22,7 @@ Transaction::Transaction(string sendUser, string recieveUser)
 	datePlaceHolder = get_time();
 	isAccepted = false;
 }
-void Transaction::listTransactions(std::stack<Transaction>)
+void Transaction::listTransactions(std::stack<Transaction> transaction)
 {
     bool flag = false;
     while (!transaction.empty()){

@@ -449,9 +449,9 @@ void User::pendingRequests()
     }
 }
 
-void User::transactionHistory(stack<Transaction> userTransactions)
+void User::transactionHistory()
 {
-    stack<Transaction> tempStack = userTransactions;
+    stack<Transaction> tempStack = this->userTransactions;
     bool flag = false;
 
     while (!tempStack.empty()){

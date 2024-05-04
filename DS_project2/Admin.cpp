@@ -29,7 +29,8 @@ void ListUsers(unordered_map<string, User>& allUsers){
     for (auto& pair : allUsers){
         cout<< "Username : "<< pair.second.getUsername()<<endl;
         cout<< "current balance : "<< pair.second.getBalance()<<endl;
-        cout<< "Transaction History : "<< pair.second.transactionHistory()<<endl;
+		cout << "Transaction History : "; pair.second.transactionHistory();
+		cout << endl;
     }
 
 }

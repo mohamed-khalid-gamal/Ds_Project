@@ -1,15 +1,10 @@
-﻿  Account.cpp
-  Admin.cpp
-  LogIn.cpp
-  main.cpp
-  Menu.cpp
-  SaveLoad.cpp
+﻿  SaveLoad.cpp
   Transaction.cpp
-C:\Users\USER\source\repos\Ds_Project\DS_project2\Transaction.cpp(96,19): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\Transaction.cpp(115,19): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   User.cpp
-C:\Users\USER\source\repos\Ds_Project\DS_project2\User.cpp(122,30): error C2102: '&' requires l-value
-C:\Users\USER\source\repos\Ds_Project\DS_project2\User.cpp(138,30): error C2102: '&' requires l-value
-C:\Users\USER\source\repos\Ds_Project\DS_project2\User.cpp(156,26): error C2102: '&' requires l-value
-C:\Users\USER\source\repos\Ds_Project\DS_project2\User.cpp(191,26): error C2102: '&' requires l-value
-C:\Users\USER\source\repos\Ds_Project\DS_project2\User.cpp(445,26): error C2102: '&' requires l-value
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(123,30): error C2102: '&' requires l-value
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(139,30): error C2102: '&' requires l-value
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(157,26): error C2102: '&' requires l-value
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(192,26): error C2102: '&' requires l-value
+C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(446,26): error C2102: '&' requires l-value
   Generating Code...
