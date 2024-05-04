@@ -15,6 +15,7 @@ class Transaction
 public:
 	Transaction();
 	Transaction(string sendUser, string recieveUser);
+	void setid(int i);
 	void setsender(string nsender);
 	void setrecipient(string nrecipient);
 	void setdatePlaceHolder(string ndatePlaceHolder);
