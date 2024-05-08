@@ -3,7 +3,8 @@
 #include "User.h"
 #include "Menu.h"
 #include "SaveLoad.h"
-void Admin::EditUser(unordered_map<string, User>& allUsers) {
+void Admin::EditUser(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions) {
+	Menu men = Menu();
 	cout << "Enter the username of Account you want to edit :";
 	string usernamesearched; getline(cin, usernamesearched);
 	User choosen = User::searchUser(usernamesearched, allUsers);
@@ -14,13 +15,13 @@ void Admin::EditUser(unordered_map<string, User>& allUsers) {
 	int x; cin >> x;
 	cin.ignore();
 	if (x == 1) {
-		choosen.changeUsername(allUsers, true);
+		choosen.changeUsername(allUsers, true, allTransactions);
 	}
 	else if (x == 2) {
-		choosen.changePassword(allUsers, true);
+		choosen.changePassword(allUsers, true, allTransactions);
 	}
 	else {
-		Menu::adminMenu();
+		men.adminMenu(allUsers,allTransactions);
 	}
 	 
 }

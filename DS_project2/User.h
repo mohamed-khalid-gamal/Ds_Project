@@ -3,7 +3,7 @@
 #include <stack>
 #include <set>
 #include <unordered_map>
-#include "Transaction.h"
+class Transaction;
 
 using namespace std;
 class User
@@ -32,17 +32,18 @@ public:
 	bool getActive(void);
 	void setActive(bool activity);
 	void setPassword(string pass);
-	void sendMoney( );
-	void requestMoney(void);
-	void acceptRequest(Transaction);
-	void changePassword(unordered_map<string, User>&, bool);
-	bool validPassword(string); 
-	void changeUsername(unordered_map<string, User>& allUsers, bool admin);
-	void pendingRequests();
+	void sendMoney(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+	void requestMoney(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+	void acceptRequest(Transaction tr_pend, unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+	void changePassword(unordered_map<string, User>& allUsers, bool admin, stack<Transaction>& allTransactions);
+	bool validPassword(string);
+	void changeUsername(unordered_map<string, User>& allUsers, bool admin, stack<Transaction>& allTransactions);
+	void pendingRequests(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
 	void transactionHistory();
 	static User searchUser(string uname, set <User> users);
 	static User searchUser(string uname, unordered_map <string, User> users);
 	static void removeUser(string uname, set <User> users);
+	static void setUserPinMenu(User activeUser);
 
 };
 

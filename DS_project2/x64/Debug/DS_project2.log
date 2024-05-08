@@ -1,10 +1,91 @@
-﻿  SaveLoad.cpp
+﻿  Admin.cpp
+D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38): error C2027: use of undefined type 'Transaction'
+  (compiling source file 'Admin.cpp')
+  D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(6,7):
+  see declaration of 'Transaction'
+  D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38):
+  the template instantiation context (the oldest one first) is
+  	D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(14,21):
+  	see reference to class template instantiation 'std::stack<Transaction,std::deque<Transaction,std::allocator<Transaction>>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\stack(27,1):
+  	see reference to class template instantiation 'std::deque<Transaction,std::allocator<Transaction>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(592,1):
+  	see reference to class template instantiation 'std::_Deque_val<std::_Deque_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=Transaction
+          ]
+  
+  Menu.cpp
+D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38): error C2027: use of undefined type 'Transaction'
+  (compiling source file 'Menu.cpp')
+  D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(6,7):
+  see declaration of 'Transaction'
+  D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38):
+  the template instantiation context (the oldest one first) is
+  	D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(14,21):
+  	see reference to class template instantiation 'std::stack<Transaction,std::deque<Transaction,std::allocator<Transaction>>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\stack(27,1):
+  	see reference to class template instantiation 'std::deque<Transaction,std::allocator<Transaction>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(592,1):
+  	see reference to class template instantiation 'std::_Deque_val<std::_Deque_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=Transaction
+          ]
+  
+  SaveLoad.cpp
+D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38): error C2027: use of undefined type 'Transaction'
+  (compiling source file 'SaveLoad.cpp')
+  D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(6,7):
+  see declaration of 'Transaction'
+  D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38):
+  the template instantiation context (the oldest one first) is
+  	D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(14,21):
+  	see reference to class template instantiation 'std::stack<Transaction,std::deque<Transaction,std::allocator<Transaction>>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\stack(27,1):
+  	see reference to class template instantiation 'std::deque<Transaction,std::allocator<Transaction>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(592,1):
+  	see reference to class template instantiation 'std::_Deque_val<std::_Deque_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=Transaction
+          ]
+  
   Transaction.cpp
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\Transaction.cpp(115,19): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38): error C2027: use of undefined type 'Transaction'
+  (compiling source file 'Transaction.cpp')
+  D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(6,7):
+  see declaration of 'Transaction'
+  D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38):
+  the template instantiation context (the oldest one first) is
+  	D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(14,21):
+  	see reference to class template instantiation 'std::stack<Transaction,std::deque<Transaction,std::allocator<Transaction>>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\stack(27,1):
+  	see reference to class template instantiation 'std::deque<Transaction,std::allocator<Transaction>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(592,1):
+  	see reference to class template instantiation 'std::_Deque_val<std::_Deque_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=Transaction
+          ]
+  
   User.cpp
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(123,30): error C2102: '&' requires l-value
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(139,30): error C2102: '&' requires l-value
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(157,26): error C2102: '&' requires l-value
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(192,26): error C2102: '&' requires l-value
-C:\Users\pc\source\repos\mohamed-khalid1907\Ds_Project\DS_project2\User.cpp(446,26): error C2102: '&' requires l-value
+D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38): error C2027: use of undefined type 'Transaction'
+  (compiling source file 'User.cpp')
+  D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(6,7):
+  see declaration of 'Transaction'
+  D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(549,38):
+  the template instantiation context (the oldest one first) is
+  	D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.h(14,21):
+  	see reference to class template instantiation 'std::stack<Transaction,std::deque<Transaction,std::allocator<Transaction>>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\stack(27,1):
+  	see reference to class template instantiation 'std::deque<Transaction,std::allocator<Transaction>>' being compiled
+  	D:\Apps\Visual Studio IDE\VC\Tools\MSVC\14.38.33130\include\deque(592,1):
+  	see reference to class template instantiation 'std::_Deque_val<std::_Deque_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=Transaction
+          ]
+  
   Generating Code...

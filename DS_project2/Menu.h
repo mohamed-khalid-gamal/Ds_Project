@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <stack>
 #include <unordered_map>
 using namespace std;
 class User;
@@ -8,7 +8,7 @@ class Transaction;
 class Menu
 {
 public:
-	static void mainMenu(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions);
-	static void userMenu(User activeUser, unordered_map<string, User>& allUsers);
-	static void adminMenu();
+	void mainMenu(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+	void userMenu(User activeUser, unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+	void adminMenu(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
 };

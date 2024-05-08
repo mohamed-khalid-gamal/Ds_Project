@@ -1,3 +1,4 @@
+#pragma once
 #include "User.h"
 #include "Account.h"
 #include "Menu.h"
@@ -6,7 +7,7 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
-#include "SaveLoad.cpp"
+#include "Transaction.h"
 using namespace std;
 
 User::User(string name, string pass)
@@ -88,7 +89,7 @@ void User::setPassword(string pass)
 {
 	password = pass;
 }
-void User::sendMoney()
+void User::sendMoney(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions)
 {
     string recipient;
     float amount;
@@ -97,8 +98,7 @@ void User::sendMoney()
     cin >> recipient;
     cout << "Enter the amount you want to send ";
     cin >> amount;
-    SaveLoad X = SaveLoad();
-    auto user = searchUser(recipient, X.loadUsers());
+    auto user = searchUser(recipient, allUsers);
     if ( user.getUsername() == recipient)
     {
         if (amount <= this->balance)
@@ -112,16 +112,13 @@ void User::sendMoney()
                 user.setTransaction(trans);
                 this->balance -= amount;
                 user.balance += amount;
-               auto transs =  X.loadTransactions();
-               transs.push(trans);
-               X.saveTransactions(transs);
+                allTransactions.push(trans);
             }
             else {
                 cout << "you  or the recepient are panned  call the admin";
                 Menu men = Menu();
-                User actUser = searchUser(this->username, X.loadUsers());
-                auto users = &X.loadUsers();
-                men.userMenu(actUser, *users);
+                User actUser = searchUser(this->username, allUsers);
+                men.userMenu(actUser, allUsers,allTransactions);
             }
         }
         else {
@@ -131,13 +128,12 @@ void User::sendMoney()
             cin >> x;
             if (x == 'y' || x == 'Y')
             {
-                sendMoney();
+                sendMoney(allUsers,allTransactions);
             }
             else {
                 Menu men = Menu();
-                User actUser = searchUser(this->username, X.loadUsers());
-                auto users = &X.loadUsers();
-                men.userMenu(actUser, *users);
+                User actUser = searchUser(this->username, allUsers);
+                men.userMenu(actUser, allUsers, allTransactions);
             }
         }
         
@@ -149,18 +145,17 @@ void User::sendMoney()
         cin >> x;
         if (x=='y' ||x=='Y')
         {
-            sendMoney();
+            sendMoney(allUsers,allTransactions);
         }
         else {
             Menu men = Menu();
-            User actUser = searchUser(this->username, X.loadUsers());
-            auto users = &X.loadUsers();
-                men.userMenu(actUser,*users );
+            User actUser = searchUser(this->username, allUsers);
+            men.userMenu(actUser,allUsers,allTransactions);
         }
     }
 }
 
-void User::requestMoney()
+void User::requestMoney(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions)
 {
     string sender;
     float amount;
@@ -168,8 +163,7 @@ void User::requestMoney()
     cin >> sender;
     cout << "Enter the amount you want to request ";
     cin >> amount;
-    SaveLoad files = SaveLoad();
-    auto user = searchUser(sender, files.loadUsers());
+    auto user = searchUser(sender, allUsers);
     if (user.getUsername() == sender)
     {     
             
@@ -184,51 +178,47 @@ void User::requestMoney()
         cin >> x;
         if (x == 'y' || x == 'Y')
         {
-            requestMoney();
+            requestMoney(allUsers, allTransactions);
         }
         else {
             Menu men = Menu();
-            User actUser = searchUser(this->username, files.loadUsers());
-            auto users = &files.loadUsers();
-            men.userMenu(actUser, *users);
+            User actUser = searchUser(this->username, allUsers);
+            men.userMenu(actUser, allUsers,allTransactions);
         }
     }
 
 }
 
-void User::acceptRequest(Transaction tr_pend)
+void User::acceptRequest(Transaction tr_pend, unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions)
 {
-
-    SaveLoad files = SaveLoad();
     user_pending_Transactions.erase(tr_pend.getId());
     tr_pend.setisAccepted(true);
     this->balance -= tr_pend.getAmount();
     this->setTransaction(tr_pend);
-    User recepient = searchUser(tr_pend.getrecipient(), files.loadUsers());
+    User recepient = searchUser(tr_pend.getrecipient(), allUsers);
     recepient.balance += tr_pend.getAmount();
     recepient.setTransaction(tr_pend);
-    stack<Transaction> trs = files.loadTransactions();
-    trs.push(tr_pend);
-    files.saveTransactions(trs);
+    allTransactions.push(tr_pend);
 }
 
-void User::changePassword(unordered_map<string, User>& allUsers, bool admin = false) {
+void User::changePassword(unordered_map<string, User>& allUsers, bool admin, stack<Transaction>& allTransactions) {
+    Menu men = Menu();
     if (admin == true) {
         cout << endl << "Enter new password : ";
         string newPassword; getline(cin, newPassword);
         if (!validPassword(newPassword)) {
-            system("pause"); system("cls");
-            cout << endl << "             (1) reEnter your new password                   ";
-            cout << endl << "             other to return to admin menu                     ";
+            getchar();
+            cout << endl << "             (1) Re-Enter your new password                   ";
+            cout << endl << "             (Else) Return to admin menu                     ";
             int x; cin >> x;
             cin.ignore();
             if (x == 1) {
-                system("pause"); system("cls");
-                changePassword(allUsers, true);
+                getchar();
+                changePassword(allUsers, true,allTransactions);
             }
             else {
-                system("pause"); system("cls");
-                Menu::adminMenu();
+                getchar();
+                men.adminMenu(allUsers, allTransactions);
                 //Menu::userMenu(allUsers[this->username], allUsers);
                 //both are correct
             }
@@ -237,8 +227,8 @@ void User::changePassword(unordered_map<string, User>& allUsers, bool admin = fa
         else {
             this->password = newPassword;
             cout << "password has been changed ! " << endl;
-            system("pause"); system("cls");
-            Menu::adminMenu();
+            getchar();
+            men.adminMenu(allUsers, allTransactions);
             //Menu::userMenu(allUsers[this->username], allUsers);
         }
     }
@@ -249,18 +239,17 @@ void User::changePassword(unordered_map<string, User>& allUsers, bool admin = fa
             cout << endl << "Enter new password : ";
             string newPassword; getline(cin, newPassword);
             if (!validPassword(newPassword)) {
-                system("pause"); system("cls");
                 cout << endl << "             (1) reEnter your new password                    ";
                 cout << endl << "             other to return to user menu                     ";
                 int x; cin >> x;
                 cin.ignore();
                 if (x == 1) {
-                    system("pause"); system("cls");
-                    changePassword(allUsers);
+                    getchar();
+                    changePassword(allUsers, false, allTransactions);
                 }
                 else {
-                    system("pause"); system("cls");
-                    Menu::userMenu(*this, allUsers);
+                    getchar();
+                    men.userMenu(*this, allUsers, allTransactions);
                     //Menu::userMenu(allUsers[this->username], allUsers);
                     //both are correct
                 }
@@ -269,25 +258,24 @@ void User::changePassword(unordered_map<string, User>& allUsers, bool admin = fa
             else {
                 this->password = newPassword;
                 cout << "password has been changed ! " << endl;
-                system("pause"); system("cls");
-                Menu::userMenu(*this, allUsers);
+                getchar();
+                men.userMenu(*this, allUsers,allTransactions);
                 //Menu::userMenu(allUsers[this->username], allUsers);
             }
         }
         else {
             cout << "Wrong password !" << endl;
-            system("pause"); system("cls");
             cout << endl << "             (1) reEnter your password                   ";
             cout << endl << "             other to return to user menu                     ";
             int x; cin >> x;
             cin.ignore();
             if (x == 1) {
-                system("pause"); system("cls");
-                changePassword(allUsers);
+                getchar();
+                changePassword(allUsers,false, allTransactions);
             }
             else {
-                system("pause"); system("cls");
-                Menu::userMenu(*this, allUsers);
+                getchar();
+                men.userMenu(*this, allUsers, allTransactions);
                 //Menu::userMenu(allUsers[this->username], allUsers);
                 //both are correct
             }
@@ -346,9 +334,9 @@ bool User::validPassword(string password) {
     }
     return true;
 }
-void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = false) {
+void User::changeUsername(unordered_map<string, User>& allUsers,bool admin, stack<Transaction>& allTransactions) {
+    Menu men = Menu();
     if (admin == false) {
-        system("pause"); system("cls");
         cout << "Enter new Username : ";
         string username; getline(cin, username);
         auto it = allUsers.find(username);
@@ -357,18 +345,18 @@ void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = fal
         }
         else {
             cout << "This username is taken !" << endl << "Try another one" << endl;
-            system("pause"); system("cls");
+            getchar();
             cout << endl << "             (1) reEnter new username                   ";
             cout << endl << "             other to return to user menu                     ";
             int x; cin >> x;
             cin.ignore();
             if (x == 1) {
-                system("pause"); system("cls");
-                changePassword(allUsers);
+                getchar();
+                changePassword(allUsers,false, allTransactions);
             }
             else {
-                system("pause"); system("cls");
-                Menu::userMenu(*this, allUsers);
+                getchar();
+                men.userMenu(*this, allUsers,allTransactions);
                 //Menu::userMenu(allUsers[this->username], allUsers);
                 //both are correct
             }
@@ -376,7 +364,6 @@ void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = fal
         system("pause");
     }
     else if (admin == true) {
-        system("pause"); system("cls");
         cout << "Enter new Username : ";
         string username; getline(cin, username);
         auto it = allUsers.find(username);
@@ -385,18 +372,18 @@ void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = fal
         }
         else {
             cout << "This username is taken !" << endl << "Try another one" << endl;
-            system("pause"); system("cls");
+            getchar();
             cout << endl << "             (1) reEnter new username                   ";
             cout << endl << "             other to return to admin menu                     ";
             int x; cin >> x;
             cin.ignore();
             if (x == 1) {
-                system("pause"); system("cls");
-                changeUsername(allUsers,true);
+                getchar();
+                changeUsername(allUsers,true,allTransactions);
             }
             else {
-                system("pause"); system("cls");
-                Menu::adminMenu();
+                getchar();
+                men.adminMenu(allUsers,allTransactions);
                 //Menu::userMenu(allUsers[this->username], allUsers);
                 //both are correct
             }
@@ -405,7 +392,7 @@ void User::changeUsername(unordered_map<string, User>& allUsers,bool admin = fal
     }
 }
 
-void User::pendingRequests()
+void User::pendingRequests(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions)
 {
     for (auto it: user_pending_Transactions)
     {
@@ -422,7 +409,7 @@ void User::pendingRequests()
         cin >> ch;
         if (ch == 'y'|| ch =='Y')
         {
-            acceptRequest(tr_pend);
+            acceptRequest(tr_pend,allUsers,allTransactions);
         }
         else
         {
@@ -440,11 +427,9 @@ void User::pendingRequests()
         }
         else
         {
-            SaveLoad X = SaveLoad();
             Menu men = Menu();
-            User actUser = searchUser(this->username, X.loadUsers());
-            auto users = &X.loadUsers();
-            men.userMenu(actUser, *users);
+            User actUser = searchUser(this->username, allUsers);
+            men.userMenu(actUser, allUsers,allTransactions);
         }
     }
 }
@@ -517,4 +502,18 @@ void User::removeUser(string uname, set <User> users)
 	}
 	cout << "User not found\n";
 	return;
+}
+
+void User::setUserPinMenu(User activeUser)
+{
+    string newPin;
+    cout << "Enter new pin(Must be 6 numbers in length): ";
+    cin >> newPin;
+    cin.ignore();
+    if (newPin.length() > 6 || newPin.length() < 6) {
+        cout << "Wrong format pleaser try again with the correct format\n";
+    }
+    else {
+        activeUser.setPin(newPin);
+    }
 }

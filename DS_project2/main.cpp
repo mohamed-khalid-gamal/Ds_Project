@@ -9,8 +9,11 @@
 
 int main()
 {
+	SaveLoad files;
 	Menu menu;
-	std::unordered_map<std::string, User> allUsers;
-	std::vector<Transaction> allTransactions;
+	std::unordered_map<std::string, User> allUsers = files.loadUsers();
+	std::stack<Transaction> allTransactions = files.loadTransactions();
 	menu.mainMenu(allUsers, allTransactions);
+	files.saveUsers(allUsers);
+	files.saveTransactions(allTransactions);
 }

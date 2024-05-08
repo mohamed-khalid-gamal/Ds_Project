@@ -3,19 +3,17 @@
 #include <fstream>
 #include <chrono>
 #include <ctime>
-#include"SaveLoad.cpp"
 #include <iostream>
-Transaction::Transaction(string sendUser, string recieveUser)
+#pragma warning(disable : 4996)
+Transaction::Transaction(string sendUser, string recieveUser, stack<Transaction>& allTransactions)
 {
-	SaveLoad files = SaveLoad();
-	auto all_tr = files.loadTransactions();
-	if (all_tr.empty())
+	if (allTransactions.empty())
 	{
 		this->id = 0;
 	}
 	else
 	{
-		this->id = all_tr.top().id++;
+		this->id = allTransactions.top().id++;
 	}
 	sender = sendUser;
 	recipient = recieveUser;
@@ -45,12 +43,13 @@ void Transaction::listTransactions(std::stack<Transaction> transaction)
     }
 }
 
-Transaction::Transaction()
-{
+Transaction::Transaction(){
 	sender = User("test", "test").getUsername();
 	recipient = User("test", "test").getUsername();
 	datePlaceHolder = "Today";
 	isAccepted = false;
+	id = 0;
+	tran_amount = 50;
 }
 void Transaction::setid(int i)
 {

@@ -9,8 +9,8 @@ class Admin {
     static const string username;
     static const string password;
 public:
-    void EditUser(unordered_map<string, User>& allUsers);
     void ListUsers(unordered_map<string, User>& allUsers);
+    void EditUser(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
 };
 
 

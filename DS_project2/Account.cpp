@@ -7,7 +7,7 @@
 #include "Menu.h"
 using namespace std;
 
-void Account::logIn(unordered_map<string, User>& allUsers, vector<Transaction>& allTransactions)
+void Account::logIn(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions)
 {
 	Menu menu;
 	string name;
@@ -33,7 +33,7 @@ void Account::logIn(unordered_map<string, User>& allUsers, vector<Transaction>& 
 		cin.ignore();
 		if (pass == "-1") return;
 		else if (name == "admin" && pass == "admin") {
-				menu.adminMenu();
+				menu.adminMenu(allUsers,allTransactions);
 				return;
 			}
 		else if (pass != allUsers[name].getPassword()) {
@@ -46,7 +46,7 @@ void Account::logIn(unordered_map<string, User>& allUsers, vector<Transaction>& 
 		}
 		break;
 	}
-	menu.userMenu(allUsers.at(name), allUsers);
+	menu.userMenu(allUsers.at(name), allUsers,allTransactions);
 }
 
 void Account::registerAccount(unordered_map<string, User>& allUsers)
@@ -113,8 +113,4 @@ void Account::forgetPassword(unordered_map<string, User>& allUsers)
 		break;
 	}
 	allUsers[name].setPassword(pass);
-}
-
-void Account::hashPassword()
-{
 }
