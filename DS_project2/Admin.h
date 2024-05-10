@@ -1,20 +1,18 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "User.h"
-#include "Menu.h"
-using namespace std;
-
+class User;
+class Transaction;
 class Admin {
-    static const string username;
-    static const string password;
+    static const std::string username;
+    static const std::string password;
 public:
-    void ListUsers(unordered_map<string, User>& allUsers);
-    void EditUser(unordered_map<string, User>& allUsers, stack<Transaction>& allTransactions);
+    void ListUsers(std::unordered_map<std::string, User>& allUsers);
+    void EditUser(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
 };
 
 
-const string Admin::username = "admin";
-const string Admin::password = "admin";
+const std::string Admin::username = "admin";
+const std::string Admin::password = "admin";
 
 

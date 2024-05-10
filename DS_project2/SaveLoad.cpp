@@ -1,12 +1,13 @@
-#include "SaveLoad.h"
+#pragma once
 #include <unordered_map>
 #include <fstream>
-using namespace std;
-
+#include "Transaction.h"
+#include "User.h"
+#include "SaveLoad.h"
 template <typename T>
-stack <T> SaveLoad::reverseStack(stack <T> orig)
+std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
 {
-	stack <T> reversed;
+	std::stack <T> reversed;
 	while (!orig.empty())
 	{
 		reversed.push(orig.top());
@@ -15,15 +16,15 @@ stack <T> SaveLoad::reverseStack(stack <T> orig)
 	return reversed;
 }
 
-unordered_map<string, User> SaveLoad::loadUsers()
+std::unordered_map<std::string, User> SaveLoad::loadUsers()
 {
-	unordered_map<string, User> users;
+	std::unordered_map<std::string, User> users;
 	User temp;
-	stack <Transaction> userTrans;
+	std::stack <Transaction> userTrans;
 	Transaction tmp;
 	int size;
-	ifstream ifile("data files/users.txt");
-	string text;
+	std::ifstream ifile("data files/users.txt");
+	std::string text;
 	while (getline(ifile, text))
 	{
 		temp.setUsername(text);
@@ -59,25 +60,25 @@ unordered_map<string, User> SaveLoad::loadUsers()
 	return users;
 }
 
-void SaveLoad::saveUsers(unordered_map<string, User> users)
+void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-	ofstream ofile("data files/users.txt");
+	std::ofstream ofile("data files/users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
 	{
-		stack<Transaction> userTrans = i->second.getTransactions();
-		ofile << i->first << endl << i->second.getPassword() << endl << i->second.getBalance()<< endl 
-			<< i->second.getPin() << endl << i->second.getActive() << endl << userTrans.size() << endl;
+		std::stack<Transaction> userTrans = i->second.getTransactions();
+		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance()<< std::endl
+			<< i->second.getPin() << std::endl << i->second.getActive() << std::endl << userTrans.size() << std::endl;
 		while (!userTrans.empty())
 		{
-			ofile << userTrans.top().getId() << endl;
+			ofile << userTrans.top().getId() << std::endl;
 			userTrans.pop();
-			ofile << userTrans.top().getsender() << endl;
+			ofile << userTrans.top().getsender() << std::endl;
 			userTrans.pop();
-			ofile << userTrans.top().getrecipient() << endl;
+			ofile << userTrans.top().getrecipient() << std::endl;
 			userTrans.pop();
-			ofile << userTrans.top().getdatePlaceHolder() << endl;
+			ofile << userTrans.top().getdatePlaceHolder() << std::endl;
 			userTrans.pop();
-			ofile << userTrans.top().getisAccepted() << endl;
+			ofile << userTrans.top().getisAccepted() << std::endl;
 			userTrans.pop();
 		}
 		
@@ -85,11 +86,11 @@ void SaveLoad::saveUsers(unordered_map<string, User> users)
 	ofile.close();
 }
 
-stack <Transaction> SaveLoad::loadTransactions()
+std::stack <Transaction> SaveLoad::loadTransactions()
 {
-	string text;
-	stack <Transaction> transactions;
-	ifstream ifile("data files/transactions.txt");
+	std::string text;
+	std::stack <Transaction> transactions;
+	std::ifstream ifile("data files/transactions.txt");
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
@@ -110,15 +111,15 @@ stack <Transaction> SaveLoad::loadTransactions()
 	return transactions;
 }
 
-void SaveLoad::saveTransactions(stack <Transaction> transactions)
+void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-	ofstream ofile("data files/transactions.txt");
-	stack <Transaction> temp = transactions;
+	std::ofstream ofile("data files/transactions.txt");
+	std::stack <Transaction> temp = transactions;
 	while (!temp.empty())
 	{
 		Transaction tmp = transactions.top();
-		ofile << tmp.getId() << endl << tmp.getsender() << endl << tmp.getrecipient() << endl
-			<< tmp.getdatePlaceHolder() << endl << tmp.getisAccepted() << endl;
+		ofile << tmp.getId() << std::endl << tmp.getsender() << std::endl << tmp.getrecipient() << std::endl
+			<< tmp.getdatePlaceHolder() << std::endl << tmp.getisAccepted() << std::endl;
 		temp.pop();
 	}
 	ofile.close();

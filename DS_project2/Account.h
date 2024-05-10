@@ -4,7 +4,6 @@
 #include <stack>
 class User;
 class Transaction;
-
 class Account
 {
 public:
