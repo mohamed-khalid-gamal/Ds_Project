@@ -16,7 +16,7 @@ std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
 	return reversed;
 }
 
-std::unordered_map<std::string, User> SaveLoad::loadUsers()
+std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction> allTransaction)
 {
 	std::unordered_map<std::string, User> users;
 	User temp;
@@ -27,6 +27,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers()
 	std::string text;
 	while (getline(ifile, text))
 	{
+		std::stack <Transaction> tempTrans = allTransaction;
 		temp.setUsername(text);
 		getline(ifile, text);
 		temp.setPassword(text);
@@ -36,24 +37,17 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers()
 		temp.setPin(text);
 		getline(ifile, text);
 		temp.setActive((bool)stoi(text));
-		getline(ifile, text);
-		size = stoi(text);
-		for (int i = 0; i < size; i++)
-		{
-			getline(ifile, text);
-			tmp.setid(stoi(text));
-			getline(ifile, text);
-			tmp.setsender(text);
-			getline(ifile, text);
-			tmp.setrecipient(text);
-			getline(ifile, text);
-			tmp.setdatePlaceHolder(text);
-			getline(ifile, text);
-			tmp.setisAccepted((bool)stoi(text));
-			userTrans.push(tmp);
+		if (!allTransaction.empty()) {
+			for (int i = 0; i < allTransaction.size(); i++)
+			{
+				if (tempTrans.top().getsender() == temp.getUsername() || tempTrans.top().getrecipient() == temp.getUsername()) {
+					userTrans.push(tempTrans.top());
+				}
+				tempTrans.pop();
+			}
+			userTrans = reverseStack(userTrans);
+			temp.setTransactions(userTrans);
 		}
-		userTrans = reverseStack(userTrans);
-		temp.setTransactions(userTrans);
 		users.insert(make_pair(temp.getUsername(), temp));
 	}
 	ifile.close();
@@ -65,10 +59,10 @@ void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 	std::ofstream ofile("data files/users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
 	{
-		std::stack<Transaction> userTrans = i->second.getTransactions();
-		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance()<< std::endl
-			<< i->second.getPin() << std::endl << i->second.getActive() << std::endl << userTrans.size() << std::endl;
-		while (!userTrans.empty())
+		// std::stack<Transaction> userTrans = i->second.getTransactions();
+		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance() << std::endl
+			<< i->second.getPin() << std::endl << i->second.getActive() << std::endl; /* << userTrans.size() << std::endl;
+	while (!userTrans.empty())
 		{
 			ofile << userTrans.top().getId() << std::endl;
 			userTrans.pop();
@@ -81,7 +75,7 @@ void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 			ofile << userTrans.top().getisAccepted() << std::endl;
 			userTrans.pop();
 		}
-		
+*/
 	}
 	ofile.close();
 }
@@ -95,6 +89,8 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 	{
 		Transaction tmp;
 		tmp.setid(stoi(text));
+		getline(ifile, text);
+		tmp.setAmount(stoi(text));
 		getline(ifile, text);
 		tmp.setsender(text);
 		getline(ifile, text);
@@ -117,8 +113,8 @@ void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 	std::stack <Transaction> temp = transactions;
 	while (!temp.empty())
 	{
-		Transaction tmp = transactions.top();
-		ofile << tmp.getId() << std::endl << tmp.getsender() << std::endl << tmp.getrecipient() << std::endl
+		Transaction tmp = temp.top();
+		ofile << tmp.getId() << std::endl << tmp.getAmount() << std::endl << tmp.getsender() << std::endl << tmp.getrecipient() << std::endl
 			<< tmp.getdatePlaceHolder() << std::endl << tmp.getisAccepted() << std::endl;
 		temp.pop();
 	}

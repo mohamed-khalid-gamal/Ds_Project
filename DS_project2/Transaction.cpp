@@ -3,6 +3,7 @@
 #include <chrono>
 #include <ctime>
 #include <iostream>
+#include <time.h>
 #include "Transaction.h"
 #include "User.h"
 #pragma warning(disable : 4996)
@@ -10,38 +11,16 @@ Transaction::Transaction(std::string sendUser, std::string recieveUser, std::sta
 {
 	if (allTransactions.empty())
 	{
-		this->id = 0;
+		id = 0;
 	}
 	else
 	{
-		this->id = allTransactions.top().id++;
+		id = allTransactions.top().id++;
 	}
 	sender = sendUser;
 	recipient = recieveUser;
 	datePlaceHolder = get_time();
 	isAccepted = false;
-}
-void Transaction::listTransactions(std::stack<Transaction> transaction)
-{
-    bool flag = false;
-    while (!transaction.empty()){
-        
-        flag = true;
-		std::cout<<"Transaction ID : ";
-		std::cout<<transaction.top().getId()<< std::endl;
-		std::cout<<"Transaction amount : ";
-		std::cout<<transaction.top().getAmount()<< std::endl;
-		std::cout<<"Sender : ";
-		std::cout<<transaction.top().getsender()<< std::endl;
-		std::cout<<"Recipient : ";
-		std::cout<<transaction.top().getrecipient()<< std::endl;
-		std::cout<<"Date : ";
-		std::cout<<transaction.top().getdatePlaceHolder()<< std::endl;
-	    transaction.pop();
-    }
-    if(!flag){
-		std::cout<<"No Transactions yet";
-    }
 }
 
 Transaction::Transaction(){
@@ -52,9 +31,7 @@ Transaction::Transaction(){
 	id = 0;
 	tran_amount = 50;
 }
-Transaction::Transaction(std::string sendUser, std::string recieveUser)
-{
-}
+
 void Transaction::setid(int i)
 {
 	id = i;
@@ -77,7 +54,7 @@ void Transaction::setisAccepted(bool nisAccepted)
 }
 void Transaction::setAmount(float trans_amount)
 {
-	this->tran_amount = trans_amount;
+	tran_amount = trans_amount;
 }
 
 
@@ -125,3 +102,26 @@ std::string Transaction::get_time()
 	return  current_date + " " + current_time_str;
 }
 
+void Transaction::listallTransactions(std::stack<Transaction>& transactions)
+{
+	bool flag = false;
+	std::stack<Transaction> temp = transactions;
+	while (!temp.empty()) {
+
+		flag = true;
+		std::cout << "\nTransaction ID : ";
+		std::cout << temp.top().getId() << std::endl;
+		std::cout << "Transaction amount : ";
+		std::cout << temp.top().getAmount() << std::endl;
+		std::cout << "Sender : ";
+		std::cout << temp.top().getsender() << std::endl;
+		std::cout << "Recipient : ";
+		std::cout << temp.top().getrecipient() << std::endl;
+		std::cout << "Date : ";
+		std::cout << temp.top().getdatePlaceHolder() << std::endl;
+		temp.pop();
+	}
+	if (!flag) {
+		std::cout << "No Transactions yet";
+	}
+}

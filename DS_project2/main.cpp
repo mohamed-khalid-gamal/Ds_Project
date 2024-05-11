@@ -12,8 +12,8 @@ int main()
 {
 	SaveLoad files;
 	Menu menu;
-	std::unordered_map<std::string, User> allUsers = files.loadUsers();
 	std::stack<Transaction> allTransactions = files.loadTransactions();
+	std::unordered_map<std::string, User> allUsers = files.loadUsers(allTransactions);
 	menu.mainMenu(allUsers, allTransactions);
 	files.saveUsers(allUsers);
 	files.saveTransactions(allTransactions);

@@ -3,7 +3,7 @@
 #include "User.h"
 #include <iostream>
 #include "Account.h"
-#include "Menu.h"
+#include "SaveLoad.h"
 
 User::User(std::string name, std::string pass)
 {
@@ -66,6 +66,19 @@ std::stack<Transaction> User::getTransactions(void)
 {
     return userTransactions;
 }
+
+std::stack<Transaction> User::getPendingRequests() {
+    std::stack<Transaction> tempTrans = this->getTransactions();
+    std::stack<Transaction> pendingTrans;
+    int size = tempTrans.size();
+    for (int i = 0; i < size; i++) {
+        if (tempTrans.top().getisAccepted() == false) {
+            pendingTrans.push(tempTrans.top());
+        }
+        tempTrans.pop();
+    }
+    return pendingTrans;
+}
 void User::setTransactions(std::stack <Transaction> UTrans)
 {
     userTransactions = UTrans;
@@ -75,10 +88,6 @@ void User::setTransaction(Transaction tra)
     userTransactions.push(tra);
 }
 
-void User::setPendingTransaction(Transaction tr)
-{
-    user_pending_Transactions.insert(std::make_pair(tr.getId(),tr));
-}
 
 void User::setPassword(std::string pass)
 {
@@ -89,46 +98,47 @@ void User::sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack
     std::string recipient;
     float amount;
 
-    std::cout << "Enter the user name you want to receive the money ";
+    std::cout << "Enter the user name you want to receive the money: ";
     std::cin >> recipient;
-    std::cout << "Enter the amount you want to send ";
+    std::cin.ignore();
+    std::cout << "Enter the amount you want to send: ";
     std::cin >> amount;
-    auto user = searchUser(recipient, allUsers);
-    if ( user.getUsername() == recipient)
+    std::cin.ignore();
+    if (allUsers[recipient].getUsername() == recipient)
     {
         if (amount <= this->balance)
         {
-            if (this->getActive()==true && user.getActive())
+            if (this->getActive()==true && allUsers[recipient].getActive() == true)
             {
-                Transaction trans = Transaction(this->getUsername(), recipient);
+                Transaction trans = Transaction(this->getUsername(), recipient,allTransactions);
                 trans.setisAccepted(true);
                 trans.setAmount(amount);
-                this->setTransaction(trans);
-                user.setTransaction(trans);
-                this->balance -= amount;
-                user.balance += amount;
+                setTransaction(trans);
+                allUsers[recipient].setTransaction(trans);
+                allUsers[username].setBalance(balance - amount);
+                balance -= amount;
+                allUsers[recipient].balance += amount;
                 allTransactions.push(trans);
             }
             else {
-                std::cout << "you  or the recepient are panned  call the admin";
-                Menu men = Menu();
+                std::cout << "you or the recepient are banned call the admin";
                 User actUser = searchUser(this->username, allUsers);
-                men.userMenu(actUser, allUsers,allTransactions);
+                return;
             }
         }
         else {
-            std::cout << "invalid amount";
+            std::cout << "invalid amount\n";
             char x;
-            std::cout << "\n do you want try again ? (Y / N)";
+            std::cout << "do you want try again ? (Y / N)\n";
             std::cin >> x;
             if (x == 'y' || x == 'Y')
             {
                 sendMoney(allUsers,allTransactions);
             }
             else {
-                Menu men = Menu();
+                
                 User actUser = searchUser(this->username, allUsers);
-                men.userMenu(actUser, allUsers, allTransactions);
+                return;
             }
         }
         
@@ -136,35 +146,35 @@ void User::sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack
     else
     {
         char x;
-        std::cout << "\n do you want try again ? (Y / N)";
+        std::cout << "Username Does not Exist\ndo you want try again ? (Y / N)\n";
         std::cin >> x;
         if (x=='y' ||x=='Y')
         {
             sendMoney(allUsers,allTransactions);
         }
         else {
-            Menu men = Menu();
+            
             User actUser = searchUser(this->username, allUsers);
-            men.userMenu(actUser,allUsers,allTransactions);
+            return;
         }
     }
 }
 
 void User::requestMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
 {
-    std::string sender;
+    std::string recName;
     float amount;
     std::cout << "Enter the user name you want to receive the request ";
-    std::cin >> sender;
+    std::cin >> recName;
     std::cout << "Enter the amount you want to request ";
     std::cin >> amount;
-    auto user = searchUser(sender, allUsers);
-    if (user.getUsername() == sender)
+    if (allUsers[recName].getUsername() == recName)
     {     
             
-                Transaction trans = Transaction( sender, this->getUsername());
+                Transaction trans = Transaction(recName, this->getUsername(), allTransactions);
                 trans.setAmount(amount);
-                user.setPendingTransaction(trans);
+                trans.setisAccepted(false);
+                allUsers[recName].setTransaction(trans);
     }
     else
     {
@@ -176,9 +186,8 @@ void User::requestMoney(std::unordered_map<std::string, User>& allUsers, std::st
             requestMoney(allUsers, allTransactions);
         }
         else {
-            Menu men = Menu();
             User actUser = searchUser(this->username, allUsers);
-            men.userMenu(actUser, allUsers,allTransactions);
+            return;
         }
     }
 
@@ -186,18 +195,43 @@ void User::requestMoney(std::unordered_map<std::string, User>& allUsers, std::st
 
 void User::acceptRequest(Transaction tr_pend, std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
 {
-    user_pending_Transactions.erase(tr_pend.getId());
     tr_pend.setisAccepted(true);
     this->balance -= tr_pend.getAmount();
-    this->setTransaction(tr_pend);
     User recepient = searchUser(tr_pend.getrecipient(), allUsers);
     recepient.balance += tr_pend.getAmount();
-    recepient.setTransaction(tr_pend);
-    allTransactions.push(tr_pend);
+    std::stack<Transaction> tempAllTrans = allTransactions;
+    std::stack<Transaction> tempUserTrans = this->getTransactions();
+    int allSize = tempAllTrans.size();
+    int userSize = tempUserTrans.size();
+    std::stack<Transaction> newUserTrans;
+    std::stack<Transaction> newAllTrans;
+    for (int i = 0; i <allSize; i++) { // All Transactions loop
+        if (tempAllTrans.top().getId() == tr_pend.getId()) {
+            newAllTrans.push(tr_pend);
+        }
+        else {
+            newAllTrans.push(tempAllTrans.top());
+        }
+        tempAllTrans.pop();
+    }
+    for (int i = 0; i < userSize; i++) { // User Transactions loop
+        if (tempUserTrans.top().getId() == tr_pend.getId()) {
+            newUserTrans.push(tr_pend);
+        }
+        else {
+            newUserTrans.push(tempUserTrans.top());
+        }
+        tempUserTrans.pop();
+    }
+    SaveLoad file; // Saveload variable so i can use the ReverseStack function
+    newAllTrans = file.reverseStack(newAllTrans);
+    newUserTrans = file.reverseStack(newUserTrans);
+    allTransactions = newAllTrans;
+    setTransactions(newUserTrans);
+    allUsers[username].setTransactions(newUserTrans);
 }
 
 void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool admin, std::stack<Transaction>& allTransactions) {
-    Menu men = Menu();
     if (admin == true) {
         std::cout << std::endl << "Enter new password : ";
         std::string newPassword; getline(std::cin, newPassword);
@@ -213,9 +247,7 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool 
             }
             else {
                 getchar();
-                men.adminMenu(allUsers, allTransactions);
-                //Menu::userMenu(allUsers[this->username], allUsers);
-                //both are correct
+                return;
             }
 
         }
@@ -223,8 +255,7 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool 
             this->password = newPassword;
             std::cout << "password has been changed ! " << std::endl;
             getchar();
-            men.adminMenu(allUsers, allTransactions);
-            //Menu::userMenu(allUsers[this->username], allUsers);
+            return;
         }
     }
     else {
@@ -244,9 +275,7 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool 
                 }
                 else {
                     getchar();
-                    men.userMenu(*this, allUsers, allTransactions);
-                    //Menu::userMenu(allUsers[this->username], allUsers);
-                    //both are correct
+                    return;
                 }
 
             }
@@ -254,8 +283,7 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool 
                 this->password = newPassword;
                 std::cout << "password has been changed ! " << std::endl;
                 getchar();
-                men.userMenu(*this, allUsers,allTransactions);
-                //Menu::userMenu(allUsers[this->username], allUsers);
+                return;
             }
         }
         else {
@@ -270,9 +298,7 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, bool 
             }
             else {
                 getchar();
-                men.userMenu(*this, allUsers, allTransactions);
-                //Menu::userMenu(allUsers[this->username], allUsers);
-                //both are correct
+                return;
             }
         }
 
@@ -330,7 +356,6 @@ bool User::validPassword(std::string password) {
     return true;
 }
 void User::changeUsername(std::unordered_map<std::string, User>& allUsers,bool admin, std::stack<Transaction>& allTransactions) {
-    Menu men = Menu();
     if (admin == false) {
         std::cout << "Enter new Username : ";
         std::string username; getline(std::cin, username);
@@ -351,9 +376,7 @@ void User::changeUsername(std::unordered_map<std::string, User>& allUsers,bool a
             }
             else {
                 getchar();
-                men.userMenu(*this, allUsers,allTransactions);
-                //Menu::userMenu(allUsers[this->username], allUsers);
-                //both are correct
+                return;
             }
         }
         system("pause");
@@ -378,9 +401,7 @@ void User::changeUsername(std::unordered_map<std::string, User>& allUsers,bool a
             }
             else {
                 getchar();
-                men.adminMenu(allUsers,allTransactions);
-                //Menu::userMenu(allUsers[this->username], allUsers);
-                //both are correct
+                return;
             }
         }
         system("pause");
@@ -389,14 +410,29 @@ void User::changeUsername(std::unordered_map<std::string, User>& allUsers,bool a
 
 void User::pendingRequests(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
 {
-    for (auto it: user_pending_Transactions)
+    std::stack<Transaction> pendRequests = this->getPendingRequests();
+    int pendSize = pendRequests.size();
+    for (int i = 0; i < pendSize; i++)
     {
-        std::cout << "id : " << it.first << "amount : " << it.second.getAmount()<<"recepient :"<<it.second.getrecipient();
+        std::cout << "id : " << pendRequests.top().getId() << "amount : " << pendRequests.top().getAmount() <<"recepient :"<< pendRequests.top().getrecipient();
     }
     int id;
     std::cout << "Enter the id of request you want to proceed \n";
     std::cin >> id;
-    Transaction tr_pend = user_pending_Transactions.at(id);
+    pendRequests = this->getPendingRequests();
+    Transaction tr_pend;
+    bool found = false;
+    for (int i = 0; i < pendSize; i++) {
+        if (pendRequests.top().getId() == id) {
+            tr_pend = pendRequests.top();
+            found = true;
+        }
+        pendRequests.pop();
+    }
+    if (!found) {
+        std::cout << "Please enter a valid id.\n";
+        return;
+    }
     if (tr_pend.getAmount()<=this->balance && this->getActive())
     {
         char ch;
@@ -408,52 +444,26 @@ void User::pendingRequests(std::unordered_map<std::string, User>& allUsers, std:
         }
         else
         {
-            user_pending_Transactions.erase(tr_pend.getId());
+            return;
         }
     }
     else
     {
-        char ch;
-        std::cout << "you can`t accept this request do you want to reject it ? (Y / N)\n";
-        std::cin >> ch;
-        if (ch == 'y' || ch == 'Y')
-        {
-            user_pending_Transactions.erase(tr_pend.getId());
-        }
-        else
-        {
-            Menu men = Menu();
-            User actUser = searchUser(this->username, allUsers);
-            men.userMenu(actUser, allUsers,allTransactions);
-        }
+        std::cout << "Insufficient Funds in Account please try again later.\n";
     }
 }
 
 void User::transactionHistory()
 {
-    std::stack<Transaction> tempStack = this->userTransactions;
-    bool flag = false;
-
-    while (!tempStack.empty()){
-
-        flag = true;
-        std::cout<<"Transaction ID : ";
-        std::cout<<tempStack.top().getId()<< std::endl;
-        std::cout<<"Transaction amount : ";
-        std::cout<<tempStack.top().getAmount()<< std::endl;
-        std::cout<<"Sender : ";
-        std::cout<<tempStack.top().getsender()<< std::endl;
-        std::cout<<"Recipient : ";
-        std::cout<<tempStack.top().getrecipient()<< std::endl;
-        std::cout<<"Date : ";
-        std::cout<<tempStack.top().getdatePlaceHolder()<< std::endl;
-        tempStack.pop();
-
+    bool flag = this->userTransactions.empty();
+    if (!flag) {
+        std::stack<Transaction> tempStack = this->userTransactions;
+        bool flag = false;
+        tempStack.top().listallTransactions(tempStack);
     }
-    if(!flag){
-        std::cout<<"No Transactions found";
+    else {
+        std::cout << "No Transactions on this account.\n";
     }
-
 }
 
 

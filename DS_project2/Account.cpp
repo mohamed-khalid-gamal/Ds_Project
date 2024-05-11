@@ -20,7 +20,7 @@ void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::stack<
 
 		if (name == "-1") return;
 		else if (name.length() < 5 || name.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			std::cout << "Wrong length please try again.\n";
 			continue;
 		}
 		break;
@@ -36,10 +36,10 @@ void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::stack<
 				menu.adminMenu(allUsers,allTransactions);
 				return;
 			}
-		else if (pass != allUsers[name].getPassword()) {
+		else if (hashText(pass) != allUsers[name].getPassword()) {
 			std::cout << "Wrong password! Please try again.\n";
 			if (++passwordFailTries > 3) {
-				std::cout << "Inputed wrong password too many times";
+				std::cout << "Inputed wrong password too many times\n";
 				return;
 			}
 			continue;
@@ -61,11 +61,11 @@ void Account::registerAccount(std::unordered_map<std::string, User>& allUsers)
 		
 		if (name == "-1") return;
 		else if (name.length() < 5 || name.length() > 16) {
-			std::cout << "Wrong length please try again.";
+			std::cout << "Wrong length please try again.\n";
 			continue;
 		}
 		else if (name == allUsers[name].getUsername()) {
-			std::cout << "Username is already taken please try again.";
+			std::cout << "Username is already taken please try again.\n";
 			continue;
 		}
 		break;
@@ -81,7 +81,7 @@ void Account::registerAccount(std::unordered_map<std::string, User>& allUsers)
 		else if (pass == "-1") return;
 		break;
 	}
-	User newUser = User(name, pass);
+	User newUser = User(name, hashText(pass));
 	allUsers[name] = newUser;
 }
 
@@ -112,5 +112,16 @@ void Account::forgetPassword(std::unordered_map<std::string, User>& allUsers)
 		}
 		break;
 	}
-	allUsers[name].setPassword(pass);
+	allUsers[name].setPassword(hashText(pass));
+}
+
+std::string Account::hashText(std::string pendingText)
+{
+	int temp = 0;
+	std::string hashedText;
+	for (int i = 0; i < pendingText.length(); i++) {
+		temp += pendingText[i];
+	}
+	hashedText = std::to_string(temp);
+	return hashedText;
 }

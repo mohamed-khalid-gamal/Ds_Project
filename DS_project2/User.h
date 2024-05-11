@@ -10,7 +10,6 @@ class User{
 	std::string password;
 	float balance;
 	std::stack<Transaction> userTransactions;
-	std::unordered_map<int,Transaction> user_pending_Transactions;
 	std::string pin;
 	bool is_active;
 public:
@@ -24,9 +23,9 @@ public:
 	std::string getPin(void);
 	void setPin(std::string pinum);
 	std::stack<Transaction> getTransactions(void);
+	std::stack<Transaction> getPendingRequests();
 	void setTransactions(std::stack <Transaction> UTrans);
 	void setTransaction(Transaction);
-	void setPendingTransaction(Transaction);
 	bool getActive(void);
 	void setActive(bool activity);
 	void setPassword(std::string pass);
