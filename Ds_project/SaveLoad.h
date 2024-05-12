@@ -1,18 +1,16 @@
-#define SAVELOAD_H
 #pragma once
 #include <string>
-#include <vector>
 #include <unordered_map>
-#include "User.h"
-#include "Transaction.h"
-using namespace std;
+#include <stack>
+class User;
+class Transaction;
 class SaveLoad
 {
 public:
-    template <typename T>
-    static stack <T> reverseStack(stack <T>);
-    unordered_map<string, User> loadUsers();
-    void saveUsers(unordered_map<string, User> users);
-    static stack <Transaction> loadTransactions();
-    static void saveTransactions(stack <Transaction> transactions);
+	template <typename T>
+	static std::stack <T> reverseStack(std::stack <T>);
+	std::unordered_map<std::string, User> loadUsers(std::stack<Transaction> allTransaction);
+	void saveUsers(std::unordered_map<std::string, User> users);
+	static std::stack <Transaction> loadTransactions();
+	static void saveTransactions(std::stack <Transaction> transactions);
 };
