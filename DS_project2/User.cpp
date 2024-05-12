@@ -330,18 +330,18 @@ void User::changeUsername(std::unordered_map<std::string, User>& allUsers, std::
     std::string newUsername;
     getline(std::cin, newUsername);
 
-    auto it = allUsers.find(newUsername);
-    if (it == allUsers.end()) {
-        User user = it->second;  
-        allUsers.erase(it);       
-        allUsers[newUsername] = user;
+    auto it = allUsers.find(this->username);
+    if (it != allUsers.end()) {
+        User& user = it->second;
         user.setUsername(newUsername);
+        allUsers[newUsername] = user;
+        allUsers.erase(it);
+        std::cout << "Username changed successfully!" << std::endl;
     }
     else {
-        std::cout << "This username is taken !" << std::endl << "Try another one" << std::endl;
+        std::cout << "This username is taken !, Try another one" << std::endl;
         getchar();
-        std::cout << std::endl << "             (1) reEnter new username                   ";
-        std::cout << std::endl << "             other to return to admin menu                     ";
+        std::cout << std::endl << "reEnter new username : ";
         int x; std::cin >> x;
         std::cin.ignore();
         if (x == 1) {

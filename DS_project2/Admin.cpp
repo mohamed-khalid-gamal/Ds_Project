@@ -7,7 +7,7 @@
 
 void Admin::ListUsers(std::unordered_map<std::string, User>& allUsers) {
 	if (allUsers.size() == 0) {
-		std::cout << "no users found";
+		std::cout << "no users found" << std::endl;
 	}
 	for (auto& pair : allUsers) {
 		std::cout << "\n~Username: " << pair.second.getUsername() << std::endl;
