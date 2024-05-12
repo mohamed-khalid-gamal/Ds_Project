@@ -1,125 +1,126 @@
-
-#include "User.h"
-#include "Transaction.h"
-#include <fstream>
+#pragma once
 #include <chrono>
 #include <ctime>
-#include"SaveLoad.cpp"
 #include <iostream>
-Transaction::Transaction(string sendUser, string recieveUser)
+#include <time.h>
+#include "Transaction.h"
+#include "User.h"
+#pragma warning(disable : 4996)
+Transaction::Transaction(std::string sendUser, std::string recieveUser, std::stack<Transaction>& allTransactions)
 {
-    SaveLoad files = SaveLoad();
-    auto all_tr = files.loadTransactions();
-    if (all_tr.empty())
-    {
-        this->id = 0;
-    }
-    else
-    {
-        this->id = all_tr.top().id++;
-    }
-    sender = sendUser;
-    recipient = recieveUser;
-    datePlaceHolder = get_time();
-    isAccepted = false;
-}
-void Transaction::listTransactions(std::stack<Transaction> transaction)
-{
-    bool flag = false;
-    while (!transaction.empty()){
-
-        flag = true;
-        cout<<"Transaction ID : ";
-        cout<<transaction.top().getId()<<endl;
-        cout<<"Transaction amount : ";
-        cout<<transaction.top().getAmount()<<endl;
-        cout<<"Sender : ";
-        cout<<transaction.top().getsender()<<endl;
-        cout<<"Recipient : ";
-        cout<<transaction.top().getrecipient()<<endl;
-        cout<<"Date : ";
-        cout<<transaction.top().getdatePlaceHolder()<<endl;
-        transaction.pop();
-    }
-    if(!flag){
-        cout<<"No Transactions yet";
-    }
+	if (allTransactions.empty())
+	{
+		id = 0;
+	}
+	else
+	{
+		id = allTransactions.top().id++;
+	}
+	sender = sendUser;
+	recipient = recieveUser;
+	datePlaceHolder = get_time();
+	isAccepted = false;
 }
 
-Transaction::Transaction()
-{
-    sender = User("test", "test").getUsername();
-    recipient = User("test", "test").getUsername();
-    datePlaceHolder = "Today";
-    isAccepted = false;
+Transaction::Transaction(){
+	sender = User("test", "test").getUsername();
+	recipient = User("test", "test").getUsername();
+	datePlaceHolder = "Today";
+	isAccepted = false;
+	id = 0;
+	tran_amount = 50;
 }
+
 void Transaction::setid(int i)
 {
-    id = i;
+	id = i;
 }
-void Transaction::setsender(string nsender)
+void Transaction::setsender(std::string nsender)
 {
-    sender = nsender;
+	sender = nsender;
 }
-void Transaction::setrecipient(string nrecipient)
+void Transaction::setrecipient(std::string nrecipient)
 {
-    recipient = nrecipient;
+	recipient = nrecipient;
 }
-void Transaction::setdatePlaceHolder(string ndatePlaceHolder)
+void Transaction::setdatePlaceHolder(std::string ndatePlaceHolder)
 {
-    datePlaceHolder = ndatePlaceHolder;
+	datePlaceHolder = ndatePlaceHolder;
 }
 void Transaction::setisAccepted(bool nisAccepted)
 {
-    isAccepted = nisAccepted;
+	isAccepted = nisAccepted;
 }
 void Transaction::setAmount(float trans_amount)
 {
-    this->tran_amount = trans_amount;
+	tran_amount = trans_amount;
 }
 
 
-string Transaction::getsender()
+std::string Transaction::getsender()
 {
-    return sender;
+	return sender;
 }
 
-string Transaction::getrecipient()
+std::string Transaction::getrecipient()
 {
-    return recipient;
+	return recipient;
 }
 
-string Transaction::getdatePlaceHolder()
+std::string Transaction::getdatePlaceHolder()
 {
-    return datePlaceHolder;
+	return datePlaceHolder;
 }
 
 int Transaction::getId()
 {
-    return id;
+	return id;
 }
 
 float Transaction::getAmount()
 {
-    return tran_amount;
+	return tran_amount;
 }
 
 bool Transaction::getisAccepted()
 {
-    return isAccepted;
+	return isAccepted;
 }
 
-string Transaction::get_time()
+std::string Transaction::get_time()
 {
-    auto now = chrono::system_clock::now();
-    time_t current_time = chrono::system_clock::to_time_t(now);
-    tm* local_time = localtime(&current_time);
-    char date_buffer[80];
-    strftime(date_buffer, sizeof(date_buffer), "%Y-%m-%d", local_time);
-    string current_date = date_buffer;
-    char time_buffer[80];
-    strftime(time_buffer, sizeof(time_buffer), "%H:%M:%S", local_time);
-    string current_time_str = time_buffer;
-    return  current_date + " " + current_time_str;
+	auto now = std::chrono::system_clock::now();
+	time_t current_time = std::chrono::system_clock::to_time_t(now);
+	tm* local_time = localtime(&current_time);
+	char date_buffer[80];
+	strftime(date_buffer, sizeof(date_buffer), "%Y-%m-%d", local_time);
+	std::string current_date = date_buffer;
+	char time_buffer[80];
+	strftime(time_buffer, sizeof(time_buffer), "%H:%M:%S", local_time);
+	std::string current_time_str = time_buffer;
+	return  current_date + " " + current_time_str;
 }
 
+void Transaction::listallTransactions(std::stack<Transaction>& transactions)
+{
+	bool flag = false;
+	std::stack<Transaction> temp = transactions;
+	while (!temp.empty()) {
+
+		flag = true;
+		std::cout << "\nTransaction ID : ";
+		std::cout << temp.top().getId() << std::endl;
+		std::cout << "Transaction amount : ";
+		std::cout << temp.top().getAmount() << std::endl;
+		std::cout << "Sender : ";
+		std::cout << temp.top().getsender() << std::endl;
+		std::cout << "Recipient : ";
+		std::cout << temp.top().getrecipient() << std::endl;
+		std::cout << "Date : ";
+		std::cout << temp.top().getdatePlaceHolder() << std::endl;
+		temp.pop();
+	}
+	if (!flag) {
+		std::cout << "No Transactions yet";
+	}
+}

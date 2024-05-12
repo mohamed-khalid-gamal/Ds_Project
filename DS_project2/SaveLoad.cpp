@@ -23,7 +23,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 	std::stack <Transaction> userTrans;
 	Transaction tmp;
 	int size;
-	std::ifstream ifile("data files/users.txt");
+	std::ifstream ifile("users.txt");
 	std::string text;
 	while (getline(ifile, text))
 	{
@@ -56,7 +56,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 
 void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-	std::ofstream ofile("data files/users.txt");
+	std::ofstream ofile("users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
 	{
 		// std::stack<Transaction> userTrans = i->second.getTransactions();
@@ -84,7 +84,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 {
 	std::string text;
 	std::stack <Transaction> transactions;
-	std::ifstream ifile("data files/transactions.txt");
+	std::ifstream ifile("transactions.txt");
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
@@ -109,7 +109,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 
 void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-	std::ofstream ofile("data files/transactions.txt");
+	std::ofstream ofile("transactions.txt");
 	std::stack <Transaction> temp = transactions;
 	while (!temp.empty())
 	{

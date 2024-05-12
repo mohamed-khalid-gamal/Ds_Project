@@ -1,49 +1,46 @@
-
-#define USER_H
+#pragma once
 #include <string>
-#include <stack>
 #include <set>
 #include <unordered_map>
-#include "Transaction.h"
+#include <stack>
+class Transaction;
 
-using namespace std;
-class User
-{
-    string username;
-    string password;
-    float balance;
-    stack<Transaction> userTransactions;
-    unordered_map<int,Transaction> user_pending_Transactions;
-    string pin;
-    bool is_active;
+class User{
+	std::string username;
+	std::string password;
+	float balance;
+	std::stack<Transaction> userTransactions;
+	std::string pin;
+	bool is_active;
 public:
-    User(string name, string pass);
-    User();
-    string getUsername(void);
-    void setUsername(string uname);
-    string getPassword(void);
-    float getBalance(void);
-    void setBalance(float bal);
-    string getPin(void);
-    void setPin(string pinum);
-    stack <Transaction> getTransactions(void);
-    void setTransactions(stack <Transaction> UTrans);
-    void setTransaction(Transaction);
-    void setPendingTransaction(Transaction);
-    bool getActive(void);
-    void setActive(bool activity);
-    void setPassword(string pass);
-    void sendMoney( );
-    void requestMoney(void);
-    void acceptRequest(Transaction);
-    void changePassword(unordered_map<string, User>&, bool);
-    bool validPassword(string);
-    void changeUsername(unordered_map<string, User>& allUsers, bool admin);
-    void pendingRequests();
-    void transactionHistory();
-    static User searchUser(string uname, set <User> users);
-    static User searchUser(string uname, unordered_map <string, User> users);
-    static void removeUser(string uname, set <User> users);
+	User(std::string name, std::string pass);
+	User();
+	std::string getUsername(void);
+	void setUsername(std::string uname);
+	std::string getPassword(void);
+	float getBalance(void);
+	void setBalance(float bal);
+	std::string getPin(void);
+	void setPin(std::string pinum);
+	std::stack<Transaction> getTransactions(void);
+	std::stack<Transaction> getPendingRequests();
+	void setTransactions(std::stack <Transaction> UTrans);
+	void setTransaction(Transaction);
+	bool getActive(void);
+	void setActive(bool activity);
+	void setPassword(std::string pass);
+	void sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
+	void requestMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
+	void acceptRequest(Transaction tr_pend, std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
+	void changePassword(std::unordered_map<std::string, User>& allUsers, bool admin, std::stack<Transaction>& allTransactions);
+	bool validPassword(std::string);
+	void changeUsername(std::unordered_map<std::string, User>& allUsers, bool admin, std::stack<Transaction>& allTransactions);
+	void pendingRequests(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
+	void transactionHistory();
+	static User searchUser(std::string uname, std::set <User> users);
+	static User searchUser(std::string uname, std::unordered_map <std::string, User> users);
+	static void removeUser(std::string uname, std::set <User> users);
+	static void setUserPinMenu(User activeUser);
 
 };
 
