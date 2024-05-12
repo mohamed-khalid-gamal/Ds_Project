@@ -17,10 +17,13 @@ void Admin::ListUsers(std::unordered_map<std::string, User>& allUsers) {
 	}
 }
 void Admin::EditUser(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
+	std::cout << "~Edit users (-1 at any point to go back to main menu)~\n";
 	ListUsers(allUsers);
 	std::cout << "Enter the username of Account you want to edit : ";
 	std::string usernamesearched; 
 	getline(std::cin, usernamesearched);
+	if (usernamesearched == "-1")
+		return;
 	User choosen = User::searchUser(usernamesearched, allUsers);
 	if (choosen.getUsername() != "test") {
 		std::cout << "(1) change username" << std::endl;

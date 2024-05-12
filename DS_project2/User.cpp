@@ -324,12 +324,14 @@ bool User::validPassword(std::string password) {
 }
 
 void User::changeUsername(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
+    std::cout << "~change username (-1 at any point to go back to main menu)~\n";
+
     std::cout << "Enter new Username : ";
     std::string newUsername;
     getline(std::cin, newUsername);
 
-    auto it = allUsers.find(this->username);
-    if (it != allUsers.end()) {
+    auto it = allUsers.find(newUsername);
+    if (it == allUsers.end()) {
         User user = it->second;  
         allUsers.erase(it);       
         allUsers[newUsername] = user;
