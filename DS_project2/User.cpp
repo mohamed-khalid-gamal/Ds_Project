@@ -239,30 +239,24 @@ void User::acceptRequest(Transaction tr_pend, std::unordered_map<std::string, Us
 }
 
 void User::changePassword(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
-    std::cout << std::endl << "Enter new password : ";
-    std::string newPassword; getline(std::cin, newPassword);
-    if (!validPassword(newPassword)) {
-        getchar();
-        std::cout << std::endl << "             (1) Re-Enter your new password                   ";
-        std::cout << std::endl << "             (Else) Return to admin menu                     ";
-        int x; std::cin >> x;
-        std::cin.ignore();
-        if (x == 1) {
+    std::cout << "~change password (-1 at any point to go back to main menu)~\n";
+    while (true) {
+        std::cout << std::endl << "Enter new password : ";
+        std::string newPassword; getline(std::cin, newPassword);
+        if (newPassword == "-1")
+            return;
+        else if (!validPassword(newPassword)) {
             getchar();
-            changePassword(allUsers, allTransactions);
+            continue;
         }
         else {
+            this->password = newPassword;
+            std::cout << "password has been changed ! " << std::endl;
             getchar();
-            return;
+            break;
         }
-
     }
-    else {
-        this->password = newPassword;
-        std::cout << "password has been changed ! " << std::endl;
-        getchar();
-        return;
-    }
+    
 }
 
 bool User::validPassword(std::string password) {
@@ -325,35 +319,32 @@ bool User::validPassword(std::string password) {
 
 void User::changeUsername(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
     std::cout << "~change username (-1 at any point to go back to main menu)~\n";
-
-    std::cout << "Enter new Username : ";
-    std::string newUsername;
-    getline(std::cin, newUsername);
-
-    auto it = allUsers.find(this->username);
-    if (it != allUsers.end()) {
-        User& user = it->second;
-        user.setUsername(newUsername);
-        allUsers[newUsername] = user;
-        allUsers.erase(it);
-        std::cout << "Username changed successfully!" << std::endl;
-    }
-    else {
-        std::cout << "This username is taken !, Try another one" << std::endl;
-        getchar();
-        std::cout << std::endl << "reEnter new username : ";
-        int x; std::cin >> x;
-        std::cin.ignore();
-        if (x == 1) {
-            getchar();
-            changeUsername(allUsers, allTransactions);
+    while (true) {
+        std::cout << "Enter new Username : ";
+        std::string newUsername;
+        getline(std::cin, newUsername);
+        if (newUsername == "-1")
+            return;
+        if (newUsername.length() < 5 || newUsername.length() > 16) {
+            std::cout << "Wrong length please try again.\n";
+            continue;
+        }
+        auto it = allUsers.find(this->username);
+        if (it != allUsers.end()) {
+            User& user = it->second;
+            user.setUsername(newUsername);
+            allUsers[newUsername] = user;
+            allUsers.erase(it);
+            std::cout << "Username changed successfully!" << std::endl;
+            break;
         }
         else {
+            std::cout << "This username is taken !, Try another one" << std::endl;
             getchar();
-            return;
+            continue;
         }
     }
-    system("pause");
+    
 }
 
 void User::pendingRequests(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
@@ -414,8 +405,7 @@ void User::transactionHistory()
     }
 }
 
-User User::searchUser(std::string uname, std::set <User> users)
-{
+User User::searchUser(std::string uname, std::set <User> users) {
     std::set <User> ::iterator it;
 	it = users.begin();
 	while (it != users.end())
