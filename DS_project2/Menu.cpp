@@ -16,7 +16,8 @@ void Menu::mainMenu(std::unordered_map<std::string, User>& allUsers, std::stack<
 			<< "(1) Log in\n"
 			<< "(2) Register\n"
 			<< "(3) Forget Password\n"
-			<< "(4) Quit\n";
+			<< "(4) Quit\n"
+			<< ">> ";
 		std::cin >> choice;
 		std::cin.ignore();
 		switch (choice) {
@@ -40,7 +41,8 @@ void Menu::userMenu(User activeUser, std::unordered_map<std::string, User>& allU
 				<< "(4) User Transaction History\n"
 				<< "(5) Pending Transactions\n"
 				<< "(6) Reset Pin\n"
-				<< "(7) Log out\n";
+				<< "(7) Log out\n"
+				<<">> ";
 			std::cin >> choice;
 			std::cin.ignore();
 			switch (choice) {
@@ -63,7 +65,8 @@ void Menu::adminMenu(std::unordered_map<std::string, User>& allUsers, std::stack
 		std::cout << "\nWelcome admin!\n"
 			<< "(1) List User\n"
 			<< "(2) Edit User\n"
-			<< "(3) Log out\n";
+			<< "(3) Log out\n"
+			<<">> ";
 		std::cin >> choice;
 		std::cin.ignore();
 		switch (choice) {

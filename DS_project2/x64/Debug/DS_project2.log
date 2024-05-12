@@ -1,6 +1,6 @@
 ﻿  User.cpp
-D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.cpp(73,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.cpp(204,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.cpp(205,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Projects\College\Digital-Wallet\GUI\Ds_Project\DS_project2\User.cpp(414,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  DS_project2.vcxproj -> D:\Projects\College\Digital-Wallet\GUI\Ds_Project\x64\Debug\DS_project2.exe
+C:\Users\moham\Desktop\My-Github\Ds_Project\DS_project2\User.cpp(78,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\moham\Desktop\My-Github\Ds_Project\DS_project2\User.cpp(211,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\moham\Desktop\My-Github\Ds_Project\DS_project2\User.cpp(212,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\moham\Desktop\My-Github\Ds_Project\DS_project2\User.cpp(362,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  DS_project2.vcxproj -> C:\Users\moham\Desktop\My-Github\Ds_Project\x64\Debug\DS_project2.exe

@@ -5,35 +5,41 @@
 #include <iostream>
 
 
-void Admin::ListUsers(std::unordered_map<std::string, User>& allUsers)
-{
+void Admin::ListUsers(std::unordered_map<std::string, User>& allUsers) {
+	if (allUsers.size() == 0) {
+		std::cout << "no users found";
+	}
 	for (auto& pair : allUsers) {
 		std::cout << "\n~Username: " << pair.second.getUsername() << std::endl;
 		std::cout << "~Current balance: " << pair.second.getBalance() << std::endl;
 		std::cout << "~Transaction History: "; pair.second.transactionHistory();
-		std::cout << "\n";
+		std::cout << std::endl;
 	}
 }
 void Admin::EditUser(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
-	std::cout << "Enter the username of Account you want to edit :";
+	ListUsers(allUsers);
+	std::cout << "Enter the username of Account you want to edit : ";
 	std::string usernamesearched; 
 	getline(std::cin, usernamesearched);
 	User choosen = User::searchUser(usernamesearched, allUsers);
-	std::cout << "(1) change username" << std::endl;
-	std::cout << "(2) change password" << std::endl;
-	std::cout << "(3) return to Admin Menu" << std::endl;
-	std::cout << ">> ";
-	int x; 
-	std::cin >> x;
-	std::cin.ignore();
-	if (x == 1) {
-		choosen.changeUsername(allUsers, true, allTransactions);
+	if (choosen.getUsername() != "test") {
+		std::cout << "(1) change username" << std::endl;
+		std::cout << "(2) change password" << std::endl;
+		std::cout << "(3) return to Admin Menu" << std::endl;
+		std::cout << ">> ";
+		int x;
+		std::cin >> x;
+		std::cin.ignore();
+		if (x == 1) {
+			choosen.changeUsername(allUsers, allTransactions);
+		}
+		else if (x == 2) {
+			choosen.changePassword(allUsers, allTransactions);
+		}
+		else {
+			return;
+		}
 	}
-	else if (x == 2) {
-		choosen.changePassword(allUsers, true, allTransactions);
-	}
-	else {
-		return;
-	}
+	
 	 
 }
