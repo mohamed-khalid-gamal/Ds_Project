@@ -99,7 +99,9 @@ void User::setPassword(std::string pass)
 {
 	password = pass;
 }
-
+void User::changepassword(const std::string& newPassword) {
+    this->password = newPassword;
+}
 void User::sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
 {
     std::string recipient;
@@ -251,12 +253,12 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, std::
         }
         else {
             this->password = newPassword;
-            std::cout << "password has been changed ! " << std::endl;
+            allUsers[this->username].setPassword(newPassword);
+            std::cout << "Password changed successfully!" << std::endl;
             getchar();
             break;
         }
     }
-    
 }
 
 bool User::validPassword(std::string password) {

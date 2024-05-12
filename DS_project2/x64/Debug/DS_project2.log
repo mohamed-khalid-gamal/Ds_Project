@@ -1,8 +1,1 @@
-<<<<<<< HEAD
 ﻿  DS_project2.vcxproj -> C:\Users\moham\Desktop\My-Github\Ds_Project\x64\Debug\DS_project2.exe
-=======
-﻿  SaveLoad.cpp
-D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\SaveLoad.cpp(25,6): warning C4101: 'size': unreferenced local variable
-D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\SaveLoad.cpp(93,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  DS_project2.vcxproj -> D:\Projects\College\Digital-Wallet\GO\Ds_Project\x64\Debug\DS_project2.exe
->>>>>>> refs/remotes/origin/main

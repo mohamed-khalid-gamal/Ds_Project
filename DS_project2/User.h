@@ -44,6 +44,8 @@ public:
 	void setActive(bool activity);
 	
 	void setPassword(std::string pass);
+
+	void changepassword(const std::string&);
 	
 	void sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
 

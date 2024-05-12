@@ -34,7 +34,7 @@ void Account::logIn(std::unordered_map<std::string, User>& allUsers, std::stack<
 				menu.adminMenu(allUsers,allTransactions);
 				return;
 			}
-		else if (hashText(pass) != allUsers[name].getPassword()) {
+		else if (pass != allUsers[name].getPassword()) {
 			std::cout << "Wrong password! Please try again.\n";
 			if (++passwordFailTries > 3) {
 				std::cout << "Inputed wrong password too many times\n";

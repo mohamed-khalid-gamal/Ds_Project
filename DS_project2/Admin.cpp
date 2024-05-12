@@ -6,15 +6,27 @@
 
 
 void Admin::ListUsers(std::unordered_map<std::string, User>& allUsers) {
-	if (allUsers.size() == 0) {
-		std::cout << "no users found" << std::endl;
+
+	std::unordered_map<std::string, User> updatedUsers;
+
+	for ( auto& pair : allUsers) {
+		if (pair.second.getUsername() != "test") {
+			updatedUsers[pair.first] = pair.second;
+		}
 	}
-	for (auto& pair : allUsers) {
-		std::cout << "\n~Username: " << pair.second.getUsername() << std::endl;
-		std::cout << "~Current balance: " << pair.second.getBalance() << std::endl;
-		std::cout << "~Transaction History: "; pair.second.transactionHistory();
-		std::cout << std::endl;
+	if (updatedUsers.empty()) {
+		std::cout << "No users found." << std::endl;
 	}
+	else {
+		for (auto& pair : updatedUsers) {
+			std::cout << "\n~Username: " << pair.second.getUsername() << std::endl;
+			std::cout << "~Current balance: " << pair.second.getBalance() << std::endl;
+			std::cout << "~Transaction History: ";
+			pair.second.transactionHistory();
+			std::cout << std::endl;
+		}
+	}
+	updatedUsers.clear();
 }
 void Admin::EditUser(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
 	std::cout << "~Edit users (-1 at any point to go back to main menu)~\n";
