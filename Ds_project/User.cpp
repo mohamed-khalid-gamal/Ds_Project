@@ -2,7 +2,6 @@
 #include "Transaction.h"
 #include "User.h"
 #include <iostream>
-#include "Account.h"
 #include "SaveLoad.h"
 User::User(std::string name, std::string pass)
 {
