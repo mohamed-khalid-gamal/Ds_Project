@@ -24,6 +24,13 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 	Transaction tmp;
 	int size;
 	std::ifstream ifile("users.txt");
+	if (!ifile.is_open())
+	{
+		ifile.close();
+		std::ofstream ofile("users.txt");
+		ofile.close();
+		return users;
+	}
 	std::string text;
 	while (getline(ifile, text))
 	{
@@ -85,6 +92,13 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 	std::string text;
 	std::stack <Transaction> transactions;
 	std::ifstream ifile("transactions.txt");
+	if (!ifile.is_open())
+	{
+		ifile.close();
+		std::ofstream ofile("transactions.txt");
+		ofile.close();
+		return transactions;
+	}
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
