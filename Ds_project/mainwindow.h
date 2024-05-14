@@ -20,13 +20,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    std::stack<Transaction> allTransactions;
-    std::unordered_map<std::string,User> allUsers;
+    std::stack<Transaction> *allTransactions = new std::stack<Transaction>;
+    std::unordered_map<std::string,User> *allUsers = new std::unordered_map<std::string,User>;
+    void logIn(QString name);
 
 private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

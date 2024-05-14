@@ -18,17 +18,18 @@ class registerwindow : public QDialog
 
 public:
     explicit registerwindow(QWidget *parent = nullptr);
-    explicit registerwindow(std::unordered_map<std::string,User>&,
-                            std::stack<Transaction>&,QWidget *parent = nullptr);
+    explicit registerwindow(std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
+    std::stack<Transaction>* allTransactions;
+    std::unordered_map<std::string,User>* allUsers;
     ~registerwindow();
-    std::stack<Transaction> allTransactions;
-    std::unordered_map<std::string,User> allUsers;
     void registerUser(QString name,QString pass);
 
 private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::registerwindow *ui;

@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Transaction.h"
 #include "User.h"
+#include "qapplication.h"
 #include "SaveLoad.h"
 template <typename T>
 std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
@@ -22,7 +23,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 	User temp;
 	std::stack <Transaction> userTrans;
     Transaction tmp;
-    std::ifstream ifile("users.txt");
+    std::ifstream ifile("data/users.txt");
 	std::string text;
 	while (getline(ifile, text))
 	{
@@ -55,26 +56,11 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 
 void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-    std::ofstream ofile("users.txt");
+    std::ofstream ofile("data/users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
-	{
-		// std::stack<Transaction> userTrans = i->second.getTransactions();
+    {
 		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance() << std::endl
-			<< i->second.getPin() << std::endl << i->second.getActive() << std::endl; /* << userTrans.size() << std::endl;
-	while (!userTrans.empty())
-		{
-			ofile << userTrans.top().getId() << std::endl;
-			userTrans.pop();
-			ofile << userTrans.top().getsender() << std::endl;
-			userTrans.pop();
-			ofile << userTrans.top().getrecipient() << std::endl;
-			userTrans.pop();
-			ofile << userTrans.top().getdatePlaceHolder() << std::endl;
-			userTrans.pop();
-			ofile << userTrans.top().getisAccepted() << std::endl;
-			userTrans.pop();
-		}
-*/
+            << i->second.getPin() << std::endl << i->second.getActive() << std::endl;
 	}
 	ofile.close();
 }
@@ -83,7 +69,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 {
 	std::string text;
 	std::stack <Transaction> transactions;
-    std::ifstream ifile("transactions.txt");
+    std::ifstream ifile("data/transactions.txt");
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
@@ -108,7 +94,11 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 
 void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-    std::ofstream ofile("transactions.txt");
+    QString fileDir = QApplication::applicationDirPath() + "/transactions.txt";
+    std::ofstream ofile(fileDir.toStdString());
+    if(!ofile.is_open()){
+
+    }
 	std::stack <Transaction> temp = transactions;
 	while (!temp.empty())
 	{

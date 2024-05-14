@@ -16,7 +16,8 @@ SOURCES += \
     adminwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    registerwindow.cpp
+    registerwindow.cpp \
+    userwindow.cpp
 HEADERS += \
     SaveLoad.h \
     Transaction.h \
@@ -24,12 +25,14 @@ HEADERS += \
     accountutil.h \
     adminwindow.h \
     mainwindow.h \
-    registerwindow.h
+    registerwindow.h \
+    userwindow.h
 
 FORMS += \
     adminwindow.ui \
     mainwindow.ui \
-    registerwindow.ui
+    registerwindow.ui \
+    userwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
