@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    MainWindow(std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent);
     ~MainWindow();
     std::stack<Transaction> *allTransactions = new std::stack<Transaction>;
     std::unordered_map<std::string,User> *allUsers = new std::unordered_map<std::string,User>;

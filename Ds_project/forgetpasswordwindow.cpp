@@ -7,8 +7,17 @@ forgetPasswordWindow::forgetPasswordWindow(QWidget *parent)
 {
     ui->setupUi(this);
 }
+forgetPasswordWindow::forgetPasswordWindow(std::unordered_map<std::string,User> *allU,QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::forgetPasswordWindow)
+{
+    ui->setupUi(this);
+    allUsers = allU;
+}
 
 forgetPasswordWindow::~forgetPasswordWindow()
 {
     delete ui;
+    allUsers = NULL;
+    delete allUsers;
 }

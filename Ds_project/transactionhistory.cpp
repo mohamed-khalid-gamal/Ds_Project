@@ -7,8 +7,17 @@ transactionHistory::transactionHistory(QWidget *parent)
 {
     ui->setupUi(this);
 }
+transactionHistory::transactionHistory(std::stack<Transaction> *allT,QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::transactionHistory)
+{
+    ui->setupUi(this);
+    allTransactions = allT;
+}
 
 transactionHistory::~transactionHistory()
 {
     delete ui;
+    allTransactions = NULL;
+    delete allTransactions;
 }

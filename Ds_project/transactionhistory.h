@@ -3,6 +3,10 @@
 
 #include <QDialog>
 
+#include <stack>
+#include "Transaction.h"
+#include "User.h"
+
 namespace Ui {
 class transactionHistory;
 }
@@ -13,6 +17,8 @@ class transactionHistory : public QDialog
 
 public:
     explicit transactionHistory(QWidget *parent = nullptr);
+    explicit transactionHistory(std::stack<Transaction> *allT,QWidget *parent = nullptr);
+    std::stack<Transaction>* allTransactions;
     ~transactionHistory();
 
 private:

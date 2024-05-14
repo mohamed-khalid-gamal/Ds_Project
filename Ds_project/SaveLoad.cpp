@@ -3,7 +3,6 @@
 #include <fstream>
 #include "Transaction.h"
 #include "User.h"
-#include "qapplication.h"
 #include "SaveLoad.h"
 template <typename T>
 std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
@@ -23,7 +22,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 	User temp;
 	std::stack <Transaction> userTrans;
     Transaction tmp;
-    std::ifstream ifile("data/users.txt");
+    std::ifstream ifile("users.txt");
 	std::string text;
 	while (getline(ifile, text))
 	{
@@ -56,7 +55,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 
 void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-    std::ofstream ofile("data/users.txt");
+    std::ofstream ofile("users.txt");
 	for (auto i = users.begin(); i != users.end(); i++)
     {
 		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance() << std::endl
@@ -69,7 +68,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 {
 	std::string text;
 	std::stack <Transaction> transactions;
-    std::ifstream ifile("data/transactions.txt");
+    std::ifstream ifile("transactions.txt");
 	while (getline(ifile, text))
 	{
 		Transaction tmp;
@@ -94,8 +93,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 
 void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-    QString fileDir = QApplication::applicationDirPath() + "/transactions.txt";
-    std::ofstream ofile(fileDir.toStdString());
+    std::ofstream ofile("transactions.txt");
     if(!ofile.is_open()){
 
     }

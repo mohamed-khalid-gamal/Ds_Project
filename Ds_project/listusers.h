@@ -2,6 +2,10 @@
 #define LISTUSERS_H
 
 #include <QDialog>
+#include <unordered_map>
+#include <string>
+#include "Transaction.h"
+#include "User.h"
 
 namespace Ui {
 class listUsers;
@@ -13,6 +17,8 @@ class listUsers : public QDialog
 
 public:
     explicit listUsers(QWidget *parent = nullptr);
+    explicit listUsers(std::unordered_map<std::string,User> *allU,QWidget *parent = nullptr);
+    std::unordered_map<std::string,User>* allUsers;
     ~listUsers();
 
 private:

@@ -8,7 +8,16 @@ pendingTransactionsWindow::pendingTransactionsWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
+pendingTransactionsWindow::pendingTransactionsWindow(std::unordered_map<std::string,User> *allU,QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::pendingTransactionsWindow)
+{
+    ui->setupUi(this);
+    allUsers = allU;
+}
 pendingTransactionsWindow::~pendingTransactionsWindow()
 {
     delete ui;
+    allUsers = NULL;
+    delete allUsers;
 }

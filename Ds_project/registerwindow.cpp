@@ -1,20 +1,18 @@
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
 #include "accountutil.h"
-#include "SaveLoad.h"
 registerwindow::registerwindow(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::registerwindow)
 {
     ui->setupUi(this);
 }
-registerwindow::registerwindow(std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent)
+registerwindow::registerwindow(std::unordered_map<std::string,User> *allU,QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::registerwindow)
 {
     ui->setupUi(this);
     allUsers = allU;
-    allTransactions = allT;
 }
 
 
@@ -22,11 +20,8 @@ registerwindow::~registerwindow()
 {
     delete ui;
     allUsers = NULL;
-    allTransactions = NULL;
     delete allUsers;
-    delete allTransactions;
 }
-
 void registerwindow::on_pushButton_4_clicked()
 {
     QWidget::close();
@@ -67,9 +62,6 @@ void registerwindow::registerUser(QString name,QString pass){
 
 void registerwindow::on_pushButton_clicked()
 {
-    SaveLoad file;
-    file.saveUsers((*this->allUsers));
-    file.saveTransactions(*this->allTransactions);
     if (ui->lineEdit_2->echoMode() == QLineEdit::Normal){
         ui->lineEdit_2->setEchoMode(QLineEdit::Password);
         ui->pushButton->setText("Show Pass");

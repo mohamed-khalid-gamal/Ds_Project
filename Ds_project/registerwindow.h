@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <string>
-#include <stack>
 #include <unordered_map>
 #include "Transaction.h"
 #include "User.h"
@@ -18,8 +17,7 @@ class registerwindow : public QDialog
 
 public:
     explicit registerwindow(QWidget *parent = nullptr);
-    explicit registerwindow(std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
-    std::stack<Transaction>* allTransactions;
+    explicit registerwindow(std::unordered_map<std::string,User> *allU,QWidget *parent = nullptr);
     std::unordered_map<std::string,User>* allUsers;
     ~registerwindow();
     void registerUser(QString name,QString pass);

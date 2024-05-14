@@ -2,7 +2,6 @@
 #include "adminwindow.h"
 #include "registerwindow.h"
 #include "ui_mainwindow.h"
-#include "SaveLoad.h"
 #include "accountutil.h"
 #include "userwindow.h"
 
@@ -11,16 +10,18 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    SaveLoad file;
-    *allTransactions = file.loadTransactions();
-    *allUsers = file.loadUsers(*allTransactions);
+}
+MainWindow::MainWindow(std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    allTransactions = allT;
+    allUsers = allU;
 }
 
 MainWindow::~MainWindow()
 {
-    SaveLoad file;
-    file.saveUsers(*allUsers);
-    file.saveTransactions(*allTransactions);
     delete ui;
     allUsers = NULL;
     allTransactions = NULL;
@@ -36,7 +37,7 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    registerwindow regwin(allUsers, allTransactions,this);
+    registerwindow regwin(allUsers,this);
     hide();
     regwin.setModal(true);
     regwin.exec();

@@ -2,6 +2,11 @@
 #define SENDMONEYWINDOW_H
 
 #include <QDialog>
+#include <stack>
+#include <unordered_map>
+#include <string>
+#include "Transaction.h"
+#include "User.h"
 
 namespace Ui {
 class sendMoneyWindow;
@@ -13,6 +18,9 @@ class sendMoneyWindow : public QDialog
 
 public:
     explicit sendMoneyWindow(QWidget *parent = nullptr);
+    explicit sendMoneyWindow(std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
+    std::stack<Transaction>* allTransactions;
+    std::unordered_map<std::string,User>* allUsers;
     ~sendMoneyWindow();
 
 private:

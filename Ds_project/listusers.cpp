@@ -8,7 +8,17 @@ listUsers::listUsers(QWidget *parent)
     ui->setupUi(this);
 }
 
+listUsers::listUsers(std::unordered_map<std::string,User> *allU,QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::listUsers)
+{
+    ui->setupUi(this);
+    allUsers = allU;
+}
+
 listUsers::~listUsers()
 {
     delete ui;
+    allUsers = NULL;
+    delete allUsers;
 }
