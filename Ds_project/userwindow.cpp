@@ -22,7 +22,7 @@ userwindow::~userwindow()
     delete allTransactions;
 }
 
-void userwindow::on_pushButton_7_clicked()
+void userwindow::on_pushButton_7_clicked() // Refresh Balance button
 {
     showBalance();
 }
@@ -35,8 +35,8 @@ void userwindow::showBalance(){
 }
 
 
-void userwindow::on_pushButton_6_clicked()
+void userwindow::on_pushButton_6_clicked() //Log out button
 {
-
+    QWidget::close();
 }
 

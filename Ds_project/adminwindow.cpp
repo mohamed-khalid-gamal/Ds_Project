@@ -27,8 +27,7 @@ adminwindow::~adminwindow()
 }
 
 
-void adminwindow::on_pushButton_3_clicked()
+void adminwindow::on_pushButton_3_clicked() //Log out button
 {
-
+    QWidget::close();
 }
-

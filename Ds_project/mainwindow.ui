@@ -23,7 +23,7 @@
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item alignment="Qt::AlignHCenter">
+      <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
        <widget class="QLabel" name="label">
         <property name="font">
          <font>
@@ -35,7 +35,10 @@
         </property>
         <property name="text">
          <string>Digital Wallet
-FCIS ASU Team </string>
+FCIS ASU - Team 67</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>

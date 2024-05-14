@@ -15,6 +15,7 @@ SOURCES += \
     accountutil.cpp \
     adminwindow.cpp \
     edituserswindow.cpp \
+    forgetpasswordwindow.cpp \
     listusers.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     accountutil.h \
     adminwindow.h \
     edituserswindow.h \
+    forgetpasswordwindow.h \
     listusers.h \
     mainwindow.h \
     pendingtransactionswindow.h \
@@ -43,6 +45,7 @@ HEADERS += \
 FORMS += \
     adminwindow.ui \
     edituserswindow.ui \
+    forgetpasswordwindow.ui \
     listusers.ui \
     mainwindow.ui \
     pendingtransactionswindow.ui \
