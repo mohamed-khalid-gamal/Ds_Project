@@ -18,7 +18,11 @@ public:
     QString activeUser;
     std::stack<Transaction>* allTransactions;
     std::unordered_map<std::string,User>* allUsers;
+    void showBalance();
     ~userwindow();
+
+private slots:
+    void on_pushButton_7_clicked();
 
 private:
     Ui::userwindow *ui;

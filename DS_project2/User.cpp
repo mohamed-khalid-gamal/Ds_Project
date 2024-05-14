@@ -241,6 +241,7 @@ void User::acceptRequest(Transaction tr_pend, std::unordered_map<std::string, Us
 }
 
 void User::changePassword(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions) {
+    Account account;
     std::cout << "~change password (-1 at any point to go back to main menu)~\n";
     while (true) {
         std::cout << std::endl << "Enter new password : ";
@@ -253,9 +254,8 @@ void User::changePassword(std::unordered_map<std::string, User>& allUsers, std::
         }
         else {
             this->password = newPassword;
-            allUsers[this->username].setPassword(newPassword);
+            allUsers[this->username].setPassword(account.hashText(newPassword));
             std::cout << "Password changed successfully!" << std::endl;
-            getchar();
             break;
         }
     }

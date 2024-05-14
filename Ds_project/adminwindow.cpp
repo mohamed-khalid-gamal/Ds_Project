@@ -26,3 +26,9 @@ adminwindow::~adminwindow()
     delete allTransactions;
 }
 
+
+void adminwindow::on_pushButton_3_clicked()
+{
+
+}
+

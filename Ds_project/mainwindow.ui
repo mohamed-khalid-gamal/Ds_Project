@@ -34,7 +34,8 @@
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>Digital Wallet</string>
+         <string>Digital Wallet
+FCIS ASU Team </string>
         </property>
        </widget>
       </item>

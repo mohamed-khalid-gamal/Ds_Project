@@ -10,6 +10,7 @@ userwindow::userwindow(QString actUser, std::unordered_map<std::string,User> *al
     allUsers = allU;
     allTransactions = allT;
     ui->label->setText("User: " + actUser);
+    showBalance();
 }
 
 userwindow::~userwindow()
@@ -20,3 +21,22 @@ userwindow::~userwindow()
     delete allUsers;
     delete allTransactions;
 }
+
+void userwindow::on_pushButton_7_clicked()
+{
+    showBalance();
+}
+
+void userwindow::showBalance(){
+    float balanceF = (*this->allUsers)[activeUser.toStdString()].getBalance();
+    std::string balanceS = std::to_string(balanceF);
+    QString balanceQ = QString::fromStdString(balanceS);
+    ui->label_2->setText("Balance: " + balanceQ);
+}
+
+
+void userwindow::on_pushButton_6_clicked()
+{
+
+}
+

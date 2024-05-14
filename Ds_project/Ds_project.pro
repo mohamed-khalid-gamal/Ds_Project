@@ -14,9 +14,15 @@ SOURCES += \
     User.cpp \
     accountutil.cpp \
     adminwindow.cpp \
+    edituserswindow.cpp \
+    listusers.cpp \
     main.cpp \
     mainwindow.cpp \
+    pendingtransactionswindow.cpp \
     registerwindow.cpp \
+    requestmoneywindow.cpp \
+    sendmoneywindow.cpp \
+    transactionhistory.cpp \
     userwindow.cpp
 HEADERS += \
     SaveLoad.h \
@@ -24,14 +30,26 @@ HEADERS += \
     User.h \
     accountutil.h \
     adminwindow.h \
+    edituserswindow.h \
+    listusers.h \
     mainwindow.h \
+    pendingtransactionswindow.h \
     registerwindow.h \
+    requestmoneywindow.h \
+    sendmoneywindow.h \
+    transactionhistory.h \
     userwindow.h
 
 FORMS += \
     adminwindow.ui \
+    edituserswindow.ui \
+    listusers.ui \
     mainwindow.ui \
+    pendingtransactionswindow.ui \
     registerwindow.ui \
+    requestmoneywindow.ui \
+    sendmoneywindow.ui \
+    transactionhistory.ui \
     userwindow.ui
 
 # Default rules for deployment.

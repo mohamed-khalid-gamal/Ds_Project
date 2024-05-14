@@ -61,7 +61,7 @@ void registerwindow::registerUser(QString name,QString pass){
     newUser.setActive(true);
     newUser.setBalance(50);
     (*this->allUsers)[name.toStdString()] = newUser;
-    ui->label_5->setText("message");
+    ui->label_5->setText("Message: User Succesfully Created.");
 }
 
 

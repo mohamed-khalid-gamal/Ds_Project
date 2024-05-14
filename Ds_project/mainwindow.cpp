@@ -18,16 +18,18 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    SaveLoad file;
+    file.saveUsers(*allUsers);
+    file.saveTransactions(*allTransactions);
     delete ui;
+    allUsers = NULL;
+    allTransactions = NULL;
     delete allUsers;
     delete allTransactions;
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    SaveLoad file;
-    file.saveUsers(*allUsers);
-    file.saveTransactions(*allTransactions);
     QWidget::close();
 }
 
