@@ -101,104 +101,56 @@ void User::setPassword(std::string pass)
 void User::changepassword(const std::string& newPassword) {
     this->password = newPassword;
 }
-void User::sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
-{
-    std::string recipient;
-    float amount;
 
-    std::cout << "Enter the user name you want to receive the money: ";
-    std::cin >> recipient;
-    std::cin.ignore();
-    std::cout << "Enter the amount you want to send: ";
-    std::cin >> amount;
-    std::cin.ignore();
-    if (allUsers[recipient].getUsername() == recipient)
+QString User::sendMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recipient, float amount)
+{
+    if ((*allUsers).count(recipient) == 1)
     {
-        if (amount <= this->balance)
+        if (amount <= (*allUsers)[recipient].getBalance())
         {
-            if (this->getActive()==true && allUsers[recipient].getActive() == true)
+            if ((*allUsers)[sender].getActive()==true && (*allUsers)[recipient].getActive() == true)
             {
-                Transaction trans = Transaction(this->getUsername(), recipient,allTransactions);
+                Transaction trans = Transaction(sender, recipient,*allTransactions);
                 trans.setisAccepted(true);
                 trans.setAmount(amount);
-                setTransaction(trans);
-                allUsers[recipient].setTransaction(trans);
-                allUsers[username].setBalance(balance - amount);
-                balance -= amount;
-                allUsers[recipient].balance += amount;
-                allTransactions.push(trans);
+                (*allUsers)[sender].setTransaction(trans);
+                (*allUsers)[recipient].setTransaction(trans);
+                (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
+                (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
+                allTransactions->push(trans);
             }
             else {
-                std::cout << "you or the recepient are banned call the admin";
-                User actUser = searchUser(this->username, allUsers);
-                return;
+                return "you or the recepient are banned call the admin";
             }
         }
         else {
-            std::cout << "invalid amount\n";
-            char x;
-            std::cout << "do you want try again ? (Y / N)\n";
-            std::cin >> x;
-            if (x == 'y' || x == 'Y')
-            {
-                sendMoney(allUsers,allTransactions);
-            }
-            else {
-                
-                User actUser = searchUser(this->username, allUsers);
-                return;
-            }
+            return "invalid amount\n";
         }
         
     }
     else
     {
-        char x;
-        std::cout << "Username Does not Exist\ndo you want try again ? (Y / N)\n";
-        std::cin >> x;
-        if (x=='y' ||x=='Y')
-        {
-            sendMoney(allUsers,allTransactions);
-        }
-        else {
-            
-            User actUser = searchUser(this->username, allUsers);
-            return;
-        }
+        return "Username Does not Exist\n";
+
     }
+    return "Successful Transaction";
 }
 
-void User::requestMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)
+QString User::requestMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recName, float amount)
 {
-    std::string recName;
-    float amount;
-    std::cout << "Enter the user name you want to receive the request ";
-    std::cin >> recName;
-    std::cout << "Enter the amount you want to request ";
-    std::cin >> amount;
-    if (allUsers[recName].getUsername() == recName)
+    if ((*allUsers).count(recName) == 1)
     {     
             
-                Transaction trans = Transaction(recName, this->getUsername(), allTransactions);
+                Transaction trans = Transaction(recName, sender, *allTransactions);
                 trans.setAmount(amount);
                 trans.setisAccepted(false);
-                allUsers[recName].setTransaction(trans);
+                (*allUsers)[recName].setTransaction(trans);
     }
     else
     {
-        char x;
-        std::cout << "\n do you want try again ? (Y / N)";
-        std::cin >> x;
-        if (x == 'y' || x == 'Y')
-        {
-            requestMoney(allUsers, allTransactions);
-        }
-        else {
-            User actUser = searchUser(this->username, allUsers);
-            return;
-        }
+        return "Username not found.";
     }
-
+    return "Successful Request";
 }
 
 void User::acceptRequest(Transaction tr_pend, std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions)

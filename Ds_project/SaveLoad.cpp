@@ -1,5 +1,7 @@
 #pragma once
 #include <unordered_map>
+#include <Qfile>
+#include <QTextStream>
 #include <fstream>
 #include "Transaction.h"
 #include "User.h"
@@ -7,103 +9,140 @@
 template <typename T>
 std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
 {
-	std::stack <T> reversed;
-	while (!orig.empty())
-	{
-		reversed.push(orig.top());
-		orig.pop();
-	}
-	return reversed;
+    std::stack <T> reversed;
+    while (!orig.empty())
+    {
+        reversed.push(orig.top());
+        orig.pop();
+    }
+    return reversed;
 }
 
 std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction> allTransaction)
 {
-	std::unordered_map<std::string, User> users;
-	User temp;
-	std::stack <Transaction> userTrans;
+    std::unordered_map<std::string, User> users;
+    User temp;
+    std::stack <Transaction> userTrans;
     Transaction tmp;
-    std::ifstream ifile("users.txt");
-	std::string text;
-	while (getline(ifile, text))
-	{
-		std::stack <Transaction> tempTrans = allTransaction;
-		temp.setUsername(text);
-		getline(ifile, text);
-		temp.setPassword(text);
-		getline(ifile, text);
-		temp.setBalance(stof(text));
-		getline(ifile, text);
-		temp.setPin(text);
-		getline(ifile, text);
-		temp.setActive((bool)stoi(text));
-		if (!allTransaction.empty()) {
+    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/users.txt");
+    if (!file.exists()){
+        std::unordered_map<std::string,User>* usersT = new std::unordered_map<std::string,User>;
+        return *usersT;
+    }
+    if (!file.open(QFile::ReadOnly | QFile::Text)){
+
+    }
+    QTextStream ifile(&file);
+    QString text;
+    while (!ifile.atEnd())
+    {
+        std::stack <Transaction> tempTrans = allTransaction;
+        text = ifile.readLine();
+        temp.setUsername(text.toStdString());
+        text = ifile.readLine();
+        temp.setPassword(text.toStdString());
+        text = ifile.readLine();
+        temp.setBalance(stof(text.toStdString()));
+        text = ifile.readLine();
+        temp.setPin(text.toStdString());
+        text = ifile.readLine();
+        temp.setActive((bool)stoi(text.toStdString()));
+        if (!allTransaction.empty()) {
             for (int i = 0; i < (int) allTransaction.size(); i++)
-			{
-				if (tempTrans.top().getsender() == temp.getUsername() || tempTrans.top().getrecipient() == temp.getUsername()) {
-					userTrans.push(tempTrans.top());
-				}
-				tempTrans.pop();
-			}
-			userTrans = reverseStack(userTrans);
-			temp.setTransactions(userTrans);
-		}
-		users.insert(make_pair(temp.getUsername(), temp));
-	}
-	ifile.close();
-	return users;
+            {
+                if (tempTrans.top().getsender() == temp.getUsername() || tempTrans.top().getrecipient() == temp.getUsername()) {
+                    userTrans.push(tempTrans.top());
+                }
+                tempTrans.pop();
+            }
+            userTrans = reverseStack(userTrans);
+            temp.setTransactions(userTrans);
+        }
+        users.insert(make_pair(temp.getUsername(), temp));
+    }
+    file.close();
+    return users;
 }
 
 void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-    std::ofstream ofile("users.txt");
-	for (auto i = users.begin(); i != users.end(); i++)
+    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/users.txt");
+    if (!file.open(QFile::WriteOnly | QFile::Text)){
+
+    }
+    QTextStream out(&file);
+    std::unordered_map<std::string, User>::iterator it;
+    it = users.begin();
+    std::string temp;
+    while(it != users.end())
     {
-		ofile << i->first << std::endl << i->second.getPassword() << std::endl << i->second.getBalance() << std::endl
-            << i->second.getPin() << std::endl << i->second.getActive() << std::endl;
-	}
-	ofile.close();
+        temp = it->second.getUsername();
+        out << QString::fromStdString(temp) << "\n";
+        temp = it->second.getPassword();
+        out << QString::fromStdString(temp) << "\n";
+        temp = std::to_string(it->second.getBalance());
+        out << QString::fromStdString(temp) << "\n";
+        temp = it->second.getPin();
+        out << QString::fromStdString(temp) << "\n";
+        temp = std::to_string(it->second.getActive());
+        out << QString::fromStdString(temp) << "\n";
+        it++;
+    }
+    file.flush();
+    file.close();
 }
 
 std::stack <Transaction> SaveLoad::loadTransactions()
 {
-	std::string text;
-	std::stack <Transaction> transactions;
-    std::ifstream ifile("transactions.txt");
-	while (getline(ifile, text))
-	{
-		Transaction tmp;
-		tmp.setid(stoi(text));
-		getline(ifile, text);
-		tmp.setAmount(stoi(text));
-		getline(ifile, text);
-		tmp.setsender(text);
-		getline(ifile, text);
-		tmp.setrecipient(text);
-		getline(ifile, text);
-		tmp.setdatePlaceHolder(text);
-		getline(ifile, text);
-		bool bol = (bool)stoi(text);
-		tmp.setisAccepted(bol);
-		transactions.push(tmp);
-	}
-	transactions = reverseStack(transactions);
-	ifile.close();
-	return transactions;
+    QString text;
+    std::stack <Transaction> transactions;
+    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/transactions.txt");
+    if (!file.exists()){
+        std::stack<Transaction>* transactionsT = new std::stack<Transaction>;
+        return *transactionsT;
+    }
+    if (!file.open(QFile::ReadOnly | QFile::Text)){
+
+    }
+    QTextStream ifile(&file);
+    while (!ifile.atEnd())
+    {
+        Transaction tmp;
+        text = ifile.readLine();
+        tmp.setid(std::stoi(text.toStdString()));
+        text = ifile.readLine();
+        tmp.setAmount(std::stof(text.toStdString()));
+        text = ifile.readLine();
+        tmp.setsender(text.toStdString());
+        text = ifile.readLine();
+        tmp.setrecipient(text.toStdString());
+        text = ifile.readLine();
+        tmp.setdatePlaceHolder(text.toStdString());
+        text = ifile.readLine();
+        bool bol = (bool)stoi(text.toStdString());
+        tmp.setisAccepted(bol);
+        transactions.push(tmp);
+    }
+    transactions = reverseStack(transactions);
+    file.close();
+    return transactions;
 }
 
 void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-    std::ofstream ofile("transactions.txt");
-    if(!ofile.is_open()){
+    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/transactions.txt");
+    if (!file.open(QFile::WriteOnly | QFile::Text)){
 
     }
-	std::stack <Transaction> temp = transactions;
-	while (!temp.empty())
-	{
-		Transaction tmp = temp.top();
-		ofile << tmp.getId() << std::endl << tmp.getAmount() << std::endl << tmp.getsender() << std::endl << tmp.getrecipient() << std::endl
-			<< tmp.getdatePlaceHolder() << std::endl << tmp.getisAccepted() << std::endl;
-		temp.pop();
-	}
-	ofile.close();
+    QTextStream ofile(&file);
+    std::stack <Transaction> temp = transactions;
+    while (!temp.empty())
+    {
+        Transaction tmp = temp.top();
+        ofile << QString::fromStdString(std::to_string(tmp.getId())) << "\n" << QString::fromStdString(std::to_string(tmp.getAmount())) << "\n"
+              << QString::fromStdString(tmp.getsender()) << "\n"<< QString::fromStdString(tmp.getrecipient()) << "\n"
+              << QString::fromStdString(tmp.getdatePlaceHolder()) << "\n" << QString::fromStdString(std::to_string(tmp.getisAccepted())) << "\n";
+        temp.pop();
+    }
+    file.close();
 }

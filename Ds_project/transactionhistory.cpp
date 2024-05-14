@@ -21,3 +21,9 @@ transactionHistory::~transactionHistory()
     allTransactions = NULL;
     delete allTransactions;
 }
+
+void transactionHistory::on_pushButton_clicked()
+{
+    QWidget::close();
+}
+

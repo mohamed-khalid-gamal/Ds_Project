@@ -19,7 +19,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    MainWindow(std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent);
     ~MainWindow();
     std::stack<Transaction> *allTransactions = new std::stack<Transaction>;
     std::unordered_map<std::string,User> *allUsers = new std::unordered_map<std::string,User>;
@@ -31,6 +30,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;

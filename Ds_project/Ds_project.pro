@@ -22,6 +22,7 @@ SOURCES += \
     pendingtransactionswindow.cpp \
     registerwindow.cpp \
     requestmoneywindow.cpp \
+    resetpinwindow.cpp \
     sendmoneywindow.cpp \
     transactionhistory.cpp \
     userwindow.cpp
@@ -38,6 +39,7 @@ HEADERS += \
     pendingtransactionswindow.h \
     registerwindow.h \
     requestmoneywindow.h \
+    resetpinwindow.h \
     sendmoneywindow.h \
     transactionhistory.h \
     userwindow.h
@@ -51,6 +53,7 @@ FORMS += \
     pendingtransactionswindow.ui \
     registerwindow.ui \
     requestmoneywindow.ui \
+    resetpinwindow.ui \
     sendmoneywindow.ui \
     transactionhistory.ui \
     userwindow.ui

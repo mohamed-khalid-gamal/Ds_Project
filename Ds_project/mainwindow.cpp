@@ -4,25 +4,26 @@
 #include "ui_mainwindow.h"
 #include "accountutil.h"
 #include "userwindow.h"
+#include "forgetpasswordwindow.h"
+#include "SaveLoad.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-}
-MainWindow::MainWindow(std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    allTransactions = allT;
-    allUsers = allU;
+    SaveLoad file;
+    *allTransactions = file.loadTransactions();
+    *allUsers = file.loadUsers(*allTransactions);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    SaveLoad file;
+    file.saveUsers(*allUsers);
+    file.saveTransactions(*allTransactions);
     allUsers = NULL;
     allTransactions = NULL;
     delete allUsers;
@@ -31,7 +32,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    QWidget::close();
+    QApplication::quit();
 }
 
 
@@ -52,11 +53,11 @@ void MainWindow::on_pushButton_clicked()
     std::string name = nameQ.toStdString();
     std::string pass = passQ.toStdString();
     AccountUtil account;
-
+    ui->label_5->setStyleSheet("color: darkred");
     if(name == "admin" && pass == "admin"){
         logIn("admin");
     }
-    if (name == (*this->allUsers)[name].getUsername()){
+    if ((*allUsers).count(name) == 1){
         if(account.hashText(pass) == (*this->allUsers)[name].getPassword()){
             logIn(nameQ);
         } else {
@@ -70,6 +71,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::logIn(QString name){
     userwindow userwindow(name,allUsers,allTransactions,this);
     adminwindow adminwindow(allUsers,allTransactions,this);
+    ui->label_5->setStyleSheet("color: darkgreen");
     hide();
     if (name == "admin"){
         adminwindow.setModal(true);
@@ -81,3 +83,13 @@ void MainWindow::logIn(QString name){
     show();
 
 };
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    forgetPasswordWindow forwin(allUsers,this);
+    hide();
+    forwin.setModal(true);
+    forwin.exec();
+    show();
+}
+

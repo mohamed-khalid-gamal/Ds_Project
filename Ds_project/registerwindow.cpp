@@ -31,7 +31,7 @@ void registerwindow::on_pushButton_2_clicked()
 {
     QString name = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
-
+    ui->label_5->setStyleSheet("Color: darkred");
     if (name.length() < 5 || name.length() > 16){
     ui->label_5->setText("Message: Invalid Username Length");
     } else {
@@ -56,7 +56,10 @@ void registerwindow::registerUser(QString name,QString pass){
     newUser.setActive(true);
     newUser.setBalance(50);
     (*this->allUsers)[name.toStdString()] = newUser;
-    ui->label_5->setText("Message: User Succesfully Created.");
+    ui->label_5->setStyleSheet("Color: darkgreen");
+    std::unordered_map<std::string,User>::iterator it;
+    it = allUsers->begin();
+    ui->label_5->setText(QString::fromStdString(it->second.getUsername()));
 }
 
 

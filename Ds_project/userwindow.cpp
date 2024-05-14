@@ -1,5 +1,10 @@
 #include "userwindow.h"
 #include "ui_userwindow.h"
+#include "sendMoneyWindow.h"
+#include "requestmoneywindow.h"
+#include "transactionhistory.h"
+#include "pendingtransactionswindow.h"
+
 
 userwindow::userwindow(QString actUser, std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent)
     : QDialog(parent)
@@ -38,5 +43,45 @@ void userwindow::showBalance(){
 void userwindow::on_pushButton_6_clicked() //Log out button
 {
     QWidget::close();
+}
+
+
+void userwindow::on_pushButton_clicked()
+{
+    hide();
+    sendMoneyWindow sendWin;
+    sendWin.setModal(true);
+    sendWin.exec();
+    show();
+}
+
+
+void userwindow::on_pushButton_2_clicked()
+{
+    hide();
+    requestMoneyWindow reqWin;
+    reqWin.setModal(true);
+    reqWin.exec();
+    show();
+}
+
+
+void userwindow::on_pushButton_3_clicked()
+{
+    hide();
+    transactionHistory tranWin;
+    tranWin.setModal(true);
+    tranWin.exec();
+    show();
+}
+
+
+void userwindow::on_pushButton_4_clicked()
+{
+    hide();
+    pendingTransactionsWindow penWin;
+    penWin.setModal(true);
+    penWin.exec();
+    show();
 }
 

@@ -1,5 +1,6 @@
 #include "edituserswindow.h"
 #include "ui_edituserswindow.h"
+#include "listusers.h"
 
 editUsersWindow::editUsersWindow(QWidget *parent)
     : QDialog(parent)
@@ -21,3 +22,19 @@ editUsersWindow::~editUsersWindow()
     allUsers = NULL;
     delete allUsers;
 }
+
+void editUsersWindow::on_pushButton_clicked()
+{
+    hide();
+    listUsers listWin;
+    listWin.setModal(true);
+    listWin.exec();
+    show();
+}
+
+
+void editUsersWindow::on_pushButton_4_clicked()
+{
+    QWidget::close();
+}
+

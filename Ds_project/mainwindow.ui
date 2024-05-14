@@ -62,7 +62,7 @@ FCIS ASU - Team 67</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: darkred</string>
+         <string notr="true">color: darkgreen</string>
         </property>
         <property name="text">
          <string>Message: No Errors</string>

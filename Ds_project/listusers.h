@@ -21,6 +21,9 @@ public:
     std::unordered_map<std::string,User>* allUsers;
     ~listUsers();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::listUsers *ui;
 };

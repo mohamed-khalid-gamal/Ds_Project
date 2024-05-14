@@ -22,3 +22,9 @@ listUsers::~listUsers()
     allUsers = NULL;
     delete allUsers;
 }
+
+void listUsers::on_pushButton_clicked()
+{
+    close();
+}
+

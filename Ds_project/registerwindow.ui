@@ -62,7 +62,7 @@ Password must be between 8 and 16 letters length</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: darkred</string>
+      <string notr="true">color: darkgreen</string>
      </property>
      <property name="text">
       <string>Message: No Errors</string>

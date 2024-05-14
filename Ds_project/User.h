@@ -3,6 +3,7 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
+#include <QString>
 class Transaction;
 
 class User{
@@ -46,10 +47,10 @@ public:
 	void setPassword(std::string pass);
 
 	void changepassword(const std::string&);
-	
-	void sendMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
 
-	void requestMoney(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
+    QString sendMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recipient, float amount);
+
+    QString requestMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recName, float amount);
 	
 	void acceptRequest(Transaction tr_pend, std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
 	

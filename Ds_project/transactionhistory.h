@@ -21,6 +21,9 @@ public:
     std::stack<Transaction>* allTransactions;
     ~transactionHistory();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::transactionHistory *ui;
 };

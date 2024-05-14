@@ -1,1 +1,11 @@
-﻿  DS_project2.vcxproj -> D:\Projects\College\Digital-Wallet\GO\Ds_Project\x64\Debug\DS_project2.exe
+﻿  Admin.cpp
+  SaveLoad.cpp
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\SaveLoad.cpp(25,6): warning C4101: 'size': unreferenced local variable
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\SaveLoad.cpp(107,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  User.cpp
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\User.cpp(78,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\User.cpp(213,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\User.cpp(214,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Projects\College\Digital-Wallet\GO\Ds_Project\DS_project2\User.cpp(355,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  DS_project2.vcxproj -> D:\Projects\College\Digital-Wallet\GO\Ds_Project\x64\Debug\DS_project2.exe
