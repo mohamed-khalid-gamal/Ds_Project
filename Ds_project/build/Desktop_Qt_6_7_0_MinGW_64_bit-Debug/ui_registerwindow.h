@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
@@ -31,7 +32,9 @@ public:
     QLabel *label_2;
     QLineEdit *lineEdit;
     QLabel *label_3;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_2;
+    QPushButton *pushButton;
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton_2;
     QPushButton *pushButton_4;
@@ -67,7 +70,7 @@ public:
         QFont font2;
         font2.setPointSize(22);
         label_5->setFont(font2);
-        label_5->setStyleSheet(QString::fromUtf8("color: darkred"));
+        label_5->setStyleSheet(QString::fromUtf8("color: darkgreen"));
 
         verticalLayout_2->addWidget(label_5, 0, Qt::AlignHCenter);
 
@@ -88,10 +91,21 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_3);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
         lineEdit_2 = new QLineEdit(registerwindow);
         lineEdit_2->setObjectName("lineEdit_2");
+        lineEdit_2->setEchoMode(QLineEdit::Password);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, lineEdit_2);
+        horizontalLayout->addWidget(lineEdit_2);
+
+        pushButton = new QPushButton(registerwindow);
+        pushButton->setObjectName("pushButton");
+
+        horizontalLayout->addWidget(pushButton);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout);
 
 
         verticalLayout_2->addLayout(formLayout);
@@ -126,6 +140,7 @@ public:
         label_5->setText(QCoreApplication::translate("registerwindow", "Message: No Errors", nullptr));
         label_2->setText(QCoreApplication::translate("registerwindow", "User Name", nullptr));
         label_3->setText(QCoreApplication::translate("registerwindow", "Password", nullptr));
+        pushButton->setText(QCoreApplication::translate("registerwindow", "Show Pass", nullptr));
         pushButton_2->setText(QCoreApplication::translate("registerwindow", "Register", nullptr));
         pushButton_4->setText(QCoreApplication::translate("registerwindow", "Back", nullptr));
     } // retranslateUi

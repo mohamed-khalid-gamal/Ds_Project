@@ -75,6 +75,8 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::logIn(QString name){
     userwindow userwindow(name,allUsers,allTransactions,this);
     adminwindow adminwindow(allUsers,allTransactions,this);
+    ui->label_5->setStyleSheet("color: darkgreen");
+    ui->label_5->setText("Message: No Errors");
     hide();
     if (name == "admin"){
         adminwindow.setModal(true);
@@ -83,8 +85,6 @@ void MainWindow::logIn(QString name){
         userwindow.setModal(true);
         userwindow.exec();
     }
-    ui->label_5->setStyleSheet("color: darkgreen");
-    ui->label_5->setText("Message: No Errors");
     show();
 
 };

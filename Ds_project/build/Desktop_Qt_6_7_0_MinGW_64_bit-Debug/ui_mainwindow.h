@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -27,13 +28,17 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
+    QLabel *label_5;
     QFormLayout *formLayout;
     QLabel *label_2;
     QLineEdit *lineEdit;
     QLabel *label_3;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_2;
+    QPushButton *pushButton_5;
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
@@ -54,7 +59,9 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy);
-        verticalLayout_2 = new QVBoxLayout(centralwidget);
+        verticalLayout_3 = new QVBoxLayout(centralwidget);
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
         label = new QLabel(centralwidget);
         label->setObjectName("label");
@@ -62,8 +69,24 @@ public:
         font.setPointSize(44);
         label->setFont(font);
         label->setStyleSheet(QString::fromUtf8(""));
+        label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(label);
+        verticalLayout_2->addWidget(label, 0, Qt::AlignHCenter|Qt::AlignVCenter);
+
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName("label_5");
+        sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
+        label_5->setSizePolicy(sizePolicy);
+        label_5->setMinimumSize(QSize(56, 136));
+        QFont font1;
+        font1.setPointSize(22);
+        label_5->setFont(font1);
+        label_5->setStyleSheet(QString::fromUtf8("color: darkgreen"));
+
+        verticalLayout_2->addWidget(label_5, 0, Qt::AlignHCenter);
+
+
+        verticalLayout_3->addLayout(verticalLayout_2);
 
         formLayout = new QFormLayout();
         formLayout->setObjectName("formLayout");
@@ -82,13 +105,24 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_3);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
         lineEdit_2 = new QLineEdit(centralwidget);
         lineEdit_2->setObjectName("lineEdit_2");
+        lineEdit_2->setEchoMode(QLineEdit::Password);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, lineEdit_2);
+        horizontalLayout->addWidget(lineEdit_2);
+
+        pushButton_5 = new QPushButton(centralwidget);
+        pushButton_5->setObjectName("pushButton_5");
+
+        horizontalLayout->addWidget(pushButton_5);
 
 
-        verticalLayout_2->addLayout(formLayout);
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout);
+
+
+        verticalLayout_3->addLayout(formLayout);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
@@ -113,7 +147,7 @@ public:
         verticalLayout->addWidget(pushButton_4);
 
 
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout_3->addLayout(verticalLayout);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -132,9 +166,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Digital Wallet", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Digital Wallet\n"
+"FCIS ASU - Team 67", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Message: No Errors", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "User Name", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
+        pushButton_5->setText(QCoreApplication::translate("MainWindow", "Show Pass", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "Register", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "Forget Password", nullptr));

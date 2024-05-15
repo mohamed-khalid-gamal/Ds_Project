@@ -41,6 +41,7 @@ QString listUsers::getUsers() {
     std::unordered_map<std::string,User>::iterator it;
     std::string tmpBan;
     it = (*allUsers).begin();
+    bool flag = false;
     while (it != (*allUsers).end()){
         if (it->second.getUsername() == "test"){
             it++;
@@ -53,7 +54,11 @@ QString listUsers::getUsers() {
            tmpBan  = "No";
         } else tmpBan = "Yes";
         text+= "~Banned: " + QString::fromStdString(tmpBan) + "\n";
+        flag = true;
         it++;
+    }
+    if (!flag){
+        return "No Users found.";
     }
     return text;
 }

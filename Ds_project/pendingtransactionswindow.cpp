@@ -83,9 +83,13 @@ void pendingTransactionsWindow::on_pushButton_2_clicked()
     //Updating user's transactions
     while (!tempUserTransactions.empty()) {
         if(tranID.toInt() == tempUserTransactions.top().getId()
-            && (tempUserTransactions.top().getsender() == activeUser.toStdString()|| tempUserTransactions.top().getrecipient() == activeUser.toStdString()))
+            && (tempUserTransactions.top().getsender() == activeUser.toStdString()))
         {
             tempUserTransactions.top().setisAccepted(true);
+            float oldBalance =(*allUsers)[tempUserTransactions.top().getsender()].getBalance();
+            float oldBalance2 =(*allUsers)[tempUserTransactions.top().getrecipient()].getBalance();
+            (*allUsers)[tempUserTransactions.top().getsender()].setBalance(oldBalance - tempUserTransactions.top().getAmount());
+            (*allUsers)[tempUserTransactions.top().getrecipient()].setBalance(oldBalance2 + tempUserTransactions.top().getAmount());
         }
         tempUserTransactions2.push(tempUserTransactions.top());
         tempUserTransactions.pop();
@@ -101,7 +105,7 @@ void pendingTransactionsWindow::acceptRequest(std::stack<Transaction>& allTransa
     //Updating alltransactions
     while (!tempAllTransactions.empty()) {
         if(id.toInt() == tempAllTransactions.top().getId()
-            && (tempAllTransactions.top().getsender() == actUser.toStdString()|| tempAllTransactions.top().getrecipient() == actUser.toStdString()))
+            && (tempAllTransactions.top().getsender() == actUser.toStdString()))
         {
             tempAllTransactions.top().setisAccepted(true);
         }

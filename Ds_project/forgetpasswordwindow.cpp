@@ -43,14 +43,16 @@ void forgetPasswordWindow::on_pushButton_3_clicked()
 
 void forgetPasswordWindow::on_pushButton_5_clicked()
 {
+    AccountUtil account;
     QString name = ui->lineEdit_3->text();
     QString pass = ui->lineEdit_4->text();
+    QString message = account.validPassword(pass.toStdString());
     ui->label_5->setStyleSheet("Color: darkred");
     if ((*allUsers).count(name.toStdString()) == 0){
         ui->label_5->setText("Message: User not Found");
     } else {
-            if (pass.length() < 8 || pass.length() > 16){
-                ui->label_5->setText("Message: Invalid Password Length");
+            if (message != "Success"){
+                ui->label_5->setText("Message: " + message);
             } else {
                 forgetPass(name,pass);
         }
