@@ -9,6 +9,7 @@ User::User(std::string name, std::string pass)
 	balance = 50;
 	pin = "000000";
 	is_active = true;
+    userTransactions = std::stack<Transaction>();
 }
 
 User::User()
@@ -70,19 +71,6 @@ std::stack<Transaction> User::getTransactions(void)
     return userTransactions;
 }
 
-std::stack<Transaction> User::getPendingRequests() {
-    std::stack<Transaction> tempTrans = this->getTransactions();
-    std::stack<Transaction> pendingTrans;
-    int size = tempTrans.size();
-    for (int i = 0; i < size; i++) {
-        if (tempTrans.top().getisAccepted() == false) {
-            pendingTrans.push(tempTrans.top());
-        }
-        tempTrans.pop();
-    }
-    return pendingTrans;
-}
-
 void User::setTransactions(std::stack <Transaction> UTrans)
 {
     userTransactions = UTrans;
@@ -101,19 +89,6 @@ void User::changepassword(const std::string& newPassword) {
     this->password = newPassword;
 }
 
-QString User::sendMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recipient, float amount)
-{
-    (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
-    (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
-
-    Transaction trans = Transaction(sender, recipient,*allTransactions);
-    trans.setisAccepted(true);
-    trans.setAmount(amount);
-    (*allUsers)[sender].setTransaction(trans);
-    (*allUsers)[recipient].setTransaction(trans);
-    allTransactions->push(trans);
-    return "Successful Transaction";
-}
 
 QString User::requestMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recName, float amount)
 {

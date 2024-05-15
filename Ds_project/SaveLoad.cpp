@@ -19,11 +19,7 @@ std::stack <T> SaveLoad::reverseStack(std::stack <T> orig){
 
 std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction> allTransaction)
 {
-    std::unordered_map<std::string, User> users;
-    User temp;
-    std::stack <Transaction> userTrans;
-    std::stack <Transaction> allTrans;
-    Transaction tmp;
+
     QFile file("./users.txt");
     if (!file.exists()){
         std::unordered_map<std::string,User>* usersT = new std::unordered_map<std::string,User>;
@@ -32,12 +28,17 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
     if (!file.open(QFile::ReadOnly | QFile::Text)){
 
     }
+    std::unordered_map<std::string, User> users;
+    User temp;
+    std::stack <Transaction> allTrans;
+    Transaction tmp;
     QTextStream ifile(&file);
     QString text;
     while (!ifile.atEnd())
     {
-        allTrans = reverseStack(allTransaction);
+        allTrans = allTransaction;
         text = ifile.readLine();
+        std::string username = text.toStdString();
         temp.setUsername(text.toStdString());
         text = ifile.readLine();
         temp.setPassword(text.toStdString());
@@ -47,16 +48,15 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
         temp.setPin(text.toStdString());
         text = ifile.readLine();
         temp.setActive((bool)stoi(text.toStdString()));
-        if (!allTransaction.empty()){
-            while(!allTrans.empty()){
-                if (allTrans.top().getsender() == temp.getUsername() || allTrans.top().getrecipient() == temp.getUsername()) {
-                    userTrans.push(allTrans.top());
-                }
-                allTrans.pop();
+        while(!allTrans.empty()){
+            tmp = allTrans.top();
+            if (tmp.getsender() == username || tmp.getrecipient() == username) {
+                temp.setTransaction(tmp);
             }
-        }
-        temp.setTransactions(userTrans);
+            allTrans.pop();
+         }
         users.insert(make_pair(temp.getUsername(), temp));
+        temp = User();
     }
     file.close();
     return users;

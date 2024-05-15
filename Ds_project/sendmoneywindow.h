@@ -19,6 +19,7 @@ class sendMoneyWindow : public QDialog
 public:
     explicit sendMoneyWindow(QWidget *parent = nullptr);
     explicit sendMoneyWindow(QString sender,std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
+    void sendMoney();
     std::stack<Transaction>* allTransactions;
     std::unordered_map<std::string,User>* allUsers;
     QString sendUser;

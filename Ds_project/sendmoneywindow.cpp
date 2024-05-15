@@ -56,7 +56,7 @@ void sendMoneyWindow::on_pushButton_2_clicked()
                 } else {
                 ui->label_4->setStyleSheet("color: darkgreen");
                 ui->label_4->setText("Message: Successful Transaction.");
-                (*allUsers)[sendUser.toStdString()].sendMoney(allUsers,allTransactions,sendUser.toStdString(),recipient.toStdString(),amount.toFloat());
+                sendMoney();
                 }
             }
 
@@ -66,4 +66,22 @@ void sendMoneyWindow::on_pushButton_2_clicked()
         ui->label_4->setText("Message: Please enter a number in Balance field");
     }
 
+}
+
+void sendMoneyWindow::sendMoney()
+{
+    QString recipient = ui->lineEdit->text();
+    QString amount = ui->lineEdit_2->text();
+
+    (*allUsers)[sendUser.toStdString()].setBalance((*allUsers)[sendUser.toStdString()].getBalance() - amount.toFloat());
+    (*allUsers)[recipient.toStdString()].setBalance((*allUsers)[recipient.toStdString()].getBalance() + amount.toFloat());
+
+    Transaction trans = Transaction(sendUser.toStdString(), recipient.toStdString(),*allTransactions);
+    trans.setisAccepted(true);
+    trans.setAmount(amount.toFloat());
+
+    (*allUsers)[sendUser.toStdString()].setTransaction(trans);
+    (*allUsers)[recipient.toStdString()].setTransaction(trans);
+
+    (*allTransactions).push(trans);
 }

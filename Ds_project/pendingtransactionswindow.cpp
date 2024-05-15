@@ -95,6 +95,7 @@ void pendingTransactionsWindow::on_pushButton_2_clicked()
         tempUserTransactions2.push(tempUserTransactions.top());
         tempUserTransactions.pop();
     }
+    tempUserTransactions2 = SaveLoad::reverseStack(tempUserTransactions2);
     (*allUsers)[activeUser.toStdString()].setTransactions(tempUserTransactions2);
     acceptRequest(*allTransactionsPointer, tranID,activeUser);
 }
@@ -119,4 +120,5 @@ void pendingTransactionsWindow::acceptRequest(std::stack<Transaction>& allTransa
         allTransactions.push(tempAllTransactions2.top());
         tempAllTransactions2.pop();
     }
+    allTransactions = SaveLoad::reverseStack(allTransactions);
 }
