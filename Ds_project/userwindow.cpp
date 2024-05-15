@@ -66,8 +66,7 @@ void userwindow::on_pushButton_3_clicked()
 
 void userwindow::on_pushButton_4_clicked()
 {
-    std::stack<Transaction> tempT = ((*allUsers)[activeUser.toStdString()].getTransactions());
-    penWin = new pendingTransactionsWindow(activeUser, allUsers,tempT,this);
+    penWin = new pendingTransactionsWindow(activeUser, allUsers,allTransactions,this);
     penWin->show();
 }
 
