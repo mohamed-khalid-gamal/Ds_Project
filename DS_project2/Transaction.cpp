@@ -122,5 +122,5 @@ void Transaction::listallTransactions(std::stack<Transaction>& transactions)
 		temp.pop();
 	} else {
 		std::cout << "No Transactions yet";
-	}
+	}}
 }
