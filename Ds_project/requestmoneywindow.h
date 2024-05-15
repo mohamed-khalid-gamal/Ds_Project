@@ -18,13 +18,16 @@ class requestMoneyWindow : public QDialog
 
 public:
     explicit requestMoneyWindow(QWidget *parent = nullptr);
-    explicit requestMoneyWindow(std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
+    explicit requestMoneyWindow(QString sendU, std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
     std::stack<Transaction>* allTransactions;
     std::unordered_map<std::string,User>* allUsers;
+    QString sendUser;
     ~requestMoneyWindow();
 
 private slots:
     void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::requestMoneyWindow *ui;

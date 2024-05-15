@@ -39,6 +39,7 @@ void listUsers::on_pushButton_2_clicked()
 QString listUsers::getUsers() {
     QString text;
     std::unordered_map<std::string,User>::iterator it;
+    std::string tmpBan;
     it = (*allUsers).begin();
     while (it != (*allUsers).end()){
         if (it->second.getUsername() == "test"){
@@ -48,7 +49,10 @@ QString listUsers::getUsers() {
         text+="\n~Username: " + it->second.getUsername() + "\n";
         std::string tmpBalance = std::to_string(it->second.getBalance());
         text+= "~Current balance: " + QString::fromStdString(tmpBalance) + "\n";
-        text+="~Transaction History: \n";
+        if (it->second.getActive()){
+           tmpBan  = "No";
+        } else tmpBan = "Yes";
+        text+= "~Banned: " + QString::fromStdString(tmpBan) + "\n";
         it++;
     }
     return text;

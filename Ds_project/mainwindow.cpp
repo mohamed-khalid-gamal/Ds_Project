@@ -58,10 +58,14 @@ void MainWindow::on_pushButton_clicked()
         logIn("admin");
     }
     if ((*allUsers).count(name) == 1){
-        if(account.hashText(pass) == (*this->allUsers)[name].getPassword()){
-            logIn(nameQ);
+        if(!((*allUsers)[name].getActive())){
+            ui->label_5->setText("Message: User is banned.");
         } else {
-            ui->label_5->setText("Message: Invalid Password");
+            if(account.hashText(pass) == (*this->allUsers)[name].getPassword()){
+                logIn(nameQ);
+            } else {
+                ui->label_5->setText("Message: Invalid Password");
+            }
         }
     } else {
         ui->label_5->setText("Message: Invalid Username");
@@ -71,8 +75,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::logIn(QString name){
     userwindow userwindow(name,allUsers,allTransactions,this);
     adminwindow adminwindow(allUsers,allTransactions,this);
-    ui->label_5->setStyleSheet("color: darkgreen");
-    ui->label_5->setText("Message: No Errors");
     hide();
     if (name == "admin"){
         adminwindow.setModal(true);
@@ -81,6 +83,8 @@ void MainWindow::logIn(QString name){
         userwindow.setModal(true);
         userwindow.exec();
     }
+    ui->label_5->setStyleSheet("color: darkgreen");
+    ui->label_5->setText("Message: No Errors");
     show();
 
 };

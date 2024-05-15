@@ -51,7 +51,7 @@ void userwindow::on_pushButton_clicked()
 
 void userwindow::on_pushButton_2_clicked()
 {
-    reqWin = new requestMoneyWindow(allUsers,allTransactions,this);
+    reqWin = new requestMoneyWindow(activeUser,allUsers,allTransactions,this);
     reqWin->show();
 }
 
@@ -66,7 +66,8 @@ void userwindow::on_pushButton_3_clicked()
 
 void userwindow::on_pushButton_4_clicked()
 {
-    penWin = new pendingTransactionsWindow(allUsers,this);
+    std::stack<Transaction> tempT = ((*allUsers)[activeUser.toStdString()].getTransactions());
+    penWin = new pendingTransactionsWindow(activeUser, allUsers,tempT,this);
     penWin->show();
 }
 

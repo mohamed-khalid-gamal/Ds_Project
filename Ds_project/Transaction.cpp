@@ -1,8 +1,6 @@
 #pragma once
-#include <fstream>
 #include <chrono>
 #include <ctime>
-#include <iostream>
 #include <time.h>
 #include "Transaction.h"
 #include "User.h"
@@ -15,7 +13,7 @@ Transaction::Transaction(std::string sendUser, std::string recieveUser, std::sta
 	}
 	else
 	{
-		id = allTransactions.top().id++;
+        id = allTransactions.top().getId() + 1;
 	}
 	sender = sendUser;
 	recipient = recieveUser;
@@ -100,29 +98,4 @@ std::string Transaction::get_time()
 	strftime(time_buffer, sizeof(time_buffer), "%H:%M:%S", local_time);
 	std::string current_time_str = time_buffer;
 	return  current_date + " " + current_time_str;
-}
-
-QString Transaction::listallTransactions(std::stack<Transaction>& transactions)
-{
-	bool flag = false;
-	std::stack<Transaction> temp = transactions;
-    QString text;
-	while (!temp.empty()) {
-
-		flag = true;
-        text+= "\nTransaction ID : ";
-        text+= QString::fromStdString(std::to_string(temp.top().getId())) + "\n";
-        text+= "Transaction amount : ";
-        text+=  QString::fromStdString(std::to_string(temp.top().getAmount())) + "\n";
-        text+= "Sender : ";
-        text+=temp.top().getsender() + "\n";
-        text+="Recipient : ";
-        text+= temp.top().getrecipient() + "\n";
-        text+= "Date : ";
-        text+= temp.top().getdatePlaceHolder() + "\n";
-		temp.pop();
-	}
-	if (!flag) {
-        text = "No Transactions yet";
-	}
 }

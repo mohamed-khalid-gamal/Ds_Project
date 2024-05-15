@@ -41,14 +41,12 @@ void editUsersWindow::on_pushButton_2_clicked() // change user
 {
     QString oldname = ui->lineEdit->text();
     QString name = ui->lineEdit_2->text();
-    QString pass = ui->lineEdit_3->text();
     ui->label_5->setStyleSheet("Color: darkred");
     if ((*allUsers).count(oldname.toStdString()) == 0){
         ui->label_5->setText("Message: User not Found");
     } else {
         ui->label_5->setStyleSheet("Color: darkgreen");
         ui->label_5->setText("Message: Username Changed Succesfully");
-        AccountUtil account;
         (*allUsers)[oldname.toStdString()].setUsername(name.toStdString());
         }
  }
@@ -72,5 +70,48 @@ void editUsersWindow::on_pushButton_3_clicked() // change pass
             (*allUsers)[oldname.toStdString()].setPassword(account.hashText(pass.toStdString()));
         }
     }
+ }
+
+
+ void editUsersWindow::on_pushButton_5_clicked()
+ {
+     QString oldname = ui->lineEdit->text();
+     ui->label_5->setStyleSheet("Color: darkred");
+     if ((*allUsers).count(oldname.toStdString()) == 0){
+         ui->label_5->setText("Message: User not Found");
+     } else {
+         std::unordered_map<std::string,User>::iterator it = allUsers->find(oldname.toStdString());
+         (*allUsers).erase(it);
+         ui->label_5->setStyleSheet("Color: darkgreen");
+         ui->label_5->setText("Message: User removed Succesfully");
+     }
+ }
+
+
+ void editUsersWindow::on_pushButton_6_clicked()
+ {
+     QString oldname = ui->lineEdit->text();
+     ui->label_5->setStyleSheet("Color: darkred");
+     if ((*allUsers).count(oldname.toStdString()) == 0){
+         ui->label_5->setText("Message: User not Found");
+     } else {
+         (*allUsers)[oldname.toStdString()].setActive(false);
+         ui->label_5->setStyleSheet("Color: darkgreen");
+         ui->label_5->setText("Message: User Banned");
+     }
+ }
+
+
+ void editUsersWindow::on_pushButton_7_clicked()
+ {
+     QString oldname = ui->lineEdit->text();
+     ui->label_5->setStyleSheet("Color: darkred");
+     if ((*allUsers).count(oldname.toStdString()) == 0){
+         ui->label_5->setText("Message: User not Found");
+     } else {
+         (*allUsers)[oldname.toStdString()].setActive(true);
+         ui->label_5->setStyleSheet("Color: darkgreen");
+         ui->label_5->setText("Message: User Unbanned");
+     }
  }
 

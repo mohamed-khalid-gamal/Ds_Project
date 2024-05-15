@@ -51,7 +51,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Old Username:</string>
+        <string>Current Username:</string>
        </property>
       </widget>
      </item>
@@ -110,6 +110,27 @@
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
         <string>Change Password</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Remove User</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>Ban User</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>Unban User</string>
        </property>
       </widget>
      </item>

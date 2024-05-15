@@ -35,9 +35,12 @@ void resetPinWindow::on_pushButton_2_clicked()
         ui->label_4->setStyleSheet("color: darkred");
         ui->label_4->setText("Message: Old Pin is incorrect");
     } else {
+        if (newPin.length() != 6){
+            ui->label_4->setText("Message: Pin must be 6 numbers long");
+        }else {
         ui->label_4->setStyleSheet("color: darkgreen");
         ui->label_4->setText("Message: Pin Reset Succesfully");
         (*allUsers)[activeUser.toStdString()].setPin(newPin.toStdString());
+        }
     }
 }
-

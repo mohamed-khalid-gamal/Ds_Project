@@ -2,10 +2,10 @@
 #include <unordered_map>
 #include <Qfile>
 #include <QTextStream>
-#include <fstream>
 #include "Transaction.h"
 #include "User.h"
 #include "SaveLoad.h"
+#include <QDir>
 template <typename T>
 std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
 {
@@ -24,7 +24,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
     User temp;
     std::stack <Transaction> userTrans;
     Transaction tmp;
-    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/users.txt");
+    QFile file("./users.txt");
     if (!file.exists()){
         std::unordered_map<std::string,User>* usersT = new std::unordered_map<std::string,User>;
         return *usersT;
@@ -66,7 +66,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
 
 void SaveLoad::saveUsers(std::unordered_map<std::string, User> users)
 {
-    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/users.txt");
+    QFile file("./users.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text)){
 
     }
@@ -96,7 +96,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 {
     QString text;
     std::stack <Transaction> transactions;
-    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/transactions.txt");
+    QFile file("./transactions.txt");
     if (!file.exists()){
         std::stack<Transaction>* transactionsT = new std::stack<Transaction>;
         return *transactionsT;
@@ -130,7 +130,7 @@ std::stack <Transaction> SaveLoad::loadTransactions()
 
 void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 {
-    QFile file("D:/Projects/College/Digital-Wallet/GO/Ds_Project/Ds_project/transactions.txt");
+    QFile file("./transactions.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text)){
 
     }

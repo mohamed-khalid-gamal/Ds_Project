@@ -28,27 +28,23 @@
         <x>0</x>
         <y>0</y>
         <width>1260</width>
-        <height>621</height>
+        <height>588</height>
        </rect>
       </property>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>9</x>
-         <y>9</y>
-         <width>419</width>
-         <height>58</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>33</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Pending Transactions:</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item alignment="Qt::AlignLeft|Qt::AlignTop">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>22</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Pending Transactions:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -84,6 +80,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="text">
+      <string>Refresh Transactions</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">

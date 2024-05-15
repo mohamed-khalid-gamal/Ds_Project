@@ -36,7 +36,7 @@
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <pointsize>33</pointsize>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="text">
