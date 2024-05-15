@@ -73,7 +73,7 @@ void userwindow::on_pushButton_4_clicked()
 
 void userwindow::on_pushButton_5_clicked()
 {
-    resetWin = new resetPinWindow(allUsers,this);
+    resetWin = new resetPinWindow(activeUser,allUsers,this);
     resetWin->show();
 }
 

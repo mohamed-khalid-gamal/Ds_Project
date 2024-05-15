@@ -14,12 +14,15 @@ class resetPinWindow : public QDialog
 
 public:
     explicit resetPinWindow(QWidget *parent = nullptr);
-    resetPinWindow(std::unordered_map<std::string,User> *allU,QWidget *parent);
+    resetPinWindow(QString actUser, std::unordered_map<std::string,User> *allU,QWidget *parent);
     std::unordered_map<std::string,User> *allUsers;
+    QString activeUser;
     ~resetPinWindow();
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::resetPinWindow *ui;
