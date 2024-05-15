@@ -45,3 +45,9 @@ void adminwindow::on_pushButton_2_clicked() // Edit Users Button
     editWin->show();
 }
 
+
+void adminwindow::on_pushButton_4_clicked()
+{
+
+}
+

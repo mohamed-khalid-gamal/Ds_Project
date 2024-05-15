@@ -54,3 +54,12 @@ QString listUsers::getUsers() {
     }
     return text;
 }
+
+void listUsers::on_pushButton_3_clicked()
+{
+    QString user = ui->lineEdit->text();
+    std::stack<Transaction> tempT = (*allUsers)[user.toStdString()].getTransactions();
+    tranWin = new transactionHistory(tempT,this);
+    tranWin->show();
+}
+
