@@ -106,6 +106,7 @@ void Transaction::listallTransactions(std::stack<Transaction>& transactions)
 {
 	bool flag = false;
 	std::stack<Transaction> temp = transactions;
+	if (!temp.empty()) {
 	while (!temp.empty()) {
 
 		flag = true;
@@ -120,8 +121,7 @@ void Transaction::listallTransactions(std::stack<Transaction>& transactions)
 		std::cout << "Date : ";
 		std::cout << temp.top().getdatePlaceHolder() << std::endl;
 		temp.pop();
-	}
-	if (!flag) {
+	} else {
 		std::cout << "No Transactions yet";
 	}
 }
