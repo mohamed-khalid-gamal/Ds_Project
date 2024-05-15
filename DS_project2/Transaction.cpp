@@ -107,8 +107,6 @@ void Transaction::listallTransactions(std::stack<Transaction>& transactions)
 	std::stack<Transaction> temp = transactions;
 	if (!temp.empty()) {
 	while (!temp.empty()) {
-
-		flag = true;
 		std::cout << "\nTransaction ID : ";
 		std::cout << temp.top().getId() << std::endl;
 		std::cout << "Transaction amount : ";
