@@ -28,7 +28,7 @@
         <x>0</x>
         <y>0</y>
         <width>1260</width>
-        <height>667</height>
+        <height>634</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -46,6 +46,13 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Refresh Transactions</string>
+     </property>
     </widget>
    </item>
    <item>

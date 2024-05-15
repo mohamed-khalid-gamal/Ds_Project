@@ -6,6 +6,7 @@
 #include <string>
 #include "Transaction.h"
 #include "User.h"
+#include "transactionhistory.h"
 
 namespace Ui {
 class listUsers;
@@ -27,8 +28,12 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::listUsers *ui;
+    transactionHistory* tranWin;
+
 };
 
 #endif // LISTUSERS_H

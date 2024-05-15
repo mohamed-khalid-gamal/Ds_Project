@@ -49,7 +49,6 @@ QString listUsers::getUsers() {
         std::string tmpBalance = std::to_string(it->second.getBalance());
         text+= "~Current balance: " + QString::fromStdString(tmpBalance) + "\n";
         text+="~Transaction History: \n";
-        text+= it->second.transactionHistory() + "\n";
         it++;
     }
     return text;

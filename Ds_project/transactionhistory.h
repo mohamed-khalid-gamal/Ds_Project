@@ -19,10 +19,13 @@ public:
     explicit transactionHistory(QWidget *parent = nullptr);
     explicit transactionHistory(std::stack<Transaction> allT,QWidget *parent = nullptr);
     std::stack<Transaction> allTransactions;
+    QString getTransactions();
     ~transactionHistory();
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::transactionHistory *ui;

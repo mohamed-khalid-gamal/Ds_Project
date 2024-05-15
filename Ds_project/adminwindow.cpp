@@ -48,6 +48,7 @@ void adminwindow::on_pushButton_2_clicked() // Edit Users Button
 
 void adminwindow::on_pushButton_4_clicked()
 {
-
+    tranWin = new transactionHistory(*allTransactions,this);
+    tranWin->show();
 }
 

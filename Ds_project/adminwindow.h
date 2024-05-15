@@ -9,6 +9,7 @@
 #include "User.h"
 #include "listusers.h"
 #include "edituserswindow.h"
+#include "transactionhistory.h"
 
 namespace Ui {
 class adminwindow;
@@ -32,10 +33,13 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::adminwindow *ui;
     listUsers *listWin;
     editUsersWindow *editWin;
+    transactionHistory *tranWin;
 };
 
 #endif // ADMINWINDOW_H
