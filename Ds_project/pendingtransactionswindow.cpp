@@ -44,7 +44,7 @@ QString pendingTransactionsWindow::getPendingTransactions(){
     bool flag = false;
     while(!(allT.empty())){
         Transaction temp = allT.top();
-        if(temp.getisAccepted()){
+        if(temp.getisAccepted() || temp.getrecipient() == activeUser.toStdString()){
             allT.pop();
             continue;
         }
