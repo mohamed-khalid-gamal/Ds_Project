@@ -52,3 +52,12 @@ void adminwindow::on_pushButton_4_clicked()
     tranWin->show();
 }
 
+
+void adminwindow::on_pushButton_5_clicked() //clear transactions
+{
+    clearTrans(*allTransactions);
+}
+
+void adminwindow::clearTrans(std::stack<Transaction>& allTrans){
+    allTrans = std::stack<Transaction>();
+}

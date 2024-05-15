@@ -7,8 +7,7 @@
 #include "SaveLoad.h"
 #include <QDir>
 template <typename T>
-std::stack <T> SaveLoad::reverseStack(std::stack <T> orig)
-{
+std::stack <T> SaveLoad::reverseStack(std::stack <T> orig){
     std::stack <T> reversed;
     while (!orig.empty())
     {
@@ -23,6 +22,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
     std::unordered_map<std::string, User> users;
     User temp;
     std::stack <Transaction> userTrans;
+    std::stack <Transaction> allTrans;
     Transaction tmp;
     QFile file("./users.txt");
     if (!file.exists()){
@@ -36,7 +36,7 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
     QString text;
     while (!ifile.atEnd())
     {
-        std::stack <Transaction> tempTrans = allTransaction;
+        allTrans = reverseStack(allTransaction);
         text = ifile.readLine();
         temp.setUsername(text.toStdString());
         text = ifile.readLine();
@@ -47,17 +47,15 @@ std::unordered_map<std::string, User> SaveLoad::loadUsers(std::stack<Transaction
         temp.setPin(text.toStdString());
         text = ifile.readLine();
         temp.setActive((bool)stoi(text.toStdString()));
-        if (!allTransaction.empty()) {
-            for (int i = 0; i < (int) allTransaction.size(); i++)
-            {
-                if (tempTrans.top().getsender() == temp.getUsername() || tempTrans.top().getrecipient() == temp.getUsername()) {
-                    userTrans.push(tempTrans.top());
+        if (!allTransaction.empty()){
+            while(!allTrans.empty()){
+                if (allTrans.top().getsender() == temp.getUsername() || allTrans.top().getrecipient() == temp.getUsername()) {
+                    userTrans.push(allTrans.top());
                 }
-                tempTrans.pop();
+                allTrans.pop();
             }
-            userTrans = reverseStack(userTrans);
-            temp.setTransactions(userTrans);
         }
+        temp.setTransactions(userTrans);
         users.insert(make_pair(temp.getUsername(), temp));
     }
     file.close();

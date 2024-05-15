@@ -45,6 +45,8 @@ void sendMoneyWindow::on_pushButton_2_clicked()
     } else {
         if((*allUsers).count(recipient.toStdString()) == 0){
             ui->label_4->setText("Message: User Does not Exist");
+        } else if ((*allUsers)[recipient.toStdString()].getUsername() == sendUser.toStdString()){
+            ui->label_4->setText("Message: Cant Send money to yourself.");
         } else {
             if((*allUsers)[sendUser.toStdString()].getBalance() <= stof(amount.toStdString())){
                 ui->label_4->setText("Message: Not enuogh balance to continue operation");

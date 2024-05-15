@@ -1,7 +1,6 @@
 #pragma once
 #include "Transaction.h"
 #include "User.h"
-#include <iostream>
 #include "SaveLoad.h"
 User::User(std::string name, std::string pass)
 {
@@ -104,34 +103,26 @@ void User::changepassword(const std::string& newPassword) {
 
 QString User::sendMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recipient, float amount)
 {
+    (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
+    (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
 
     Transaction trans = Transaction(sender, recipient,*allTransactions);
     trans.setisAccepted(true);
     trans.setAmount(amount);
     (*allUsers)[sender].setTransaction(trans);
     (*allUsers)[recipient].setTransaction(trans);
-    (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
-    (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
     allTransactions->push(trans);
-
     return "Successful Transaction";
 }
 
 QString User::requestMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recName, float amount)
 {
-    if ((*allUsers).count(recName) == 1)
-    {
-        Transaction trans = Transaction(recName, sender, *allTransactions);
-        trans.setAmount(amount);
-        trans.setisAccepted(false);
-        (*allUsers)[recName].setTransaction(trans);
-        (*allUsers)[sender].setTransaction(trans);
-        (*allTransactions).push(trans);
-    }
-    else
-    {
-        return "Username not found.";
-    }
+    Transaction trans = Transaction(recName, sender, *allTransactions);
+    trans.setAmount(amount);
+    trans.setisAccepted(false);
+    (*allUsers)[recName].setTransaction(trans);
+    (*allUsers)[sender].setTransaction(trans);
+    (*allTransactions).push(trans);
     return "Successful Request";
 }
 

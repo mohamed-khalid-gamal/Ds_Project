@@ -24,6 +24,7 @@ public:
     explicit adminwindow(std::unordered_map<std::string,User> *allU, std::stack<Transaction> *allT,QWidget *parent = nullptr);
     std::stack<Transaction>* allTransactions;
     std::unordered_map<std::string,User>* allUsers;
+    void clearTrans(std::stack<Transaction>& allTrans);
     ~adminwindow();
 
 private slots:
@@ -34,6 +35,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::adminwindow *ui;
