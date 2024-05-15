@@ -1,5 +1,6 @@
 #include "pendingtransactionswindow.h"
 #include "ui_pendingtransactionswindow.h"
+#include "SaveLoad.h"
 
 pendingTransactionsWindow::pendingTransactionsWindow(QWidget *parent)
     : QDialog(parent)
@@ -76,6 +77,16 @@ QString pendingTransactionsWindow::getPendingTransactions(){
 void pendingTransactionsWindow::on_pushButton_2_clicked()
 {
     QString tranID = ui->lineEdit->text();
-
+    std::stack<Transaction> tempUserTransactions = (*allUsers)[activeUser.toStdString()].getTransactions();
+    std::stack<Transaction> tempUserTransactions2 = tempUserTransactions;
+    while (!tempUserTransactions.empty()) {
+        if(tranID.toInt() == tempUserTransactions.top().getId()){
+            tempUserTransactions.top().setisAccepted(true);
+        }
+        tempUserTransactions2.push(tempUserTransactions.top());
+        tempUserTransactions.pop();
+    }
+    tempUserTransactions2 = SaveLoad::reverseStack(tempUserTransactions2);
+    (*allUsers)[activeUser.toStdString()].setTransactions(tempUserTransactions2);
 }
 

@@ -59,7 +59,7 @@ void registerwindow::registerUser(QString name,QString pass){
     ui->label_5->setStyleSheet("Color: darkgreen");
     std::unordered_map<std::string,User>::iterator it;
     it = allUsers->begin();
-    ui->label_5->setText(QString::fromStdString(it->second.getUsername()));
+    ui->label_5->setText("Message: User Succesfullly Created");
 }
 
 
