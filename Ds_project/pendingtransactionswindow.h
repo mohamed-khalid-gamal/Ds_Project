@@ -17,11 +17,12 @@ class pendingTransactionsWindow : public QDialog
 
 public:
     explicit pendingTransactionsWindow(QWidget *parent = nullptr);
-    explicit pendingTransactionsWindow(QString activeU,std::unordered_map<std::string,User>* allU,std::stack<Transaction> allT,QWidget *parent);
+    explicit pendingTransactionsWindow(QString activeU,std::unordered_map<std::string,User>* allU,std::stack<Transaction>* allTP,QWidget *parent);
     QString getPendingTransactions();
-    std::stack<Transaction> allTransactions;
+    std::stack<Transaction>* allTransactionsPointer;
     QString activeUser;
     std::unordered_map<std::string,User>* allUsers;
+    void acceptRequest(std::stack<Transaction>& allTransactions,QString id,QString actUser);
     ~pendingTransactionsWindow();
 
 private slots:

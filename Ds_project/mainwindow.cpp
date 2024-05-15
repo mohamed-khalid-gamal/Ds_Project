@@ -68,7 +68,7 @@ void MainWindow::on_pushButton_clicked()
             }
         }
     } else {
-        ui->label_5->setText("Message: Invalid Username");
+        ui->label_5->setText("Message: User not found");
     }
 }
 

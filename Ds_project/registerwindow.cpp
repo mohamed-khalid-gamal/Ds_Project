@@ -29,8 +29,10 @@ void registerwindow::on_pushButton_4_clicked()
 
 void registerwindow::on_pushButton_2_clicked()
 {
+    AccountUtil account;
     QString name = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
+    QString message = account.validPassword(pass.toStdString());
     ui->label_5->setStyleSheet("Color: darkred");
     if (name.length() < 5 || name.length() > 16){
     ui->label_5->setText("Message: Invalid Username Length");
@@ -38,9 +40,10 @@ void registerwindow::on_pushButton_2_clicked()
         if((*allUsers).count(name.toStdString()) == 1 || name.toStdString() == "admin"){
             ui->label_5->setText("Message: Name is already taken.");
         } else {
-            if (pass.length() < 8 || pass.length() > 16){
-                ui->label_5->setText("Message: Invalid Password Length");
+            if (message != "Success"){
+                ui->label_5->setText("Message: " + message);
              } else {
+                ui->label_5->setText("Message: User Created successfully");
                registerUser(name,pass);
              }
             }

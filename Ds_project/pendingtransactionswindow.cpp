@@ -9,12 +9,12 @@ pendingTransactionsWindow::pendingTransactionsWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-pendingTransactionsWindow::pendingTransactionsWindow(QString activeU,std::unordered_map<std::string,User>* allU,std::stack<Transaction> allT,QWidget *parent)
+pendingTransactionsWindow::pendingTransactionsWindow(QString activeU,std::unordered_map<std::string,User>* allU,std::stack<Transaction>* allTP,QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::pendingTransactionsWindow)
 {
     ui->setupUi(this);
-    allTransactions = allT;
+    allTransactionsPointer = allTP;
     activeUser = activeU;
     allUsers = allU;
     ui->label->setText(getPendingTransactions());
@@ -40,11 +40,8 @@ void pendingTransactionsWindow::on_pushButton_4_clicked()
 QString pendingTransactionsWindow::getPendingTransactions(){
     QString text;
     std::string stringT;
-    std::stack<Transaction> allT = allTransactions;
-    if (allT.empty()){
-        text = "No Transactions found.";
-        return text;
-    }
+    std::stack<Transaction> allT = (*allUsers)[activeUser.toStdString()].getTransactions();
+    bool flag = false;
     while(!(allT.empty())){
         Transaction temp = allT.top();
         if(temp.getisAccepted()){
@@ -68,7 +65,11 @@ QString pendingTransactionsWindow::getPendingTransactions(){
             stringT = "No";
         }
         text+= QString::fromStdString(stringT) + "\n";
+        flag = true;
         allT.pop();
+    }
+    if(!flag){
+        text = "No Transactions found.";
     }
     return text;
 }
@@ -78,15 +79,38 @@ void pendingTransactionsWindow::on_pushButton_2_clicked()
 {
     QString tranID = ui->lineEdit->text();
     std::stack<Transaction> tempUserTransactions = (*allUsers)[activeUser.toStdString()].getTransactions();
-    std::stack<Transaction> tempUserTransactions2 = tempUserTransactions;
+    std::stack<Transaction> tempUserTransactions2;
+    //Updating user's transactions
     while (!tempUserTransactions.empty()) {
-        if(tranID.toInt() == tempUserTransactions.top().getId()){
+        if(tranID.toInt() == tempUserTransactions.top().getId()
+            && (tempUserTransactions.top().getsender() == activeUser.toStdString()|| tempUserTransactions.top().getrecipient() == activeUser.toStdString()))
+        {
             tempUserTransactions.top().setisAccepted(true);
         }
         tempUserTransactions2.push(tempUserTransactions.top());
         tempUserTransactions.pop();
     }
-    tempUserTransactions2 = SaveLoad::reverseStack(tempUserTransactions2);
+    tempUserTransactions = SaveLoad::reverseStack(tempUserTransactions2);
     (*allUsers)[activeUser.toStdString()].setTransactions(tempUserTransactions2);
+    acceptRequest(*allTransactionsPointer, tranID,activeUser);
 }
 
+void pendingTransactionsWindow::acceptRequest(std::stack<Transaction>& allTransactions,QString id,QString actUser){
+    std::stack<Transaction> tempAllTransactions = (*allUsers)[activeUser.toStdString()].getTransactions();
+    std::stack<Transaction> tempAllTransactions2;
+    //Updating alltransactions
+    while (!tempAllTransactions.empty()) {
+        if(id.toInt() == tempAllTransactions.top().getId()
+            && (tempAllTransactions.top().getsender() == actUser.toStdString()|| tempAllTransactions.top().getrecipient() == actUser.toStdString()))
+        {
+            tempAllTransactions.top().setisAccepted(true);
+        }
+        tempAllTransactions2.push(tempAllTransactions.top());
+        tempAllTransactions.pop();
+    }
+    allTransactions = std::stack<Transaction>();
+    while (!tempAllTransactions2.empty()){
+        allTransactions.push(tempAllTransactions2.top());
+        tempAllTransactions2.pop();
+    }
+}
