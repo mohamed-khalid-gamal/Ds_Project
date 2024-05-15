@@ -62,7 +62,7 @@ public:
 	
 	void pendingRequests(std::unordered_map<std::string, User>& allUsers, std::stack<Transaction>& allTransactions);
 	
-	void transactionHistory();
+    QString transactionHistory();
 	
 	static User searchUser(std::string uname, std::set <User> users);
 	

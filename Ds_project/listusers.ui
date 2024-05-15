@@ -28,7 +28,7 @@
         <x>0</x>
         <y>0</y>
         <width>1260</width>
-        <height>667</height>
+        <height>634</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -36,7 +36,7 @@
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <pointsize>33</pointsize>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="text">
@@ -46,6 +46,13 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Refresh User List</string>
+     </property>
     </widget>
    </item>
    <item>

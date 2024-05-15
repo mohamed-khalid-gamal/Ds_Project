@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <stack>
+#include <QString>
 class Transaction{
 	int id;
 	float tran_amount;
@@ -17,7 +18,7 @@ public:
 	void setdatePlaceHolder(std::string ndatePlaceHolder);
 	void setisAccepted(bool nisAccepted);
 	void setAmount(float);
-	void listallTransactions(std::stack<Transaction>& transactions); 
+    QString listallTransactions(std::stack<Transaction>& transactions);
 	std::string getsender();
 	std::string getrecipient();
 	std::string getdatePlaceHolder();

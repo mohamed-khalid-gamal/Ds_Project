@@ -345,17 +345,19 @@ void User::pendingRequests(std::unordered_map<std::string, User>& allUsers, std:
     }
 }
 
-void User::transactionHistory()
+QString User::transactionHistory()
 {
     bool flag = this->userTransactions.empty();
+    QString text;
     if (!flag) {
         std::stack<Transaction> tempStack = this->userTransactions;
         bool flag = false;
-        tempStack.top().listallTransactions(tempStack);
+        text = tempStack.top().listallTransactions(tempStack);
     }
     else {
-        std::cout << "No Transactions on this account.\n";
+        text = "No Transactions on this account.\n";
     }
+    return text;
 }
 
 User User::searchUser(std::string uname, std::set <User> users) {

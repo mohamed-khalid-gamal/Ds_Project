@@ -102,26 +102,27 @@ std::string Transaction::get_time()
 	return  current_date + " " + current_time_str;
 }
 
-void Transaction::listallTransactions(std::stack<Transaction>& transactions)
+QString Transaction::listallTransactions(std::stack<Transaction>& transactions)
 {
 	bool flag = false;
 	std::stack<Transaction> temp = transactions;
+    QString text;
 	while (!temp.empty()) {
 
 		flag = true;
-		std::cout << "\nTransaction ID : ";
-		std::cout << temp.top().getId() << std::endl;
-		std::cout << "Transaction amount : ";
-		std::cout << temp.top().getAmount() << std::endl;
-		std::cout << "Sender : ";
-		std::cout << temp.top().getsender() << std::endl;
-		std::cout << "Recipient : ";
-		std::cout << temp.top().getrecipient() << std::endl;
-		std::cout << "Date : ";
-		std::cout << temp.top().getdatePlaceHolder() << std::endl;
+        text+= "\nTransaction ID : ";
+        text+= QString::fromStdString(std::to_string(temp.top().getId())) + "\n";
+        text+= "Transaction amount : ";
+        text+=  QString::fromStdString(std::to_string(temp.top().getAmount())) + "\n";
+        text+= "Sender : ";
+        text+=temp.top().getsender() + "\n";
+        text+="Recipient : ";
+        text+= temp.top().getrecipient() + "\n";
+        text+= "Date : ";
+        text+= temp.top().getdatePlaceHolder() + "\n";
 		temp.pop();
 	}
 	if (!flag) {
-		std::cout << "No Transactions yet";
+        text = "No Transactions yet";
 	}
 }

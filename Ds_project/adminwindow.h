@@ -7,6 +7,8 @@
 #include <string>
 #include "Transaction.h"
 #include "User.h"
+#include "listusers.h"
+#include "edituserswindow.h"
 
 namespace Ui {
 class adminwindow;
@@ -32,6 +34,8 @@ private slots:
 
 private:
     Ui::adminwindow *ui;
+    listUsers *listWin;
+    editUsersWindow *editWin;
 };
 
 #endif // ADMINWINDOW_H

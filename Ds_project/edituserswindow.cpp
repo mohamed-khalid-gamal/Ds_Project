@@ -25,11 +25,8 @@ editUsersWindow::~editUsersWindow()
 
 void editUsersWindow::on_pushButton_clicked()
 {
-    hide();
-    listUsers listWin;
-    listWin.setModal(true);
-    listWin.exec();
-    show();
+    listWin = new listUsers(allUsers,this);
+    listWin->show();
 }
 
 

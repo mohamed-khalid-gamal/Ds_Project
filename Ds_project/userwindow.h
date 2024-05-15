@@ -2,6 +2,11 @@
 #define USERWINDOW_H
 #include "Transaction.h"
 #include "User.h"
+#include "sendMoneyWindow.h"
+#include "requestmoneywindow.h"
+#include "transactionhistory.h"
+#include "pendingtransactionswindow.h"
+#include "resetpinwindow.h"
 
 #include <QDialog>
 
@@ -34,8 +39,15 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_pushButton_5_clicked();
+
 private:
     Ui::userwindow *ui;
+    pendingTransactionsWindow* penWin;
+    transactionHistory* tranWin;
+    requestMoneyWindow* reqWin;
+    sendMoneyWindow* sendWin;
+    resetPinWindow* resetWin;
 };
 
 #endif // USERWINDOW_H

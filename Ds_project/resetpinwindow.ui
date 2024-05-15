@@ -24,7 +24,8 @@
         </font>
        </property>
        <property name="text">
-        <string>Send Money</string>
+        <string>Reset Pin
+Note: Default pin is 000000</string>
        </property>
       </widget>
      </item>
@@ -72,7 +73,7 @@
    <item>
     <widget class="QPushButton" name="pushButton_2">
      <property name="text">
-      <string>Send Money</string>
+      <string>Reset Pin</string>
      </property>
     </widget>
    </item>

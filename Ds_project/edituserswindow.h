@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <QDialog>
 #include <string>
-#include "Transaction.h"
 #include "User.h"
+#include "listusers.h"
 
 namespace Ui {
 class editUsersWindow;
@@ -27,6 +27,7 @@ private slots:
 
 private:
     Ui::editUsersWindow *ui;
+    listUsers *listWin;
 };
 
 #endif // EDITUSERSWINDOW_H

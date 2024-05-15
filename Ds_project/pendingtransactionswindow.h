@@ -21,6 +21,9 @@ public:
     std::unordered_map<std::string,User>* allUsers;
     ~pendingTransactionsWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::pendingTransactionsWindow *ui;
 };

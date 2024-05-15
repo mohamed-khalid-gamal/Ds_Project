@@ -1,7 +1,5 @@
 #include "adminwindow.h"
 #include "ui_adminwindow.h"
-#include "listusers.h"
-#include "edituserswindow.h"
 
 adminwindow::adminwindow(QWidget *parent)
     : QDialog(parent)
@@ -36,20 +34,14 @@ void adminwindow::on_pushButton_3_clicked() //Log out button
 
 void adminwindow::on_pushButton_clicked() //List Users Button
 {
-    hide();
-    listUsers listWin(this);
-    listWin.setModal(true);
-    listWin.exec();
-    show();
+    listWin = new listUsers(allUsers,this);
+    listWin->show();
 }
 
 
 void adminwindow::on_pushButton_2_clicked() // Edit Users Button
 {
-    hide();
-    editUsersWindow editWin;
-    editWin.setModal(true);
-    editWin.exec();
-    show();
+    editWin = new editUsersWindow(allUsers,this);
+    editWin->show();
 }
 

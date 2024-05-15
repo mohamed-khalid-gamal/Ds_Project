@@ -25,3 +25,9 @@ requestMoneyWindow::~requestMoneyWindow()
     delete allUsers;
     delete allTransactions;
 }
+
+void requestMoneyWindow::on_pushButton_2_clicked()
+{
+    close();
+}
+

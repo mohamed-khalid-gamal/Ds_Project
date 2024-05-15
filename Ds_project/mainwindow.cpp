@@ -72,6 +72,7 @@ void MainWindow::logIn(QString name){
     userwindow userwindow(name,allUsers,allTransactions,this);
     adminwindow adminwindow(allUsers,allTransactions,this);
     ui->label_5->setStyleSheet("color: darkgreen");
+    ui->label_5->setText("Message: No Errors");
     hide();
     if (name == "admin"){
         adminwindow.setModal(true);
@@ -91,5 +92,17 @@ void MainWindow::on_pushButton_3_clicked()
     forwin.setModal(true);
     forwin.exec();
     show();
+}
+
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    if (ui->lineEdit_2->echoMode() == QLineEdit::Normal){
+        ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+        ui->pushButton_5->setText("Show Pass");
+    } else {
+        ui->lineEdit_2->setEchoMode(QLineEdit::Normal);
+        ui->pushButton_5->setText("Hide Pass");
+    }
 }
 

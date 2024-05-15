@@ -1,9 +1,5 @@
 #include "userwindow.h"
 #include "ui_userwindow.h"
-#include "sendMoneyWindow.h"
-#include "requestmoneywindow.h"
-#include "transactionhistory.h"
-#include "pendingtransactionswindow.h"
 
 
 userwindow::userwindow(QString actUser, std::unordered_map<std::string,User> *allU,std::stack<Transaction> *allT,QWidget *parent)
@@ -48,40 +44,36 @@ void userwindow::on_pushButton_6_clicked() //Log out button
 
 void userwindow::on_pushButton_clicked()
 {
-    hide();
-    sendMoneyWindow sendWin;
-    sendWin.setModal(true);
-    sendWin.exec();
-    show();
+    sendWin = new sendMoneyWindow(activeUser,allUsers,allTransactions,this);
+    sendWin->show();
 }
 
 
 void userwindow::on_pushButton_2_clicked()
 {
-    hide();
-    requestMoneyWindow reqWin;
-    reqWin.setModal(true);
-    reqWin.exec();
-    show();
+    reqWin = new requestMoneyWindow(allUsers,allTransactions,this);
+    reqWin->show();
 }
 
 
 void userwindow::on_pushButton_3_clicked()
 {
-    hide();
-    transactionHistory tranWin;
-    tranWin.setModal(true);
-    tranWin.exec();
-    show();
+    std::stack<Transaction> tempT = ((*allUsers)[activeUser.toStdString()].getTransactions());
+    tranWin = new transactionHistory(tempT, this);
+    tranWin->show();
 }
 
 
 void userwindow::on_pushButton_4_clicked()
 {
-    hide();
-    pendingTransactionsWindow penWin;
-    penWin.setModal(true);
-    penWin.exec();
-    show();
+    penWin = new pendingTransactionsWindow(allUsers,this);
+    penWin->show();
+}
+
+
+void userwindow::on_pushButton_5_clicked()
+{
+    resetWin = new resetPinWindow(allUsers,this);
+    resetWin->show();
 }
 

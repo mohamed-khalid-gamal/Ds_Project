@@ -21,3 +21,9 @@ pendingTransactionsWindow::~pendingTransactionsWindow()
     allUsers = NULL;
     delete allUsers;
 }
+
+void pendingTransactionsWindow::on_pushButton_clicked()
+{
+    close();
+}
+

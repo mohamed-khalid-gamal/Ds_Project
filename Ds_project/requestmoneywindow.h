@@ -23,6 +23,9 @@ public:
     std::unordered_map<std::string,User>* allUsers;
     ~requestMoneyWindow();
 
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     Ui::requestMoneyWindow *ui;
 };
