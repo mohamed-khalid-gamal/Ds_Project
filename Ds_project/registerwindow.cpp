@@ -35,7 +35,7 @@ void registerwindow::on_pushButton_2_clicked()
     if (name.length() < 5 || name.length() > 16){
     ui->label_5->setText("Message: Invalid Username Length");
     } else {
-        if(name.toStdString() == (*this->allUsers)[name.toStdString()].getUsername() || name.toStdString() == "admin"){
+        if((*allUsers).count(name.toStdString()) == 1 || name.toStdString() == "admin"){
             ui->label_5->setText("Message: Name is already taken.");
         } else {
             if (pass.length() < 8 || pass.length() > 16){
