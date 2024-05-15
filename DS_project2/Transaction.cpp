@@ -104,7 +104,6 @@ std::string Transaction::get_time()
 
 void Transaction::listallTransactions(std::stack<Transaction>& transactions)
 {
-	bool flag = false;
 	std::stack<Transaction> temp = transactions;
 	if (!temp.empty()) {
 	while (!temp.empty()) {
