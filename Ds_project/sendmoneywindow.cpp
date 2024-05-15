@@ -48,11 +48,16 @@ void sendMoneyWindow::on_pushButton_2_clicked()
         } else {
             if((*allUsers)[sendUser.toStdString()].getBalance() <= stof(amount.toStdString())){
                 ui->label_4->setText("Message: Not enuogh balance to continue operation");
-            } else {
+            } else{
+                if (stof(amount.toStdString()) < 1){
+                    ui->label_4->setText("Message: Can not send an amount that is less than 1");
+                } else {
                 ui->label_4->setStyleSheet("color: darkgreen");
                 ui->label_4->setText("Message: Successful Transaction.");
                 (*allUsers)[sendUser.toStdString()].sendMoney(allUsers,allTransactions,sendUser.toStdString(),recipient.toStdString(),amount.toFloat());
+                }
             }
+
         }
     }
     } catch(const std::invalid_argument e){

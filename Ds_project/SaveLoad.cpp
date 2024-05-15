@@ -123,7 +123,6 @@ std::stack <Transaction> SaveLoad::loadTransactions()
         tmp.setisAccepted(bol);
         transactions.push(tmp);
     }
-    transactions = reverseStack(transactions);
     file.close();
     return transactions;
 }
@@ -135,7 +134,7 @@ void SaveLoad::saveTransactions(std::stack <Transaction> transactions)
 
     }
     QTextStream ofile(&file);
-    std::stack <Transaction> temp = transactions;
+    std::stack <Transaction> temp = reverseStack(transactions);
     while (!temp.empty())
     {
         Transaction tmp = temp.top();

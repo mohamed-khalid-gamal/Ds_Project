@@ -104,35 +104,16 @@ void User::changepassword(const std::string& newPassword) {
 
 QString User::sendMoney(std::unordered_map<std::string, User>* allUsers, std::stack<Transaction>* allTransactions,std::string sender, std::string recipient, float amount)
 {
-    if ((*allUsers).count(recipient) == 1)
-    {
-        if (amount <= (*allUsers)[recipient].getBalance())
-        {
-            if ((*allUsers)[sender].getActive()==true && (*allUsers)[recipient].getActive() == true)
-            {
-                Transaction trans = Transaction(sender, recipient,*allTransactions);
-                trans.setisAccepted(true);
-                trans.setAmount(amount);
-                (*allUsers)[sender].setTransaction(trans);
-                (*allUsers)[recipient].setTransaction(trans);
-                (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
-                (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
-                allTransactions->push(trans);
-            }
-            else {
-                return "you or the recepient are banned call the admin";
-            }
-        }
-        else {
-            return "invalid amount\n";
-        }
-        
-    }
-    else
-    {
-        return "Username Does not Exist\n";
 
-    }
+    Transaction trans = Transaction(sender, recipient,*allTransactions);
+    trans.setisAccepted(true);
+    trans.setAmount(amount);
+    (*allUsers)[sender].setTransaction(trans);
+    (*allUsers)[recipient].setTransaction(trans);
+    (*allUsers)[sender].setBalance((*allUsers)[sender].getBalance() - amount);
+    (*allUsers)[recipient].setBalance((*allUsers)[recipient].getBalance() + amount);
+    allTransactions->push(trans);
+
     return "Successful Transaction";
 }
 

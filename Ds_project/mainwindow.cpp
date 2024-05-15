@@ -56,8 +56,11 @@ void MainWindow::on_pushButton_clicked()
     ui->label_5->setStyleSheet("color: darkred");
     if(name == "admin" && pass == "admin"){
         logIn("admin");
-    }
-    if ((*allUsers).count(name) == 1){
+        return;
+    }     if(name == "admin" && pass != "admin"){
+        ui->label_5->setText("Message: Invalid Password");
+        return;
+    } else if ((*allUsers).count(name) == 1){
         if(!((*allUsers)[name].getActive())){
             ui->label_5->setText("Message: User is banned.");
         } else {

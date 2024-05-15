@@ -37,7 +37,7 @@ void editUsersWindow::on_pushButton_4_clicked()
 }
 
 
-void editUsersWindow::on_pushButton_2_clicked() // change user
+void editUsersWindow::on_pushButton_2_clicked() // change username
 {
     QString oldname = ui->lineEdit->text();
     QString name = ui->lineEdit_2->text();
@@ -48,6 +48,9 @@ void editUsersWindow::on_pushButton_2_clicked() // change user
         ui->label_5->setStyleSheet("Color: darkgreen");
         ui->label_5->setText("Message: Username Changed Succesfully");
         (*allUsers)[oldname.toStdString()].setUsername(name.toStdString());
+        (*allUsers)[name.toStdString()] = (*allUsers)[oldname.toStdString()];
+        std::unordered_map<std::string,User>::iterator it = allUsers->find(oldname.toStdString());
+        (*allUsers).erase(it);
         }
  }
 
@@ -73,7 +76,7 @@ void editUsersWindow::on_pushButton_3_clicked() // change pass
  }
 
 
- void editUsersWindow::on_pushButton_5_clicked()
+ void editUsersWindow::on_pushButton_5_clicked() // remove user
  {
      QString oldname = ui->lineEdit->text();
      ui->label_5->setStyleSheet("Color: darkred");

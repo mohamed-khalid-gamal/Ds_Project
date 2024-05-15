@@ -90,12 +90,12 @@ void pendingTransactionsWindow::on_pushButton_2_clicked()
             float oldBalance2 =(*allUsers)[tempUserTransactions.top().getrecipient()].getBalance();
             (*allUsers)[tempUserTransactions.top().getsender()].setBalance(oldBalance - tempUserTransactions.top().getAmount());
             (*allUsers)[tempUserTransactions.top().getrecipient()].setBalance(oldBalance2 + tempUserTransactions.top().getAmount());
+            (*allUsers)[tempUserTransactions.top().getrecipient()].setActive(true);
         }
         tempUserTransactions2.push(tempUserTransactions.top());
         tempUserTransactions.pop();
     }
-    tempUserTransactions = SaveLoad::reverseStack(tempUserTransactions2);
-    (*allUsers)[activeUser.toStdString()].setTransactions(tempUserTransactions2);
+    (*allUsers)[activeUser.toStdString()].setTransactions(SaveLoad::reverseStack(tempUserTransactions2));
     acceptRequest(*allTransactionsPointer, tranID,activeUser);
 }
 
@@ -112,9 +112,12 @@ void pendingTransactionsWindow::acceptRequest(std::stack<Transaction>& allTransa
         tempAllTransactions2.push(tempAllTransactions.top());
         tempAllTransactions.pop();
     }
-    allTransactions = std::stack<Transaction>();
+    while (!allTransactions.empty()){
+        allTransactions.pop();
+    }
     while (!tempAllTransactions2.empty()){
         allTransactions.push(tempAllTransactions2.top());
         tempAllTransactions2.pop();
     }
+    allTransactions = SaveLoad::reverseStack(allTransactions);
 }

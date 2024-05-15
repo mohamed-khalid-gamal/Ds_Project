@@ -41,11 +41,16 @@ void requestMoneyWindow::on_pushButton_2_clicked()
             if((*allUsers).count(recipient.toStdString()) == 0){
                 ui->label_4->setText("Message: User Does not Exist");
             } else {
+                if (stof(amount.toStdString()) < 1){
+                    ui->label_4->setText("Message: Can not send an amount that is less than 1");
+                }
+                else {
                     ui->label_4->setStyleSheet("color: darkgreen");
                     ui->label_4->setText("Message: Successful Transaction.");
                     (*allUsers)[sendUser.toStdString()].requestMoney(allUsers,allTransactions,sendUser.toStdString(),recipient.toStdString(),amount.toFloat());
                 }
             }
+        }
     } catch(const std::invalid_argument e){
         ui->label_4->setText("Message: Please enter a number in Balance field");
     }
