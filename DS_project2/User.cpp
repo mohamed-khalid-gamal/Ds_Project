@@ -432,20 +432,17 @@ User User::searchUser(std::string uname, std::unordered_map <std::string, User> 
 	}
 }
 
-void User::removeUser(std::string uname, std::set <User> users)
+void User::removeUser(std::string uname, std::unordered_map <std::string, User> users)
 {
-    std::set <User> ::iterator it;
-	while (it != users.end())
-	{
-		if (uname == it->username)
-		{
-			users.erase(it);
-			return;
-		}
-		it++;
-	}
-    std::cout << "User not found\n";
-	return;
+    auto it = users.find(uname);
+    if (it != users.end())
+        users.erase(it);
+    else
+    {
+        std::cout << "User not found\n";
+       
+    }
+    return;
 }
 
 void User::setUserPinMenu(User activeUser)

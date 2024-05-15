@@ -67,7 +67,7 @@ public:
 	
 	static User searchUser(std::string uname, std::unordered_map <std::string, User> users);
 	
-	static void removeUser(std::string uname, std::set <User> users);
+	static void removeUser(std::string uname, std::unordered_map <std::string, User> users);
 	
 	static void setUserPinMenu(User activeUser);
 
